@@ -1,24 +1,41 @@
 <template>
-  <div>
-    <i class="iconfont">&#xe8b5;</i>
+  <div class="inner">
+    <all-header></all-header>
+    <div class="info">
+      <h1>haha</h1>
+      
+    </div>
+    <all-footer></all-footer>
   </div>
 </template>
 
 <script>
+import AllFooter from '../../common/footer/footer'
+import AllHeader from '../../common/Header/header'
 export default {
   data () {
     return {
 
     }
   },
+  components:{
+    AllHeader,
+    AllFooter,
+  }
 
 }
 </script>
 <style lang="scss">
-h1{
-  color: #ffba33;
+@import '../../assets/scss/mixin.scss';
+.inner{
+  padding-top: 50px;
 }
-i{
-  font-size: 70px;
+.info{
+  h1{
+    color: $fc;
+  }
+  i{
+    font-size: 24px;
+  }
 }
 </style>
