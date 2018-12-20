@@ -11,8 +11,9 @@
       </span>
     </div>
     <div class="header_right">
-      <!-- <i class="iconfont">&#xe8a0;</i> -->
-      <span class="login">登录</span>
+      <i class="iconfont">&#xe8a0;</i>
+      <router-link to="/login" class="login">登录</router-link>
+      <!-- <span class="login"></span> -->
     </div>
   </div>
 </template>

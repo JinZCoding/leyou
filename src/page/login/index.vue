@@ -1,12 +1,23 @@
 <template>
-  <div>
-    <div class="login_container">
+  <div class="login-div">
+    <div>
+      <div class="login_container">
+        <form action="" class="login-form">
+          <div class="userid">
+            <label for="">账号:</label>
+            <input type="text">
+          </div>
+          <div class="userpwd">
+            <label for="">密码:</label>
+            <input type="password">
+          </div>
+        </form>
 
+      </div>
 
-    </div>
-
-    <div class="bottom_con">
-      <p>&copy; jinzhiyi</p>
+      <div class="bottom_con">
+        <p>&copy; jinzhiyi</p>
+      </div>
     </div>
   </div>
 </template>
@@ -20,8 +31,25 @@ export default {
 };
 </script>
 <style lang="scss">
-h1 {
+@import "../../assets/scss/mixin.scss";
+
+.login-div{
+  @include wh(300px,400px);
+  margin: 50px auto;
   font-size: 18px;
-  color: #ffba33;
+}
+.login_container{
+  .login-form>div{
+    padding-bottom: 10px;
+  }
+}
+input{
+  @include wh(220px, 40px);
+  border: 1px solid #999;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.bottom_con{
+  
 }
 </style>
