@@ -23,16 +23,16 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../../assets/scss/mixin.scss";
+@import "../../style/mixin.scss";
 .header {
   background: $fc;
   position: fixed;
   top: 0;
-  @include wh(100%, 50px);
+  @include wh(100%, 100px);
   @include fj;
   align-items: center;
-  padding: 0 10px;
-  font-size: 16px;
+  padding: 0 20px;
+  font-size: 28px;
   .header_add {
     color: #fff;
   }
@@ -43,18 +43,18 @@ export default {
 .header_search {
   .search_box {
     display: inline-block;
-    @include wh(200px, 30px);
+    @include wh(400px, 60px);
     background: #fff;
     // border-bottom: 1px solid #fff;
     border: 1px solid #fff;
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     .search_input{
-        @include wh(170px, 30px);
-        margin-left: 5px;
+        @include wh(340px, 60px);
+        margin-left: 10px;
         // padding-left: 5px;
-        font-size: 15px;
+        font-size: 30px;
     }
     .iconfont {
       color: $fc;
@@ -64,6 +64,6 @@ export default {
 }
 .iconfont {
   color: #fff;
-  font-size: 22px;
+  font-size: 34px;
 }
 </style>

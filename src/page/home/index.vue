@@ -1,12 +1,14 @@
 <template>
-  <div class="inner">
+  <div>
     <all-header></all-header>
-    <div class="info">
-      <h1>haha</h1>
-      
+    <div class="inner">
+      <div class="info">
+        <h1>haha</h1>
+        
+      </div>
     </div>
     <all-footer></all-footer>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -26,16 +28,16 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../../assets/scss/mixin.scss';
+@import '../../style/mixin.scss';
 .inner{
-  padding-top: 50px;
+  padding-top: 100px;
 }
 .info{
   h1{
     color: $fc;
   }
   i{
-    font-size: 24px;
+    font-size: 40px;
   }
 }
 </style>

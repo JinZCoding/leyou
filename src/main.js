@@ -4,8 +4,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router'
 
-// import '!style-loader!css-loader!sass-loader./assets/scss/mixin.scss'
+// import '!style-loader!css-loader!sass-loader./style/mixin.scss'
 import './assets/iconfont/iconfont.css'
+
+// 注册自定义toast组件
+import registryToast from './components/common/toast/toast'
+Vue.prototype.$toast = registryToast.showToast;
 
 Vue.config.productionTip = false
 
