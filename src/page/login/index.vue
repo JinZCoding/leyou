@@ -11,7 +11,7 @@
               <img src="../../assets/img/id.png" alt>
             </span>
           </label>
-          <input type="text" v-model="userId" placeholder="请输入渠道ID">
+          <input type="text" v-model="userId" placeholder="请输入账号">
           <span class="del" @click="userId=''">
             <img v-show="userId" src="../../assets/img/del@3x.png" alt>
           </span>

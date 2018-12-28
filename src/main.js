@@ -4,14 +4,39 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router'
 
-// import '!style-loader!css-loader!sass-loader./style/mixin.scss'
 import './assets/iconfont/iconfont.css'
+
+//引入swiper
+// require('swiper/dist/css/swiper.css')
+// import VueAwesomeSwiper from 'vue-awesome-swiper'
+// Vue.use(VueAwesomeSwiper)
+
+import promise from 'es6-promise'
+promise.polyfill()
+
+// axios
+import axios from 'axios';
+import qs from 'qs';
+Vue.prototype.$axios = axios;
+import { post, get,postJson } from '@/Axios'
+
+Vue.prototype.$post = post
+Vue.prototype.$get = get
+Vue.prototype.$postJson = postJson
+
 
 // 注册自定义toast组件
 import registryToast from './components/common/toast/toast'
 Vue.prototype.$toast = registryToast.showToast;
 
 Vue.config.productionTip = false
+
+Vue.prototype.qs = qs;
+
+// 在这句话之前写
+Vue.prototype.$http = axios;
+// Vue.prototype.$http.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+
 
 Vue.use(VueRouter)
 
