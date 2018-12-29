@@ -7,9 +7,9 @@ import routes from './router'
 import './assets/iconfont/iconfont.css'
 
 //引入swiper
-// require('swiper/dist/css/swiper.css')
-// import VueAwesomeSwiper from 'vue-awesome-swiper'
-// Vue.use(VueAwesomeSwiper)
+require('swiper/dist/css/swiper.css')
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
 
 import promise from 'es6-promise'
 promise.polyfill()

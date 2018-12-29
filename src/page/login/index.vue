@@ -51,6 +51,9 @@ export default {
       showPass: false
     };
   },
+  created(){
+    console.log(this.showPass)
+  },
   methods: {
     login() {
       if (this.userId && this.loginPassword) {
@@ -86,13 +89,9 @@ export default {
     @include cl;
   }
 }
-
 input {
   @include wh(220px, 40px);
   border: none;
-  background-color: #fff;
-  border-radius: 5px;
-  font-size: 16px;
   padding: 0 5px;
 }
 .login_container {

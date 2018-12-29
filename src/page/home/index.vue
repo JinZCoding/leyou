@@ -1,65 +1,249 @@
 <template>
   <div>
-    <all-header></all-header>
-    <div class="inner">
-      <div class="info">
+    <div class="home_header">
+      <div class="home_left">
+        <div>
+          <i class="iconfont">&#xe89d;</i>
+          <span class="home_address ellipsis">{{location}}</span>
+        </div>
+      </div>
+      <div class="home_search">
+        <span class="search_box">
+          <input type="text" class="search_input" placeholder="搜索目的地/攻略/游记">
+          <i class="iconfont">&#xe870;</i>
+        </span>
+      </div>
+      <div class="home_right">
+        <div>
+          <i class="iconfont" @click="goProfile" v-if="isLogin">&#xe8a0;</i>
+          <router-link to="/login" class="login" v-else>登录</router-link>
+        </div>
       </div>
     </div>
+    <div class="inner">
+      <div class="info">
+        <!-- 导航轮播 -->
+        <swiper :options="swiperOption">
+          <swiper-slide>
+            <img src="../../assets/img/swiper/s1.png" alt>
+          </swiper-slide>
+          <swiper-slide>
+            <img src="../../assets/img/swiper/s2.png" alt>
+          </swiper-slide>
+          <swiper-slide>
+            <img src="../../assets/img/swiper/s3.png" alt>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+        <div class="index-nav">
+          <ul class="nav-ul">
+            <li class="nav-li">
+              <router-link to="/strategy">
+                <i class="iconfont">&#xe89e;</i>
+                <span>攻略</span>
+              </router-link>
+            </li>
+            <li class="nav-li">
+              <router-link to="/">
+                <i class="iconfont">&#xe89a;</i>
+                <span>游记</span>
+              </router-link>
+            </li>
+            <li class="nav-li">
+              <router-link to="/">
+                <i class="iconfont">&#xe88f;</i>
+                <span>结伴</span>
+              </router-link>
+            </li>
+            <li class="nav-li">
+              <router-link to="/">
+                <i class="iconfont">&#xe8a2;</i>
+                <span>当地</span>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="index-list">
+          <div>
+            <div class="list_header">
+              <span>推荐攻略</span>
+            </div>
+            <guide-list></guide-list>
+          </div>
+        </div>
+      </div>
+    </div>
+    <scroll-top></scroll-top>
     <all-footer></all-footer>
   </div>
 </template>
 
 <script>
 import AllFooter from "../../components/footer/footer";
-import AllHeader from "../../components/header/header";
+import GuideList from "./components/guideList";
+import ScrollTop from "../../components/common/scrollTop";
 import { setStore, removeStore, getStore } from "../../config/util";
-// import Swiper from 'swiper';
-// import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 
 export default {
   data() {
     return {
-      // swiperOption: {//以下配置不懂的，可以去swiper官网看api，链接http://www.swiper.com.cn/api/
-      //     // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，<br>　　　　　　　　假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-      //     notNextTick: true,
-      //     autoplay: 3000,
-      //     setWrapperSize :true,
-      //     autoHeight: true,
-      //     pagination : '.swiper-pagination',
-      //     paginationClickable :true,
-      //   }
+      location: "北京",
+      swiperOption: {
+        loop: true, // 循环模式选项
+        // 如果需要分页器
+        // autoplay:true,//自动播放
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false //用户操作swiper之后，是否禁止autoplay。默认为true：停止。
+          //如果设置为false，用户操作swiper之后自动切换不会停止，每次都会重新启动autoplay。
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        }
+      }
     };
   },
   components: {
-    AllHeader,
     AllFooter,
-    // swiper,
-    // swiperSlide
+    GuideList,
+    ScrollTop,
+    swiper,
+    swiperSlide
   },
-  mounted() {
-  }
+  mounted() {},
+  methods: {}
 };
 </script>
 <style lang="scss">
 @import "../../style/mixin.scss";
-.inner {
-  width: 90%;
-  margin: 100px auto;
-}
-.info {
-  h1 {
-    color: $fc;
+.home_header {
+  background: $fc;
+  position: fixed;
+  top: 0;
+  @include wh(100%, 100px);
+  // @include fj;
+  display: flex;
+  align-items: center;
+  // box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.03);
+  padding: 0 20px;
+  font-size: 28px;
+  z-index: 999;
+  & > div {
+    display: inline-block;
   }
+}
+.home_left {
+  // width: 150px;
+  display: flex;
+  align-items: center;
+  width: 20%;
+  margin-right: 20px;
+  .home_address {
+    font-size: 30px;
+    color: #fff;
+    padding-left: 7px;
+  }
+}
+.home_search {
+  width: 60%;
+  .search_box {
+    display: inline-block;
+    @include wh(100%, 60px);
+    background: #fff;
+    // border-bottom: 1px solid #fff;
+    border: 1px solid #fff;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    .search_input {
+      @include wh(80%, 60px);
+      margin-left: 30px;
+      // padding-left: 5px;
+      font-size: 30px;
+    }
+    .iconfont {
+      color: $fc;
+      float: right;
+    }
+  }
+}
+.home_right {
+  position: absolute;
+  right: 20px;
+  min-width: 50px;
+  .login,
+  span,
   i {
-    font-size: 40px;
+    font-size: 30px;
+    display: inline-block;
+    color: #fff;
   }
 }
+.iconfont {
+  color: #fff;
+  font-size: 44px;
+}
+.inner {
+  // width: 90%;
+  margin: 100px auto;
+  padding-bottom: 100px;
+}
+// 轮播图
 .swiper-container {
-  width: 600px;
-  height: 300px;
+  @include wh(100%, 400px);
   font-size: 30px;
   // margin: 10px auto;
   text-align: center;
-  background-color: #fff;
+  // background-color: #fff;
+  img {
+    @include wh(100%, 100%);
+  }
+}
+.swiper-pagination-bullet-active {
+  background: $fc;
+}
+//导航
+.index-nav {
+  @include wh(100%, 160px);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.03);
+  background: #fff;
+  padding: 15px 25px;
+  .nav-ul {
+    @include wh(100%, 100%);
+    @include fj;
+    align-items: center;
+  }
+  .nav-li {
+    flex: 1;
+    i {
+      display: block;
+      text-align: center;
+      color: $fc;
+      font-size: 72px;
+    }
+    span {
+      display: block;
+      width: 100%;
+      padding-top: 10px;
+      text-align: center;
+      line-height: 1em;
+      font-size: 26px;
+    }
+  }
+}
+//下面推荐列表
+.index-list {
+  width: 100%;
+  .list_header {
+    line-height: 60px;
+    text-align: center;
+    font-size: 25px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.03);
+    span {
+      color: #999;
+    }
+  }
 }
 </style>

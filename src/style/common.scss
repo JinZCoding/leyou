@@ -16,6 +16,11 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     }
 }
 
+a, a:visited {
+    text-decoration: none;
+    color: #474747;
+}
+
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
 ::-webkit-scrollbar  
 {  
@@ -50,6 +55,7 @@ input{
     font-size: 28px;
     color: #474A4D;
     outline: none;
+    background: transparent;
 }
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     font-family: PingFangSC-Regular;
@@ -89,9 +95,12 @@ html,body{
 }
 
 .clear:after{
-    content: '';
-    display: block;
     clear: both;
+    height: 0;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    content: ".";
 }
 
 .clear{
