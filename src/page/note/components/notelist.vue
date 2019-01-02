@@ -1,12 +1,12 @@
 <template>
   <div class="list">
     <ul>
-      <li v-for="(item, index) in list" :key="index" class="strategy-li">
+      <li v-for="(item, index) in list" :key="index" class="note-li">
         <router-link to="/">
           <span class="left sort">
             <i class="num">{{index+1}}</i>
           </span>
-          <div class="strategy_title">
+          <div class="note_title">
             <h3>标题标题标题标题标题标题标题标题标题标题</h3>
             <i class="iconfont in">&#xe88e;</i>
           </div>
@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-  name: "StrategyList",
+  name: "NoteList",
   data() {
     return {
       list: [1, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -34,9 +34,9 @@ export default {
 .list {
   margin-top: 20px;
 }
-.strategy-li {
+.note-li {
   padding: 15px 0;
-  border-bottom: 1px solid #eee; /*no*/
+  // border-bottom: 1px solid #eee; /*no*/
   &:last-child {
     border: none;
   }
@@ -64,7 +64,7 @@ export default {
       background-color: #ffd000;
     }
   }
-  .strategy_title {
+  .note_title {
     margin-left: 55px;
     position: relative;
     // display: flex;

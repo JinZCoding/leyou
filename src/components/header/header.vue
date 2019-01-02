@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header_left">
       <div @click="goBack">
-        <i class="iconfont">&#xe8b5;</i>
+        <i class="iconfont">&#xe629;</i>
       </div>
     </div>
     <div class="header_center">
@@ -19,17 +19,22 @@ import { getStore } from "../../config/util";
 export default {
   name: "allHeader",
   data() {
-    return {
-      isLogin: false,
-      userName: "",
-      location: "北京"
-    };
+    return {};
   },
   props: ["banner"],
   created() {},
   methods: {
     goBack() {
       this.$router.go(-1);
+      // console.log(window.history.length)
+      // if (window.history.length > 1) {
+      //   this.$router.go(-1);
+      // }else{
+      //   this.$router.go("/index")
+      // }
+      // window.history.length > 1
+      //   ? window.history.back()
+      //   : (document.location.href = "/index");
     }
   }
 };
@@ -37,10 +42,10 @@ export default {
 <style lang="scss">
 @import "../../style/mixin.scss";
 .header {
-  background: $fc;
+  background: #fff;
   position: fixed;
   top: 0;
-  @include wh(100%, 100px);
+  @include wh(100%, 90px);
   display: flex;
   align-items: center;
   padding: 0 25px;
@@ -49,6 +54,10 @@ export default {
   & > div {
     display: inline-block;
   }
+  .iconfont {
+    color: rgb(242, 148, 7);
+    font-size: 44px;
+  }
 }
 .header_left {
   // width: 150px;
@@ -56,7 +65,7 @@ export default {
   align-items: center;
   // width: 20%;
   margin-right: 20px;
-  i{
+  i {
     font-weight: 700;
   }
 }
@@ -65,16 +74,13 @@ export default {
   position: absolute;
   @include cl;
   h2 {
-    color: #fff;
+    color: $fc;
+    font-size: 38px;
   }
 }
 .header_right {
   position: absolute;
   right: 20px;
   min-width: 50px;
-}
-.iconfont {
-  color: #fff;
-  font-size: 44px;
 }
 </style>

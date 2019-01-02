@@ -44,7 +44,7 @@
               </router-link>
             </li>
             <li class="nav-li">
-              <router-link to="/">
+              <router-link to="/note">
                 <i class="iconfont">&#xe89a;</i>
                 <span>游记</span>
               </router-link>
@@ -88,6 +88,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   data() {
     return {
+      isLogin: false,
       location: "北京",
       swiperOption: {
         loop: true, // 循环模式选项
@@ -112,8 +113,14 @@ export default {
     swiper,
     swiperSlide
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.isLogin = getStore("isLogin") || false
+  },
+  methods: {
+    goProfile(){
+      console.log("1111111")
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -122,7 +129,7 @@ export default {
   background: $fc;
   position: fixed;
   top: 0;
-  @include wh(100%, 100px);
+  @include wh(100%, 90px);
   // @include fj;
   display: flex;
   align-items: center;
@@ -174,8 +181,7 @@ export default {
   right: 20px;
   min-width: 50px;
   .login,
-  span,
-  i {
+  span{
     font-size: 30px;
     display: inline-block;
     color: #fff;
@@ -187,7 +193,7 @@ export default {
 }
 .inner {
   // width: 90%;
-  margin: 100px auto;
+  margin: 90px auto;
   padding-bottom: 100px;
 }
 // 轮播图

@@ -2,7 +2,8 @@ import App from '../App'
 
 const index = r => require.ensure([], () => r(require('../page/home/')), 'home')
 const login = r => require.ensure([], () => r(require('../page/login/')), 'login')
-const strategy = r => require.ensure([], () => r(require('../page/strategy/strategy')), 'strategy')
+const note = r => require.ensure([], () => r(require('../page/note/')), 'note')
+const strategy = r => require.ensure([], () => r(require('../page/strategy/')), 'strategy')
 
 export default [{
   path: '/',
@@ -26,6 +27,13 @@ export default [{
       name: index,
       component: index
     },
+    // 游记
+    {
+      path: '/note',
+      name: note,
+      component: note
+    },
+    // 攻略
     {
       path: '/strategy',
       name: strategy,
