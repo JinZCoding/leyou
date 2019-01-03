@@ -51,6 +51,8 @@ export default {
   padding: 0 25px;
   font-size: 28px;
   z-index: 999;
+  // box-shadow: 0 0 3px 2px rgba(0,0,0,0.07);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
   & > div {
     display: inline-block;
   }

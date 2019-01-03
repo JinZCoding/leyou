@@ -30,7 +30,7 @@
           <h3>玩哪里</h3>
           <swiper :options="swiperOption">
             <swiper-slide v-for="(item, index) in img" :key="index">
-              <img src="../../assets/img/swiper/s1.png" width="100%" alt class="photo">
+              <img src="../../assets/img/swiper/s4.jpeg" width="100%" alt class="photo">
               <div class="name">
                 <span class="t1 lineclamp" style="-webkit-line-clamp: 2;">天安门广场天安门广场天安门广场</span>
                 <!-- <span class="t2">100298评价</span> -->
@@ -45,12 +45,31 @@
         </div>
         <div class="cityItem live">
           <h3>住哪里</h3>
+
         </div>
         <div class="cityItem eat">
           <h3>吃什么</h3>
-          <div class="food">
-            
+          <div class="food clear">
+            <ul>
+              <li v-for="(item, index) in foodList" :key="index">
+                <router-link to="/">
+                  <div class="food_img">
+                    <img :src="item.img_name" width="100%" alt>
+                  </div>
+                  <div class="food_name">
+                    <p class="t1">{{item.name}}</p>
+                    <p class="t2">
+                      <strong>{{item.views}}</strong>人提起过
+                    </p>
+                  </div>
+                </router-link>
+              </li>
+            </ul>
+            <router-link tag="div" to="/" class="moreinfo">
+              <span>更多美味</span>
+            </router-link>
           </div>
+
         </div>
       </div>
     </div>
@@ -66,6 +85,28 @@ export default {
   data() {
     return {
       img: [1, 2, 1, 2, 1, 2, 1, 2],
+      foodList: [
+        {
+          name: "瓷瓶儿老酸奶",
+          img_name: require("@/assets/img/food_1.jpeg"),
+          views: "2080"
+        },
+        {
+          name: "炒肝",
+          img_name: require("@/assets/img/food_2.jpeg"),
+          views: "2010"
+        },
+        {
+          name: "北京烤鸭",
+          img_name: require("@/assets/img/food_3.jpeg"),
+          views: "23322"
+        },
+        {
+          name: "炸酱面",
+          img_name: require("@/assets/img/food_4.jpeg"),
+          views: "20801"
+        }
+      ],
       swiperOption: {
         // loop: true, // 循环模式选项
         // width: 120,
@@ -86,7 +127,7 @@ export default {
 @import "../../style/mixin.scss";
 
 .strategy {
-  margin: 90px auto;
+  margin: 90px auto 0;
   padding-bottom: 100px;
   width: 100%;
 }
@@ -200,6 +241,38 @@ export default {
   .moreinfo {
     // line-height: 230px;
     @include center;
+  }
+}
+.food {
+  li {
+    width: 50%;
+    float: left;
+    a {
+      display: block;
+      margin-bottom: 10px;
+    }
+    &:nth-child(2n + 1) a {
+      padding-right: 10px;
+    }
+    &:nth-child(2n) a {
+      padding-left: 10px;
+    }
+    .food_name {
+      height: 90px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .t1 {
+        font-size: 32px;
+      }
+      .t2 {
+        font-size: 26px;
+        strong {
+          font-size: 28px;
+          color: #ff9d00;
+        }
+      }
+    }
   }
 }
 // 多行省略

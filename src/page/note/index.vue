@@ -68,7 +68,7 @@ export default {
 @import "../../style/mixin.scss";
 
 .note {
-  margin: 90px auto;
+  margin: 90px auto 0;
   padding-bottom: 100px;
 }
 .center {

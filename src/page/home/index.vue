@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="home_header">
-      <div class="home_left">
+      <router-link to="/city" class="home_left">
         <div>
           <i class="iconfont">&#xe89d;</i>
           <span class="home_address ellipsis">{{location}}</span>
         </div>
-      </div>
+      </router-link>
       <div class="home_search">
         <span class="search_box">
           <input type="text" class="search_input" placeholder="搜索目的地/攻略/游记">
@@ -114,11 +114,14 @@ export default {
     swiperSlide
   },
   mounted() {
-    this.isLogin = getStore("isLogin") || false
+    this.isLogin = getStore("isLogin") || false;
+    if (getStore("location")) {
+      this.location = JSON.parse(getStore("location")).cityName;
+    }
   },
   methods: {
-    goProfile(){
-      console.log("1111111")
+    goProfile() {
+      console.log("1111111");
     }
   }
 };
@@ -142,12 +145,13 @@ export default {
   }
 }
 .home_left {
-  // width: 150px;
   display: flex;
   align-items: center;
   width: 20%;
   margin-right: 20px;
   .home_address {
+    display: inline-block;
+    width: 70px;
     font-size: 30px;
     color: #fff;
     padding-left: 7px;
@@ -181,7 +185,7 @@ export default {
   right: 20px;
   min-width: 50px;
   .login,
-  span{
+  span {
     font-size: 30px;
     display: inline-block;
     color: #fff;
@@ -193,7 +197,7 @@ export default {
 }
 .inner {
   // width: 90%;
-  margin: 90px auto;
+  margin: 90px auto 0;
   padding-bottom: 100px;
 }
 // 轮播图
