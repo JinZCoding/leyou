@@ -50,13 +50,13 @@
               </router-link>
             </li>
             <li class="nav-li">
-              <router-link to="/">
+              <router-link to="/companions">
                 <i class="iconfont">&#xe88f;</i>
                 <span>结伴</span>
               </router-link>
             </li>
             <li class="nav-li">
-              <router-link to="/">
+              <router-link to="/localplay">
                 <i class="iconfont">&#xe8a2;</i>
                 <span>当地</span>
               </router-link>
@@ -80,8 +80,8 @@
 
 <script>
 import AllFooter from "../../components/footer/footer";
-import GuideList from "./components/guideList";
-import ScrollTop from "../../components/common/scrollTop";
+import GuideList from "./components/guidelist";
+import ScrollTop from "../../components/common/scrolltop";
 import { setStore, removeStore, getStore } from "../../config/util";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 

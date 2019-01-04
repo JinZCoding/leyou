@@ -4,17 +4,13 @@
       <div class="close" @click="colse">
         <i class="iconfont">&#xe86e;</i>
       </div>
-      <!-- <div class="search_input">
-          <input type="text" placeholder="搜索条件">
-          <i class="iconfont">&#xe870;</i>
-      </div>-->
       <div class="tit">选择所在城市</div>
     </div>
     <city-selector></city-selector>
   </div>
 </template>
 <script>
-import CitySelector from "../../components/common/citySelector";
+import CitySelector from "./components/cityselector";
 
 export default {
   data() {

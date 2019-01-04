@@ -1,17 +1,19 @@
 <template>
-  <div class="strategy">
-    <all-header banner="攻略"></all-header>
-    <!-- <div>
+  <div class="localplay">
+    <all-header banner="当地游玩"></all-header>
+    <div>
       <div>
         <div class="cityItem current_city">
           <img src="../../assets/img/glbg.png" width="100%" alt>
+          <!-- <i class="iconfont">&#xe758;</i> -->
           <div class="pic">
             <img src="../../assets/img/beijing.jpeg" width="100%" alt>
           </div>
           <div class="caption">
-            <router-link to="/city?backurl=strategy" class="gobaike">
+            <router-link to="/city?backurl=localplay" class="gobaike">
               <i class="iconfont">&#xe758;</i>
               <h2>{{location.cityName}}</h2>
+              <!-- <p>北京，简称“京”，是中华人民共和国的首都、直辖市、国家中心城市、超大城市、国际大都市，全国政治中心、文化中心、国际交往中心、科技创新中心和综合交通枢纽，是中国共产党中央委员会、中华人民共和国中央人民政府、</p> -->
             </router-link>
           </div>
         </div>
@@ -31,6 +33,7 @@
               <img src="../../assets/img/swiper/s4.jpeg" width="100%" alt class="photo">
               <div class="name">
                 <span class="t1 lineclamp" style="-webkit-line-clamp: 2;">天安门广场天安门广场天安门广场</span>
+                <!-- <span class="t2">100298评价</span> -->
               </div>
             </swiper-slide>
             <swiper-slide>
@@ -65,13 +68,13 @@
         </div>
         <div class="cityItem live">
           <h3>当地攻略</h3>
-          <strategy-list></strategy-list>
+          <localplay-list></localplay-list>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="center_bottom">
-      <i class="iconfont">&#xe881;</i>
-      <span>这有一个新点子！</span>
+      <i class="iconfont">&#xe890;</i>
+      <span>这儿全是好玩的</span>
     </div>
     <all-footer></all-footer>
   </div>
@@ -79,7 +82,7 @@
 <script>
 import AllFooter from "../../components/footer/footer";
 import AllHeader from "../../components/header/header";
-import StrategyList from "./components/strategylist";
+import LocalplayList from "./components/localplaylist";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { setStore, getStore } from "../../config/util";
 
@@ -129,7 +132,7 @@ export default {
   components: {
     AllHeader,
     AllFooter,
-    StrategyList,
+    LocalplayList,
     swiper,
     swiperSlide
   }
@@ -138,7 +141,7 @@ export default {
 <style lang="scss">
 @import "../../style/mixin.scss";
 
-.strategy {
+.localplay {
   margin: 90px auto 0;
   padding-bottom: 100px;
   width: 100%;

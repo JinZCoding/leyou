@@ -48,8 +48,8 @@
 <script>
 import AllFooter from "../../components/footer/footer";
 import AllHeader from "../../components/header/header";
-import NoteList from "./components/NoteList";
-import HotRecommend from "./components/hotNote";
+import NoteList from "./components/notelist";
+import HotRecommend from "./components/hotnote";
 
 export default {
   data() {

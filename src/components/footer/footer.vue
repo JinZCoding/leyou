@@ -4,6 +4,9 @@
       <i class="iconfont">&#xe8e3;</i>
       <span>首页</span>
     </router-link>
+    <router-link class="publish" to>
+      <i class="iconfont">&#xe62a;</i>
+    </router-link>
     <router-link to="/" class="footer_right">
       <i class="iconfont">&#xe8a0;</i>
       <span>我的</span>
@@ -32,13 +35,21 @@ export default {
   right: 0;
   font-size: 34px;
   z-index: 999;
+  .publish {
+    z-index: 1000;
+    position: absolute;
+    i{
+      color: $fc;
+      font-size: 78px;
+    }
+  }
   & > a {
     display: inline-block;
     flex: 1;
     text-align: center;
-    &:first-child {
-      border-right: 1px solid #999; /*no*/
-    }
+    // &:first-child {
+    //   border-right: 1px solid #999; /*no*/
+    // }
   }
   i {
     font-size: 42px;

@@ -3,7 +3,7 @@
     <div class="city city-wap">
       <div class="city-list">
         <div class="block-60"></div>
-        <div class="clearfix cityItem">
+        <div class="clearfix cityItem-div">
           <p>当前城市</p>
           <ul>
             <li class="ellipsis" @click="chooseCity(currentLocation)">
@@ -12,7 +12,7 @@
             </li>
           </ul>
         </div>
-        <div v-for="(item, index) in cityListData" :key="index" class="clearfix cityItem">
+        <div v-for="(item, index) in cityListData" :key="index" class="clearfix cityItem-div">
           <p :id="item.ckey">{{item.ckey}}</p>
           <ul>
             <li
@@ -35,13 +35,14 @@
 
 <script>
 import cityList from "./cityList.js";
-import { setStore, getStore } from "../../config/util";
+import { setStore, getStore } from "../../../config/util";
 
 export default {
   name: "CitySelector",
   data() {
     return {
       currentLocation: "",
+      // 热门城市
       hotCity: [
         {
           cityName: "北京",
@@ -65,9 +66,13 @@ export default {
     };
   },
   mounted() {
-    this.currentLocation =  JSON.parse(getStore("location")) || {cityName: "北京", pinyin:"beijing"};
+    this.currentLocation = JSON.parse(getStore("location")) || {
+      cityName: "北京",
+      pinyin: "beijing"
+    };
   },
   computed: {
+    // 城市列表
     cityListData() {
       let map = {}; // 处理过后的数据对象
       let temps = []; // 临时变量
@@ -96,6 +101,7 @@ export default {
       list.unshift({ ckey: "热门城市", cityList: this.hotCity });
       return list;
     },
+    // 城市首字母
     cityListKey() {
       let cityListKey = [];
       this.cityListData.map(item => {
@@ -105,12 +111,22 @@ export default {
     }
   },
   methods: {
-    //选择城市
+    //选择城市 跳转
     chooseCity(city) {
       // console.log(city);
       setStore("location", city);
-      this.$router.push({ path: "/index" });
+      if (window.location.search) {
+        // 如果有backurl,点击后返回backurl页面
+        var args = this.getUrl(window.location.href);
+        this.$router.replace(args.backurl);
+        this.$router.go(-1);
+        // this.$router.replace({path: "/"+args.backurl})
+      } else {
+        this.$router.replace({ path: "/index" });
+        this.$router.go(-1);
+      }
     },
+    // 右侧城市首字母
     switchKey(key) {
       // 当前选中的字母
       this.activeKey = key;
@@ -121,16 +137,36 @@ export default {
       // 获取当前字母来cityList中距离顶部的位置
       let targetTop = document.querySelector("#" + key + "").offsetTop;
       window.scrollTo({
-        top: targetTop - 60, // 60是search的高度
+        top: targetTop - 50, // 50是search的高度
         behavior: "smooth"
       });
+    },
+    // 获取链接中的参数
+    getUrl(url) {
+      // 先获取href问号以及问号后的内容
+      if (url) {
+        url = url.substr(url.indexOf("?"));
+      } else {
+        url = window.location.search;
+      }
+      //判断是否含有问号，有则说明含有参数
+      if (url.indexOf("?") !== -1) {
+        var str = url.substr(1);
+        var strs = str.split("&");
+        var obj = new Object();
+        for (var i = 0; i < strs.length; i++) {
+          obj[strs[i].split("=")[0]] = strs[i].split("=")[1];
+        }
+        return obj;
+      }
+      return null;
     }
   }
 };
 </script>
 
 <style lang="scss">
-@import "../../style/mixin.scss";
+@import "../../../style/mixin.scss";
 
 .city-wap {
   color: #3b4f62;
@@ -169,7 +205,7 @@ export default {
       }
     }
   }
-  .cityItem {
+  .cityItem-div {
     &:nth-child(2),
     &:nth-child(3) {
       ul {

@@ -52,7 +52,6 @@ export default {
     };
   },
   created(){
-    console.log(this.showPass)
   },
   methods: {
     login() {
