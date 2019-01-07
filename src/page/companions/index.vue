@@ -1,10 +1,10 @@
 <template>
   <div class="localplay">
     <all-header banner="结伴"></all-header>
-
+  
     <div class="center_bottom">
-      <i class="iconfont">&#xe88f;</i>
-      <span>一起去东京和巴黎吧~</span>
+      <i class="iconfont">&#xe890;</i>
+      <span>带你去东京和巴黎</span>
     </div>
     <all-footer></all-footer>
   </div>

@@ -2,17 +2,17 @@
   <div class="list">
     <ul>
       <li v-for="(item, index) in list" :key="index" class="note-li">
-        <router-link to="/">
+        <router-link :to="'/article/'+item.id">
           <span class="left sort">
             <i class="num">{{index+1}}</i>
           </span>
           <div class="note_title">
-            <h3>标题标题标题标题标题标题标题标题标题标题</h3>
+            <h3>{{item.title}}</h3>
             <i class="iconfont in">&#xe88e;</i>
           </div>
           <div class="bottom_info">
-            <span class="author">moki</span>
-            <span class="address">日本</span>
+            <span class="author">{{item.author}}</span>
+            <span class="address">{{item.address}}</span>
           </div>
         </router-link>
       </li>
@@ -24,7 +24,62 @@ export default {
   name: "NoteList",
   data() {
     return {
-      list: [1, 1, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      list: [
+        {
+          id: "1",
+          title: "标题踢踢踢踢踢踢踢ITITITii",
+          author: "mokio",
+          address: "日本"
+        },
+        {
+          id: "2",
+          title: "哎哟哟哟哟哟哟哟我滴小心脏",
+          author: "william",
+          address: "香港"
+        },
+        {
+          id: "3",
+          title: "妈咪妈咪哄",
+          author: "asha",
+          address: "重庆"
+        },
+        {
+          id:"4",
+          title: "标题踢踢踢踢踢踢踢ITITITii",
+          author: "mokio",
+          address: "日本"
+        },
+        {
+          id:"5",
+          title: "哎哟哟哟哟哟哟哟我滴小心脏",
+          author: "william",
+          address: "香港"
+        },
+        {
+          id:"6",
+          title: "妈咪妈咪哄",
+          author: "asha",
+          address: "重庆"
+        },
+        {
+          id:"7",
+          title: "标题踢踢踢踢踢踢踢ITITITii",
+          author: "mokio",
+          address: "日本"
+        },
+        {
+          id:"8",
+          title: "哎哟哟哟哟哟哟哟我滴小心脏",
+          author: "william",
+          address: "香港"
+        },
+        {
+          id:"9",
+          title: "妈咪妈咪哄",
+          author: "asha",
+          address: "重庆"
+        }
+      ]
     };
   }
 };
@@ -59,7 +114,9 @@ export default {
       vertical-align: middle;
     }
   }
-  &:nth-child(1),&:nth-child(2),&:nth-child(3) {
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(3) {
     .sort {
       background-color: #ffd000;
     }

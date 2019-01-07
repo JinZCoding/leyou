@@ -3,19 +3,19 @@
     <div>
       <ul class="article-ul">
         <li v-for="(item,index) in articlelist" :key="index">
-          <router-link to class="article-items">
-            <h3 class="title">{{title}}</h3>
+          <router-link :to="'/article/'+item.id" class="article-items">
+            <h3 class="title">{{item.title}}</h3>
             <div class="content clear">
               <dt class="content_cover left">
-                <img src="../../../assets/img/swiper/s1.png" alt>
+                <img :src="item.cover_img" alt>
               </dt>
               <dd class="content_right">
-                <div class="summary">{{summary}}</div>
+                <div class="summary">{{item.summary}}</div>
                 <div class="extra">
-                  <span>{{views}}浏览</span>
+                  <span>{{item.views}}浏览</span>
                   <div class="author">
-                    {{author}}
-                    <img src="../../../assets/img/shi.png" alt>
+                    {{item.author}}
+                    <img :src="item.author_img" alt>
                   </div>
                 </div>
               </dd>
@@ -31,13 +31,44 @@ export default {
   name: "GuideList",
   data() {
     return {
-      articlelist: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4],
-      title:
-        "标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题",
-      summary:
-        "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
-      author: "嗷嗷嗷嗷奥",
-      views: "2900"
+      articlelist: [
+        {
+          id: "1",
+          title: "你猜是什么~",
+          summary: "你猜我猜不猜",
+          author: "嗷嗷啊呜",
+          views: "2091",
+          cover_img: "./static/img/swiper/s6.jpeg",
+          author_img: "./static/img/shi.png"
+        },
+        {
+          id: "2",
+          title: "你猜是什么~",
+          summary: "你猜我猜不猜",
+          author: "嗷嗷啊呜",
+          views: "2091",
+          cover_img: "./static/img/swiper/s6.jpeg",
+          author_img: "./static/img/shi.png"
+        },
+        {
+          id: "3",
+          title: "你猜是什么~",
+          summary: "你猜我猜不猜",
+          author: "嗷嗷啊呜",
+          views: "2091",
+          cover_img: "./static/img/swiper/s5.jpeg",
+          author_img: "./static/img/shi.png"
+        },
+        {
+          id: "4",
+          title: "你猜是什么~",
+          summary: "你猜我猜不猜",
+          author: "嗷嗷啊呜",
+          views: "2091",
+          cover_img: "./static/img/swiper/s1.png",
+          author_img: "./static/img/shi.png"
+        }
+      ]
     };
   }
 };

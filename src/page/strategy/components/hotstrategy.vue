@@ -1,13 +1,7 @@
 <template>
   <div class="hot-item">
     <ul>
-      <router-link
-        tag="li"
-        :to="'/article/'+item.id"
-        class="hot-li-items"
-        v-for="(item, index) in list"
-        :key="index"
-      >
+      <router-link tag="li" :to="'/article/'+item.id" class="hot-li-items" v-for="(item, index) in list" :key="index">
         <img :src="item.cover_img" alt>
         <div class="layout">
           <div class="one">
@@ -24,9 +18,9 @@
             <div class="avatar">
               <img :src="item.author_img" alt>
             </div>
-            <div class="likes">
-              <!-- <i class="iconfont">&#xe88c;</i> -->
-            </div>
+            <!-- <div class="likes">
+              <i class="iconfont">&#xe88c;</i>
+            </div>-->
           </div>
         </div>
       </router-link>
@@ -35,7 +29,7 @@
 </template>
 <script>
 export default {
-  name: "HotRecommend",
+  name: "HotStrategy",
   data() {
     return {
       list: [
@@ -45,22 +39,22 @@ export default {
           views: "290001",
           title: "一起去玩吧！",
           author: "兔子爱吃胡萝北",
-          cover_img: "./static/img/hot_2.png",
-          author_img: "./static/img/head_1.jpeg"
-        },
-        {
-          id:"2",
-          traveltime: "2019-1-1",
-          views: "290001",
-          title: "一起去玩吧！",
-          author: "兔子爱吃胡萝北",
           cover_img: "./static/img/hot_1.jpeg",
           author_img: "./static/img/head_1.jpeg"
         },
         {
+          id:"2",
+          traveltime: "2019-1-2",
+          views: "2901",
+          title: "一起去玩吧！",
+          author: "兔子爱吃胡萝北",
+          cover_img: "./static/img/hot_2.png",
+          author_img: "./static/img/head_2.jpeg"
+        },
+        {
           id:"3",
-          traveltime: "2019-1-1",
-          views: "290001",
+          traveltime: "2019-1-4",
+          views: "2001",
           title: "一起去玩吧！",
           author: "兔子爱吃胡萝北",
           cover_img: "./static/img/hot_1.jpeg",
@@ -116,7 +110,7 @@ export default {
     }
   }
   .two {
-    font-size: 32px;
+    font-size: 35px;
     span {
       display: inline-block;
       width: 100%;
@@ -132,7 +126,7 @@ export default {
     .avatar {
       position: absolute;
       bottom: 20px;
-      left: 26px;
+      right: 36px;
       img {
         @include wh(80px, 80px);
         border-radius: 50%;
@@ -142,7 +136,6 @@ export default {
       position: absolute;
       bottom: 20px;
       right: 28px;
-      //   background-color: #fff;
       i {
         color: #000;
         font-size: 57px;

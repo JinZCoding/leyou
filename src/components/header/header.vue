@@ -51,8 +51,7 @@ export default {
   padding: 0 25px;
   font-size: 28px;
   z-index: 999;
-  // box-shadow: 0 0 3px 2px rgba(0,0,0,0.07);
-  border-bottom: 1px solid rgba(0,0,0,0.07);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   & > div {
     display: inline-block;
   }
@@ -60,29 +59,29 @@ export default {
     color: rgb(242, 148, 7);
     font-size: 44px;
   }
-}
-.header_left {
-  // width: 150px;
-  display: flex;
-  align-items: center;
-  // width: 20%;
-  margin-right: 20px;
-  i {
-    font-weight: 700;
+  .header_left {
+    // width: 150px;
+    display: flex;
+    align-items: center;
+    // width: 20%;
+    margin-right: 20px;
+    i {
+      font-weight: 700;
+    }
   }
-}
-.header_center {
-  text-align: center;
-  position: absolute;
-  @include cl;
-  h2 {
-    color: $fc;
-    font-size: 38px;
+  .header_center {
+    text-align: center;
+    position: absolute;
+    @include cl;
+    h2 {
+      color: $fc;
+      font-size: 38px;
+    }
   }
-}
-.header_right {
-  position: absolute;
-  right: 20px;
-  min-width: 50px;
+  .header_right {
+    position: absolute;
+    right: 20px;
+    min-width: 50px;
+  }
 }
 </style>

@@ -4,27 +4,20 @@
     <div>
       <div class="center">
         <div class="today">
-          <!-- <div class="banner">
-            <span>今日推荐</span>
-          </div> -->
           <div class="today_travel">
             <img src="../../assets/img/today.jpeg" alt>
-            <router-link class="link" to="/">
+            <router-link class="link" :to="'/article/'+id" >
               <p class="tit ellipsis">寒假带娃新选择——迪士尼邮轮亮点图鉴</p>
               <i class="iconfont">&#xe88e;</i>
             </router-link>
           </div>
-          <!-- div.1242131231 -->
         </div>
         <div class="hot">
           <div class="banner">
-            <i class="iconfont">&#xe647;</i>
+            <i class="iconfont">&#xe7a8;</i>
             <span>热门游记</span>
           </div>
           <hot-recommend></hot-recommend>
-          <router-link tag="div" to="/" class="more">
-            <span>查看更多</span>
-          </router-link>
         </div>
         <div class="new">
           <div class="banner">
@@ -39,7 +32,7 @@
       </div>
     </div>
     <div class="center_bottom">
-      <i class="iconfont">&#xe89e;</i>
+      <i class="iconfont">&#xe621;</i>
       <span>每个地方，都有好玩的</span>
     </div>
     <all-footer></all-footer>
@@ -53,7 +46,9 @@ import HotRecommend from "./components/hotnote";
 
 export default {
   data() {
-    return {};
+    return {
+      id:"1"
+    };
   },
   components: {
     AllFooter,

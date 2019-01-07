@@ -1,36 +1,22 @@
 <template>
-  <div class="strategy-list">
-    <div>
-      <ul class="strategy-ul">
-        <li v-for="(item,index) in articlelist" :key="index">
-          <router-link to class="strategy-items">
-            <!-- <h4 class="title">{{title}}</h4> -->
-            <div class="content clear">
-              <div class="content_cover">
-                <img src="../../../assets/img/swiper/s2.png" alt>
-              </div>
-              <div class="content_left">
-                <div class="title">{{item.title}}</div>
-                <div class="extra">
-                  <!-- <span>{{views}}浏览</span> -->
-                  <div class="author">
-                    <img src="../../../assets/img/wa.png" alt>
-                    {{item.author}}
-                  </div>
-                </div>
-              </div>
-              <div class="content_bottom">
-                <span>
-                  <strong>{{item.views}}</strong>浏览
-                </span>
-                <i class="iconfont" v-if="!item.like" @click="likes(index)">&#xe872;</i>
-                <i class="iconfont" v-else>&#xe871;</i>
-              </div>
-            </div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
+  <div class="list">
+    <ul>
+      <li v-for="(item, index) in list" :key="index" class="note-li">
+        <router-link :to="'/article/'+item.id">
+          <span class="left sort">
+            <i class="num">{{index+1}}</i>
+          </span>
+          <div class="note_title">
+            <h3>{{item.title}}</h3>
+            <i class="iconfont in">&#xe88e;</i>
+          </div>
+          <div class="bottom_info">
+            <span class="author">{{item.author}}</span>
+            <span class="address">{{item.address}}</span>
+          </div>
+        </router-link>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -38,128 +24,104 @@ export default {
   name: "StrategyList",
   data() {
     return {
-      articlelist: [
+      list: [
         {
-          title: "全网最全的北京攻略呱！",
-          author: "呱",
-          views: "22.1万",
-          like: false
+          id:"1",
+          title: "标题踢踢踢踢踢踢踢ITITITii",
+          author: "mokio",
+          address: "日本"
         },
         {
-          title: "全网最全的北京攻略呱啊！",
-          author: "呱啊",
-          views: "22.2万",
-          like: false
+          id:"2",
+          title: "哎哟哟哟哟哟哟哟我滴小心脏",
+          author: "william",
+          address: "香港"
         },
         {
-          title: "全网最全的北京攻略呱啊",
-          author: "呱啊w",
-          views: "22.2万",
-          like: false
+          id:"3",
+          title: "妈咪妈咪哄",
+          author: "asha",
+          address: "重庆"
         }
-      ],
+      ]
     };
-  },
-  methods: {
-    likes(index) {
-      this.articlelist[index].like = true;
-    }
   }
 };
 </script>
 <style lang="scss">
 @import "../../../style/mixin.scss";
-.strategy-list {
-  background-color: #fff;
-  width: 100%;
+.list {
+  margin-top: 20px;
 }
-.strategy-ul {
-  li {
-    position: relative;
-    padding: 0 0 10px;
-    border-bottom: 1px solid #eee;
-    &:last-child {
-      border: none;
-    }
-    a {
-      display: block;
+.note-li {
+  padding: 15px 0;
+  // border-bottom: 1px solid #eee; /*no*/
+  &:last-child {
+    border: none;
+  }
+  .sort {
+    @include wh(40px, 25px);
+    // background-color: $fc;
+    border-radius: 10px;
+    background-color: #ddd;
+    .num {
+      display: inline-block;
+      text-align: center;
+      color: #666;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 16px;
+      width: 35px;
+      border-radius: 3px;
+      text-align: center;
+      padding: 0 0 0 10px;
+      vertical-align: middle;
     }
   }
-}
-.strategy-items {
-  .content {
-    padding: 20px 0 0;
-    .content_cover {
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(3) {
+    .sort {
+      background-color: #ffd000;
+    }
+  }
+  .note_title {
+    margin-left: 55px;
+    position: relative;
+    // display: flex;
+    // align-items: center;
+    h3 {
+      font-size: 34px;
+      line-height: 44px;
+      padding: 0 40px 0 0;
+      display: -webkit-box !important;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .in {
       position: absolute;
-      right: 0;
-      width: 280px;
-      img {
-        @include wh(100%, 200px);
-        border-radius: 10px;
+      right: 8px;
+      top: 0;
+    }
+  }
+  .bottom_info {
+    margin: 6px 0 0 55px;
+    height: 38px;
+    line-height: 38px;
+    span {
+      color: #999;
+      font-size: 24px;
+      padding: 0 18px;
+      &:first-child {
+        padding-left: 0;
+        border-right: 1px solid #999;
       }
     }
-    .content_left {
-      @include wh(380px, 200px);
-      position: relative;
-      .title {
-        color: #333;
-        font-weight: 700;
-        font-size: 34px;
-        line-height: 1.4em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        padding-right: 18px;
-      }
-      .extra {
-        height: 30px;
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        font-size: 20px;
-        line-height: 30px;
-        .author {
-          display: inline-block;
-          position: absolute;
-          left: 0;
-          color: #666;
-        }
-        img {
-          @include wh(30px, 30px);
-          vertical-align: middle;
-          margin: 0 5px 0 5px;
-          border-radius: 50%;
-        }
-      }
-    }
-    .content_bottom {
-      position: relative;
-      @include wh(100%, 40px);
-      line-height: 40px;
-      margin-top: 5px;
-      span {
-        display: inline-block;
-        width: 150px;
-        text-align: right;
-        position: absolute;
-        right: 50px;
-        font-size: 22px;
-        strong {
-          font-weight: 700;
-        }
-      }
-      i {
-        display: inline-block;
-        width: 50px;
-        text-align: right;
-        position: absolute;
-        right: 0;
-        color: $fc;
-      }
-    }
+  }
+  i {
+    color: #333;
   }
 }
 </style>

@@ -5,8 +5,9 @@ const login = r => require.ensure([], () => r(require('../page/login/')), 'login
 const city = r => require.ensure([], () => r(require('../page/city/')), 'city')
 const note = r => require.ensure([], () => r(require('../page/note/')), 'note')
 const strategy = r => require.ensure([], () => r(require('../page/strategy/')), 'strategy')
-const companions= r => require.ensure([], () => r(require('../page/companions/')), 'companions')
+const companions = r => require.ensure([], () => r(require('../page/companions/')), 'companions')
 const localplay = r => require.ensure([], () => r(require('../page/localplay/')), 'localplay')
+const article = r => require.ensure([], () => r(require('../page/article/')), 'article')
 
 export default [{
   path: '/',
@@ -60,6 +61,11 @@ export default [{
       name: localplay,
       component: localplay
     },
-
+    // 文章页面
+    {
+      path: '/article/:id',
+      name: article,
+      component: article
+    }
   ]
 }]

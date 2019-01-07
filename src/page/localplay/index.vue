@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="center_bottom">
-      <i class="iconfont">&#xe890;</i>
+      <i class="iconfont">&#xe65b;</i>
       <span>这儿全是好玩的</span>
     </div>
     <all-footer></all-footer>
@@ -290,14 +290,7 @@ export default {
     }
   }
 }
-// 多行省略
-.lineclamp {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
+
 .center_bottom {
   // background-color: red;
   @include wh(100%, 120px);

@@ -24,14 +24,8 @@
       <div class="info">
         <!-- 导航轮播 -->
         <swiper :options="swiperOption">
-          <swiper-slide>
-            <img src="../../assets/img/swiper/s1.png" alt>
-          </swiper-slide>
-          <swiper-slide>
-            <img src="../../assets/img/swiper/s2.png" alt>
-          </swiper-slide>
-          <swiper-slide>
-            <img src="../../assets/img/swiper/s3.png" alt>
+          <swiper-slide v-for="(item, index) in swiperImgList" :key="index">
+            <img :src="item" alt>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -90,6 +84,7 @@ export default {
     return {
       isLogin: false,
       location: "北京",
+      swiperImgList:["./static/img/swiper/s1.png","./static/img/swiper/s2.png","./static/img/swiper/s3.png","./static/img/swiper/s4.jpeg"],
       swiperOption: {
         loop: true, // 循环模式选项
         // 如果需要分页器

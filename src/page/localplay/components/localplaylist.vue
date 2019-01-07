@@ -3,7 +3,7 @@
     <div>
       <ul class="localplay-ul">
         <li v-for="(item,index) in articlelist" :key="index">
-          <router-link to class="localplay-items">
+          <router-link :to="'/article/'+item.id"  class="localplay-items">
             <!-- <h4 class="title">{{title}}</h4> -->
             <div class="content clear">
               <div class="content_cover">
@@ -40,18 +40,21 @@ export default {
     return {
       articlelist: [
         {
+          id: "1",
           title: "全网最全的北京攻略呱！",
           author: "呱",
           views: "22.1万",
           like: false
         },
         {
+          id:"2",
           title: "全网最全的北京攻略呱啊！",
           author: "呱啊",
           views: "22.2万",
           like: false
         },
         {
+          id:"3",
           title: "全网最全的北京攻略呱啊",
           author: "呱啊w",
           views: "22.2万",
