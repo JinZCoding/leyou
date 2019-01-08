@@ -8,6 +8,7 @@ const strategy = r => require.ensure([], () => r(require('../page/strategy/')), 
 const companions = r => require.ensure([], () => r(require('../page/companions/')), 'companions')
 const localplay = r => require.ensure([], () => r(require('../page/localplay/')), 'localplay')
 const article = r => require.ensure([], () => r(require('../page/article/')), 'article')
+const reply = r => require.ensure([], () => r(require('../page/article/components/replypage')), 'reply')
 
 export default [{
   path: '/',
@@ -65,7 +66,12 @@ export default [{
     {
       path: '/article/:id',
       name: article,
-      component: article
+      component: article,
+
+    }, {
+      path: '/reply',
+      name: reply,
+      component: reply
     }
   ]
 }]

@@ -6,9 +6,9 @@
           <i class="iconfont">&#xe629;</i>
         </div>
       </div>
-      <!-- <div class="header_center">
-        <h2>{{title}}</h2>
-      </div>-->
+      <div class="header_center" v-if="coverHeader">
+        <h2 class="ellipsis">文章标题</h2>
+      </div>
       <div class="header_right">
         <i class="iconfont">&#xe603;</i>
       </div>
@@ -20,56 +20,69 @@
         </div>
         <div class="article_content">
           <div class="article_title">
-            <h4 class="t1 lineclamp">「天鹅湖」太阳斜斜的照着俄罗斯的浪漫主义</h4>
+            <h4 class="t1 lineclamp">{{title}}</h4>
             <p class="time">
               创建于
-              <strong>2018-12-24</strong>
+              <strong>{{time}}</strong>
             </p>
             <p class="address">
               <i class="iconfont">&#xe89a;</i>
-              俄罗斯
+              {{address}}
             </p>
           </div>
           <div class="article_detail">
+            <div v-html="content"></div>
+          </div>
+          <div class="copy">
             <p>
-              天鹅湖有不同版本的结局，一个结局里，王子和公主双双坠入悬崖，却感动了上天，成功复活，
-              从此解除了魔咒，是所有童话故事都有的幸福结局。
+              本游记著作权归@
+              <i>{{author}}</i>所有，任何形式转载请联系作者。
             </p>
-            <p>悲剧版的结局里，王子和公主殉情，天鹅们的魔咒被解除，恶魔也死去。</p>
-            <p>还有一个残忍的版本里，恶魔杀死了王子，天鹅依然没有变回公主，并被恶魔带走。</p>
-            <p>
-              天鹅湖的故事好多人都知道，《天鹅湖》的旋律好多人都记得，正如我来到俄罗斯之前，只知道柴可夫斯基，
-              还有这个被国人称为“战斗名族”的国家。
-            </p>
-            <p>
-              从莫斯科到圣彼得堡的10天，我把它们浓缩在这4分钟的音乐和视频里。
-              音乐的名字就大言不惭的叫做《天鹅湖》吧。
-              这4分钟也许不够精彩，歌也不一定动听，但是我还是想通过这样的方式来表达自己对俄罗斯这个国家的喜爱。
-            </p>
-            <p>《天鹅湖》致敬最最伟大的柴可夫斯基。</p>
-            <div class="img_cover">
-              <img src="../../assets/img/cover.jpeg" alt>
+            <p>&copy; 2019 leyou</p>
+            <span>- THE END -</span>
+          </div>
+        </div>
+        <div class="article_reply">
+          <div>
+            <h4>回复</h4>
+            <div v-if="replylen">
+              <div class="reply_ul">
+                <li class="replyItem" v-for="(item, index) in replyList" :key="index">
+                  <div class="readers left">
+                    <img :src="item.author_img" alt>
+                  </div>
+                  <div class="reply_desc">
+                    <span class="author">{{item.author}}</span>
+                    <p class="replyone">{{item.reply}}</p>
+                  </div>
+                </li>
+              </div>
+              <div class="moreReply" v-if="showMore" @click="goReply">
+                <span>查看全部{{replylen}}条回复</span>
+              </div>
             </div>
-            <p>
-              昨晚在机场排队入关的时候跟一个经常来俄罗斯出差的国人聊天，得知俄罗斯最好吃性价比最高的快餐莫过于肯德基。
-              从克里姆林宫出来，一分钟都不想耽误的直奔红场后面的那条街，找到一家肯德基，点了两个套餐
-            </p>
+            <div class="noreply" v-else>
+              <span>快来发表你的评论吧~</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="articleFooter">
-      <div>
+      <div @click="goReply">
         <i class="iconfont">&#xe891;</i>
       </div>
-      <div>
-        <i class="iconfont">&#xe872;</i>
+      <div @click="collect = !collect">
+        <i class="iconfont" v-if="collect">&#xe871;</i>
+        <i class="iconfont" v-else>&#xe872;</i>        
       </div>
-      <div>
-        <i class="iconfont">&#xe88c;</i>
+      <div @click="thanks = !thanks">
+        <i class="iconfont" v-if="thanks">&#xe88b;</i>
+        <i class="iconfont" v-else>&#xe88c;</i>
       </div>
-      <div>
-        <i class="iconfont">&#xe874;</i>
+      <div @click="likes = !likes">
+        <i class="iconfont" v-if="likes">&#xe873;</i>
+        <i class="iconfont" v-else>&#xe874;</i>
       </div>
     </div>
   </div>
@@ -78,14 +91,53 @@
 export default {
   data() {
     return {
-      title: "hihii",
-      coverHeader: false
+      title: "",
+      time: "",
+      address: "",
+      author: "",
+      content: "",
+      coverHeader: false,
+      replylen: 0,
+      replyList: [],
+      collect: false, //收藏
+      thanks: false, //感谢
+      likes: false //喜欢
     };
+  },
+  computed: {
+    // 判断回复数>5显示 查看全部
+    showMore() {
+      if (this.replylen > 5) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   mounted() {
     window.addEventListener("scroll", this.scrollTop);
+    this.initData();
   },
   methods: {
+    // 初始化页面
+    initData() {
+      this.$axios.get("../static/json/article.json").then(res => {
+        // console.log(res.data);
+        this.title = res.data.title;
+        this.time = res.data.time;
+        this.address = res.data.address;
+        this.author = res.data.author;
+        this.content = res.data.content;
+      });
+
+      this.$axios.get("../static/json/replylist.json").then(res => {
+        // console.log(res.data);
+        this.replylen = res.data.length;
+        // 只显示五条评论
+        this.replyList = res.data.slice(0, 5);
+      });
+    },
+    // header样式
     scrollTop() {
       let scrollTop =
         window.pageYOffset ||
@@ -97,6 +149,15 @@ export default {
         this.coverHeader = false;
       }
     },
+    // 前往回复页面
+    goReply() {
+      // console.log(this.$route.params.id)
+      this.$router.push({
+        path: "/reply",
+        query: { id: this.$route.params.id }
+      });
+    },
+    // 返回上一页
     goBack() {
       this.$router.go(-1);
     }
@@ -133,6 +194,12 @@ export default {
   .header_left {
     margin-right: 20px;
   }
+  .header_center {
+    h2 {
+      font-size: 34px;
+      max-width: 300px;
+    }
+  }
   .header_right {
     position: absolute;
     right: 25px;
@@ -150,7 +217,8 @@ export default {
   }
 }
 .articlePage {
-  position: relative;
+  // position: relative;
+  padding-bottom: 120px;
   .article_cover {
     width: 100%;
     img {
@@ -158,12 +226,12 @@ export default {
     }
   }
   .article_content {
-    position: absolute;
+    position: relative;
     width: 100%;
     margin-top: -40px;
     border-top-left-radius: 40px;
     background: #fff;
-    padding: 30px 40px 140px;
+    padding: 30px 40px;
     .article_title {
       padding-bottom: 30px;
       border-bottom: 1px solid #eee;
@@ -206,6 +274,100 @@ export default {
         img {
           width: 100%;
         }
+      }
+    }
+    .copy {
+      p,
+      span,
+      i {
+        color: #999;
+        font-size: 26px;
+        text-align: left;
+        line-height: 36px;
+      }
+      span {
+        display: block;
+        padding-top: 20px;
+        text-align: center;
+        font-weight: 700;
+      }
+    }
+  }
+  .article_reply {
+    background: #fff;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding: 30px 40px 10px;
+    h4 {
+      font-size: 36px;
+      line-height: 45px;
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 30px;
+        background: $fc;
+        margin-right: 15px;
+      }
+    }
+    .reply_ul {
+      // padding-top: 20px;
+      .replyItem {
+        padding: 20px 0 25px;
+        border-bottom: 1px solid #eee;
+        &:last-child {
+          border: none;
+        }
+      }
+      .readers {
+        @include wh(55px, 55px);
+        border: 1px solid #f8f8f8;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+        img {
+          width: 100%;
+          border-radius: 50%;
+        }
+      }
+      .reply_desc {
+        padding-left: 70px;
+        .author {
+          display: block;
+          height: 55px;
+          font-size: 32px;
+          line-height: 55px;
+          // font-weight: 700;
+        }
+        .replyone {
+          font-size: 28px;
+          text-align: justify;
+        }
+        .replyto {
+          margin-top: 15px;
+          padding: 15px;
+          width: 100%;
+          min-height: 100px;
+          border-radius: 20px;
+          background: #eee;
+        }
+      }
+    }
+    .moreReply {
+      display: block;
+      margin: 10px 0;
+      text-align: center;
+      span {
+        font-size: 28px;
+        color: $fc;
+      }
+    }
+    .noreply {
+      text-align: center;
+      margin: 20px 0;
+      span {
+        font-size: 28px;
+        color: #666;
       }
     }
   }

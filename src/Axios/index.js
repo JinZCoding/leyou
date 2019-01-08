@@ -21,7 +21,8 @@ const Axios = axios.create({
   // baseURL: '/p2pbg',
   // baseURL: 'http://' + domain + ':8080',
   // baseURL: 'http://p2p-test.letvjr.com:8080',
-  baseURL: "http://10.75.164.45:8080",
+  // baseURL: "http://10.75.164.45:8080",
+  baseURL:"http://10.75.164.145:8686",
   timeout: 10000,
   responseType: 'json',
   withCredentials: true, //携带cookie
