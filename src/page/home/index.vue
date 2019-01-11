@@ -15,7 +15,9 @@
       </div>
       <div class="home_right">
         <div>
-          <i class="iconfont" @click="goProfile" v-if="isLogin">&#xe8a0;</i>
+          <router-link to="/profile" @click="goProfile" v-if="isLogin">
+            <i class="iconfont">&#xe8a0;</i>
+          </router-link>
           <router-link to="/login" class="login" v-else>登录</router-link>
         </div>
       </div>
@@ -84,7 +86,12 @@ export default {
     return {
       isLogin: false,
       location: "北京",
-      swiperImgList:["./static/img/swiper/s1.png","./static/img/swiper/s2.png","./static/img/swiper/s3.png","./static/img/swiper/s4.jpeg"],
+      swiperImgList: [
+        "./static/img/swiper/s1.png",
+        "./static/img/swiper/s2.png",
+        "./static/img/swiper/s3.png",
+        "./static/img/swiper/s4.jpeg"
+      ],
       swiperOption: {
         loop: true, // 循环模式选项
         // 如果需要分页器

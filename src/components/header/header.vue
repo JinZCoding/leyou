@@ -72,7 +72,7 @@ export default {
   .header_center {
     text-align: center;
     position: absolute;
-    @include cl;
+    @include center;
     h2 {
       color: $fc;
       font-size: 38px;

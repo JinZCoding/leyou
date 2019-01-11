@@ -7,7 +7,7 @@
     <router-link class="publish" to>
       <i class="iconfont">&#xe62a;</i>
     </router-link>
-    <router-link to="/" class="footer_right">
+    <router-link to="/profile" class="footer_right">
       <i class="iconfont">&#xe8a0;</i>
       <span>我的</span>
     </router-link>
@@ -38,6 +38,7 @@ export default {
   .publish {
     z-index: 1000;
     position: absolute;
+    @include center;
     i{
       color: $fc;
       font-size: 78px;

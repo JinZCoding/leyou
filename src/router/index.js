@@ -1,7 +1,10 @@
 import App from '../App'
 
-const index = r => require.ensure([], () => r(require('../page/home/')), 'home')
 const login = r => require.ensure([], () => r(require('../page/login/')), 'login')
+const index = r => require.ensure([], () => r(require('../page/home/')), 'home')
+const profile = r => require.ensure([], () => r(require('../page/profile/')), 'profile')
+const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
+const release = r => require.ensure([], () => r(require('../page/release/')), 'release')
 const city = r => require.ensure([], () => r(require('../page/city/')), 'city')
 const note = r => require.ensure([], () => r(require('../page/note/')), 'note')
 const strategy = r => require.ensure([], () => r(require('../page/strategy/')), 'strategy')
@@ -31,6 +34,24 @@ export default [{
       path: '/index',
       name: index,
       component: index
+    },
+    // 个人信息
+    {
+      path: '/profile',
+      name: profile,
+      component: profile
+    },
+    // 搜索
+    {
+      path: '/search',
+      name: search,
+      component: search
+    },
+    // 发布
+    {
+      path: '/release',
+      name: release,
+      component: release
     },
     // 选择城市
     {
@@ -68,7 +89,9 @@ export default [{
       name: article,
       component: article,
 
-    }, {
+    }, 
+    // 回复
+    {
       path: '/reply',
       name: reply,
       component: reply
