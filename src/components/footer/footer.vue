@@ -4,7 +4,7 @@
       <i class="iconfont">&#xe8e3;</i>
       <span>首页</span>
     </router-link>
-    <router-link class="publish" to>
+    <router-link class="publish" to="/release">
       <i class="iconfont">&#xe62a;</i>
     </router-link>
     <router-link to="/profile" class="footer_right">
