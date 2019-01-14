@@ -3,6 +3,10 @@ import App from '../App'
 const login = r => require.ensure([], () => r(require('../page/login/')), 'login')
 const index = r => require.ensure([], () => r(require('../page/home/')), 'home')
 const profile = r => require.ensure([], () => r(require('../page/profile/')), 'profile')
+
+const personal = r => require.ensure([], () => r(require('../page/profile/children/personal')), 'personal')
+
+
 const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
 const release = r => require.ensure([], () => r(require('../page/release/')), 'release')
 const city = r => require.ensure([], () => r(require('../page/city/')), 'city')
@@ -40,6 +44,11 @@ export default [{
       path: '/profile',
       name: profile,
       component: profile
+    },
+    {
+      path: '/personal',
+      name: personal,
+      component: personal
     },
     // 搜索
     {

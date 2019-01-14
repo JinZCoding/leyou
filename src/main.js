@@ -6,6 +6,12 @@ import routes from './router'
 
 import './assets/iconfont/iconfont.css'
 
+// 导入vant UI
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
+
 //引入swiper
 require('swiper/dist/css/swiper.css')
 import VueAwesomeSwiper from 'vue-awesome-swiper'

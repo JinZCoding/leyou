@@ -6,7 +6,7 @@
     </div>
     <div class="profilepage">
       <div class="page_top">
-        <div class="me">
+        <router-link to="/personal" tag="div" class="me">
           <div class="pro_left">
             <span class="avatar">
               <img src="../../assets/img/head_1.jpeg" alt>
@@ -19,7 +19,7 @@
               <i class="iconfont">&#xe88e;</i>
             </span>
           </div>
-        </div>
+        </router-link>
       </div>
       <div class="page_bottom">
         <div>
