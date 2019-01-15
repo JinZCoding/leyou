@@ -5,6 +5,7 @@ const index = r => require.ensure([], () => r(require('../page/home/')), 'home')
 const profile = r => require.ensure([], () => r(require('../page/profile/')), 'profile')
 
 const personal = r => require.ensure([], () => r(require('../page/profile/children/personal')), 'personal')
+const interest = r => require.ensure([], () => r(require('../page/profile/children/interest')), 'interest')
 
 
 const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
@@ -43,12 +44,19 @@ export default [{
     {
       path: '/profile',
       name: profile,
-      component: profile
-    },
-    {
-      path: '/personal',
-      name: personal,
-      component: personal
+      component: profile,
+      children: [
+        // 编辑个人资料
+        {
+          path: 'personal',
+          name: personal,
+          component: personal
+        },
+        {
+          path: 'interest',
+          name: interest,
+          component: interest
+        }]
     },
     // 搜索
     {
@@ -98,7 +106,7 @@ export default [{
       name: article,
       component: article,
 
-    }, 
+    },
     // 回复
     {
       path: '/reply',

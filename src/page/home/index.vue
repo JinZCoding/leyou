@@ -9,7 +9,7 @@
       </router-link>
       <div class="home_search">
         <span class="search_box">
-          <input type="text" class="search_input" placeholder="搜索目的地/攻略/游记">
+          <input type="text" class="search_input" readonly placeholder="搜索目的地/攻略/游记">
           <i class="iconfont">&#xe870;</i>
         </span>
       </div>

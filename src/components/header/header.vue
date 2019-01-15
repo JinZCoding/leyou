@@ -8,9 +8,9 @@
     <div class="header_center">
       <h2>{{banner}}</h2>
     </div>
-    <div class="header_right">
+    <!-- <div class="header_right">
       <div></div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -57,7 +57,7 @@ export default {
   }
   .iconfont {
     color: rgb(242, 148, 7);
-    font-size: 44px;
+    font-size: 34px;
   }
   .header_left {
     // width: 150px;
@@ -75,7 +75,7 @@ export default {
     @include center;
     h2 {
       color: $fc;
-      font-size: 38px;
+      font-size: 32px;
     }
   }
   .header_right {

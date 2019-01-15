@@ -6,7 +6,8 @@
     </div>
     <div class="profilepage">
       <div class="page_top">
-        <router-link to="/personal" tag="div" class="me">
+        <router-link to="/profile/personal" tag="div" class="me">
+          <!-- <div class="me" @click="personalShow=true"> -->
           <div class="pro_left">
             <span class="avatar">
               <img src="../../assets/img/head_1.jpeg" alt>
@@ -19,32 +20,45 @@
               <i class="iconfont">&#xe88e;</i>
             </span>
           </div>
+          <!-- </div> -->
         </router-link>
       </div>
       <div class="page_bottom">
         <div>
           <div class="one">
-            <div class="likes">
+            <router-link
+              :to="{path:'/profile/interest', query: {active:0}}"
+              tag="div"
+              class="likes"
+            >
               <span class="icon">
                 <!-- <i class="iconfont">&#xe88b;</i> -->
-                <img src="../../assets/img/xihuan_.png" width="35px" alt="">
+                <img src="../../assets/img/xihuan_.png" width="30px" alt>
               </span>
               <span class="font">我的喜欢</span>
-            </div>
-            <div class="praises">
+            </router-link>
+            <router-link
+              :to="{path:'/profile/interest', query: {active:1}}"
+              tag="div"
+              class="praises"
+            >
               <span class="icon">
                 <!-- <i class="iconfont">&#xe873;</i> -->
-                <img src="../../assets/img/dianzan.png" width="35px" alt="">
+                <img src="../../assets/img/dianzan.png" width="30px" alt>
               </span>
               <span class="font">我的赞</span>
-            </div>
-            <div class="favorites">
+            </router-link>
+            <router-link
+              :to="{path:'/profile/interest', query: {active:2}}"
+              tag="div"
+              class="favorites"
+            >
               <span class="icon">
                 <!-- <i class="iconfont">&#xe86d;</i> -->
-                <img src="../../assets/img/shoucang_.png" width="35px" alt="">
+                <img src="../../assets/img/shoucang_.png" width="30px" alt>
               </span>
               <span class="font">我的收藏</span>
-            </div>
+            </router-link>
           </div>
           <div class="two my_articles">
             <div class="article_tit">
@@ -61,27 +75,35 @@
                 <span>用文字记录旅行的小技巧</span>
               </div>
               <div class="article_class">
-                <span>游记</span><span>攻略</span><span>评价</span>
+                <span>游记</span>
+                <span>攻略</span>
+                <span>评价</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <router-view></router-view>
     <all-footer></all-footer>
   </div>
 </template>
 <script>
 import AllHeader from "../../components/header/header";
 import AllFooter from "../../components/footer/footer";
+import { Popup } from "vant";
+
 export default {
+  data() {
+    return {};
+  },
   components: {
     AllHeader,
     AllFooter
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../style/mixin.scss";
 .profile_header {
   @include wh(100%, 90px);
@@ -171,10 +193,6 @@ export default {
       align-items: center;
       .icon {
         margin-bottom: 5px;
-        i {
-          color: #fedb09;
-          font-size: 60px;
-        }
       }
       .font {
         font-size: 28px;
@@ -182,6 +200,12 @@ export default {
     }
   }
   .two {
+    .article_tit {
+      h3 {
+        font-size: 28px;
+        font-weight: 700;
+      }
+    }
     .article_info {
       @include fj(center);
       flex-direction: column;
@@ -191,37 +215,36 @@ export default {
         margin: 15px auto 20px;
         // @include wh(400px, 90px);
         // width: 400px;
-        padding: 30px 55px;
+        padding: 20px 55px;
         @include fj(center);
         align-items: center;
-        background-color: rgb(255,235,121);;
+        background-color: rgb(255, 235, 121);
         text-align: center;
         border-radius: 65px;
-        span{
-          font-size: 36px;
+        span {
+          font-size: 32px;
           font-weight: 700;
-          i{
+          i {
             font-size: 45px;
             margin-right: 20px;
           }
         }
-        
       }
     }
-    .tips{
+    .tips {
       padding-top: 10px;
-      span{
+      span {
         font-size: 26px;
         color: #75b2e4;
       }
     }
-    .article_class{
+    .article_class {
       margin: 40px 0 25px;
-      span{
+      span {
         font-size: 26px;
         padding: 0 30px;
         border-right: 1px solid #999;
-        &:last-child{
+        &:last-child {
           border: none;
         }
       }
