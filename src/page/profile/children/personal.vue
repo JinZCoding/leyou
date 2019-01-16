@@ -283,9 +283,6 @@ export default {
     @include wh(100%, 100px);
     line-height: 100px;
     border-bottom: 1px solid #eee;
-    &:last-child {
-      // border: none;
-    }
     span {
       font-size: 32px;
       font-weight: 200;

@@ -75,9 +75,9 @@
                 <span>用文字记录旅行的小技巧</span>
               </div>
               <div class="article_class">
-                <span>游记</span>
-                <span>攻略</span>
-                <span>评价</span>
+                <router-link :to="{path:'/profile/mywritten', query: {active:0}}" tag="span">游记</router-link>
+                <router-link :to="{path:'/profile/mywritten', query: {active:1}}" tag="span">攻略</router-link>
+                <router-link :to="{path:'/profile/mywritten', query: {active:2}}" tag="span">评价</router-link>
               </div>
             </div>
           </div>

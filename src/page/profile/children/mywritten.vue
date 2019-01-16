@@ -1,8 +1,8 @@
 <template>
-  <div class="interest">
+  <div class="mywritten">
     <all-header :banner="title"></all-header>
     <van-tabs v-model="active" color="#fedb09" @click="onTitleClick" swipeable sticky>
-      <van-tab title="我的喜欢">
+      <van-tab title="游记">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <van-cell
             v-for="(item, index) in list"
@@ -13,7 +13,7 @@
           />
         </van-list>
       </van-tab>
-      <van-tab title="我的赞">
+      <van-tab title="攻略">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <van-cell
             v-for="(item, index) in list"
@@ -24,7 +24,7 @@
           />
         </van-list>
       </van-tab>
-      <van-tab title="我的收藏">
+      <van-tab title="评价">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
           <van-cell
             v-for="(item, index) in list"
@@ -55,8 +55,7 @@ export default {
   created() {
     // console.log(this.$route.query.active);
     this.active = this.$route.query.active;
-    this.title = (this.active===0?"我的喜欢":(this.active===1?"我的赞":"我的收藏"));
-
+    this.title = (this.active===0?"游记":(this.active===1?"攻略":"评价"));
   },
   mounted() {
     this.initData();
@@ -95,7 +94,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.interest {
+.mywritten {
   position: absolute;
   top: 0;
   left: 0;

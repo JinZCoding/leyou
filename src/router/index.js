@@ -6,6 +6,7 @@ const profile = r => require.ensure([], () => r(require('../page/profile/')), 'p
 
 const personal = r => require.ensure([], () => r(require('../page/profile/children/personal')), 'personal')
 const interest = r => require.ensure([], () => r(require('../page/profile/children/interest')), 'interest')
+const mywritten = r => require.ensure([], () => r(require('../page/profile/children/mywritten')), 'mywritten')
 
 
 const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
@@ -56,6 +57,11 @@ export default [{
           path: 'interest',
           name: interest,
           component: interest
+        },
+        {
+          path: 'mywritten',
+          name: mywritten,
+          component: mywritten
         }]
     },
     // 搜索
