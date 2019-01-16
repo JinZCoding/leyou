@@ -2,7 +2,10 @@
   <div class="profile">
     <!-- <all-header banner="个人中心"></all-header> -->
     <div class="profile_header">
-      <span>个人中心</span>
+      <span class="pro_tit">个人中心</span>
+      <span class="logout" @click="logout">
+        <i class="iconfont">&#xe673;</i>
+      </span>
     </div>
     <div class="profilepage">
       <div class="page_top">
@@ -75,9 +78,9 @@
                 <span>用文字记录旅行的小技巧</span>
               </div>
               <div class="article_class">
-                <span>游记</span>
-                <span>攻略</span>
-                <span>评价</span>
+                <router-link :to="{path:'/profile/mywritten', query: {active:0}}" tag="span">游记</router-link>
+                <router-link :to="{path:'/profile/mywritten', query: {active:1}}" tag="span">攻略</router-link>
+                <router-link :to="{path:'/profile/mywritten', query: {active:2}}" tag="span">评价</router-link>
               </div>
             </div>
           </div>
@@ -91,7 +94,7 @@
 <script>
 import AllHeader from "../../components/header/header";
 import AllFooter from "../../components/footer/footer";
-import { Popup } from "vant";
+import { Popup, Dialog } from "vant";
 
 export default {
   data() {
@@ -100,6 +103,21 @@ export default {
   components: {
     AllHeader,
     AllFooter
+  },
+  methods: {
+    logout() {
+      Dialog.confirm({
+        title: "退出登录",
+        message: "确认退出？"
+      })
+        .then(() => {
+          // on confirm
+          console.log("退出登录");
+        })
+        .catch(() => {
+          // on cancel
+        });
+    }
   }
 };
 </script>
@@ -118,10 +136,16 @@ export default {
   span {
     color: #fff;
   }
+  .logout {
+    position: absolute;
+    right: 30px;
+    i {
+      font-size: 40px;
+      color: #fff;
+    }
+  }
 }
 .profilepage {
-  // margin: 90px auto 0;
-  // padding-top: 90px;
   padding-bottom: 100px;
   width: 100%;
   .page_top {

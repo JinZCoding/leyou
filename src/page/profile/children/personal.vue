@@ -13,10 +13,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="bg"
-      style="background: url('../../static/img/personal_bg.png') no-repeat center;"
-    >
+    <div class="bg" style="background: url('../../static/img/personal_bg.png') no-repeat center;">
       <div class="avatar">
         <span class="avatar_img">
           <img :src="info.avatar" alt>
@@ -112,7 +109,15 @@ export default {
       }
     };
   },
+  mounted() {
+    // this.initData();
+  },
   methods: {
+    // 初始化信息
+    initData() {
+      this.oldinfo = this.info;
+      console.log(this.oldinfo);
+    },
     // 取消确认个人资料
     onClickCancel() {
       if (this.havechange) {
@@ -145,7 +150,7 @@ export default {
     onAddressCancel() {
       this.addressShow = false;
     },
-
+    // 选择地址
     onAddressConfirm(val) {
       console.log(val);
       this.info.address = val[0].name + " " + val[1].name + " " + val[2].name;
@@ -181,20 +186,28 @@ export default {
       this.sexShow = false;
     }
   },
-  computed: {
-    newUsername() {
-      return this.info.username;
-    }
-  },
+  computed: {},
   watch: {
-    newUsername(val, old) {
-      // console.log(val, old);
-      if (val === this.oldinfo.username) {
-        this.havechange = false;
-      } else {
-        this.havechange = true;
-        console.log(val);
-      }
+    // 监控信息变化
+    info: {
+      handler(val, oldVal) {
+        console.log(val, oldVal);
+        console.log(this.oldinfo);
+        if (
+          val.username === this.oldinfo.username &&
+          val.sex === this.oldinfo.sex &&
+          val.avatar === this.oldinfo.avatar &&
+          val.birthday === this.oldinfo.birthday &&
+          val.address === this.oldinfo.address &&
+          val.autograph === this.oldinfo.autograph
+        ) {
+          console.log(123123);
+          this.havechange = false;
+        } else {
+          this.havechange = true;
+        }
+      },
+      deep: true
     }
   }
 };
@@ -283,9 +296,6 @@ export default {
     @include wh(100%, 100px);
     line-height: 100px;
     border-bottom: 1px solid #eee;
-    &:last-child {
-      // border: none;
-    }
     span {
       font-size: 32px;
       font-weight: 200;
@@ -306,21 +316,6 @@ export default {
       border-bottom: 1px solid #eee;
       &:last-child {
         border: none;
-      }
-    }
-  }
-}
-.van-overlay {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-.van-dialog {
-  border-radius: 20px;
-  width: 70%;
-  .van-button {
-    color: #1989fa;
-    &.van-dialog__cancel {
-      span {
-        font-weight: 700;
       }
     }
   }
