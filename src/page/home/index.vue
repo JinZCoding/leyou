@@ -46,15 +46,15 @@
               </router-link>
             </li>
             <li class="nav-li">
-              <router-link to="/companions">
-                <i class="iconfont">&#xe88f;</i>
-                <span>结伴</span>
-              </router-link>
-            </li>
-            <li class="nav-li">
               <router-link to="/localplay">
                 <i class="iconfont">&#xe8a2;</i>
                 <span>当地</span>
+              </router-link>
+            </li>
+            <li class="nav-li">
+              <router-link to="/record">
+                <i class="iconfont">&#xe7af;</i>
+                <span>随记</span>
               </router-link>
             </li>
           </ul>

@@ -116,7 +116,7 @@ export default {
     // 初始化信息
     initData() {
       this.oldinfo = this.info;
-      console.log(this.oldinfo);
+      // console.log(this.oldinfo);
     },
     // 取消确认个人资料
     onClickCancel() {
@@ -152,8 +152,9 @@ export default {
     },
     // 选择地址
     onAddressConfirm(val) {
-      console.log(val);
+      // console.log(val);
       this.info.address = val[0].name + " " + val[1].name + " " + val[2].name;
+      console.log(this.info.address);
       this.addressShow = false;
     },
     onAddressChange(picker) {
@@ -191,8 +192,8 @@ export default {
     // 监控信息变化
     info: {
       handler(val, oldVal) {
-        console.log(val, oldVal);
-        console.log(this.oldinfo);
+        // console.log(val, oldVal);
+        // console.log(this.oldinfo);
         if (
           val.username === this.oldinfo.username &&
           val.sex === this.oldinfo.sex &&
@@ -201,7 +202,7 @@ export default {
           val.address === this.oldinfo.address &&
           val.autograph === this.oldinfo.autograph
         ) {
-          console.log(123123);
+          // console.log(123123);
           this.havechange = false;
         } else {
           this.havechange = true;

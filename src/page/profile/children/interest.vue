@@ -67,14 +67,14 @@ export default {
   methods: {
     initData() {
       this.$axios.get("../../static/json/myinterest.json").then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.list = res.data;
       });
     },
     // 切换标签，显示不同列表
     onTitleClick(index, title) {
       this.title = title;
-      // console.log(index);
+      console.log(title);
     },
     onLoad() {
       // 异步更新数据

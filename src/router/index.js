@@ -11,10 +11,12 @@ const mywritten = r => require.ensure([], () => r(require('../page/profile/child
 
 const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
 const release = r => require.ensure([], () => r(require('../page/release/')), 'release')
+const release1 = r => require.ensure([], () => r(require('../page/release/demo.vue')), 'release1')
+
 const city = r => require.ensure([], () => r(require('../page/city/')), 'city')
 const note = r => require.ensure([], () => r(require('../page/note/')), 'note')
 const strategy = r => require.ensure([], () => r(require('../page/strategy/')), 'strategy')
-const companions = r => require.ensure([], () => r(require('../page/companions/')), 'companions')
+const record = r => require.ensure([], () => r(require('../page/record/')), 'record')
 const localplay = r => require.ensure([], () => r(require('../page/localplay/')), 'localplay')
 const article = r => require.ensure([], () => r(require('../page/article/')), 'article')
 const reply = r => require.ensure([], () => r(require('../page/article/components/replypage')), 'reply')
@@ -62,7 +64,8 @@ export default [{
           path: 'mywritten',
           name: mywritten,
           component: mywritten
-        }]
+        }
+      ]
     },
     // 搜索
     {
@@ -75,6 +78,12 @@ export default [{
       path: '/release',
       name: release,
       component: release
+    },
+    // 发布测试
+    {
+      path: '/release1',
+      name: release1,
+      component: release1
     },
     // 选择城市
     {
@@ -96,9 +105,9 @@ export default [{
     },
     // 结伴
     {
-      path: '/companions',
-      name: companions,
-      component: companions
+      path: '/record',
+      name: record,
+      component: record
     },
     // 当地游玩
     {
