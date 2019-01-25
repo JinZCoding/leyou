@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="inner">
+    <div class="home_inner">
       <div class="info">
         <!-- 导航轮播 -->
         <swiper :options="swiperOption">
@@ -197,7 +197,7 @@ export default {
   color: #fff;
   font-size: 44px;
 }
-.inner {
+.home_inner {
   // width: 90%;
   margin: 90px auto 0;
   padding-bottom: 100px;

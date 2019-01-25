@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './router'
+import store from './store'
 
 import './assets/iconfont/iconfont.css'
 
@@ -53,6 +54,7 @@ const router = new VueRouter({
 
 /* eslint-disable no-new */
 new Vue({
+  store,
   router,
 
 }).$mount('#app')

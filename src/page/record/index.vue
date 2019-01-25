@@ -8,8 +8,10 @@
             is="RecordItem"
             v-for="(item, index) in list"
             :key="index"
+            :item="item"
             :name="item.name"
             :content="item.content"
+            :imgurl="item.img_url"
           ></li>
         </ul>
       </div>
@@ -30,12 +32,29 @@ export default {
     return {
       list: [
         {
+          avatar: "../../static/img/head_1.jpeg",
           name: "aha",
-          content: "你好啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或~"
+          content: "你好啊哈哈哈哈哈哈哈哈哈~",
+          date: "2019-1-1",
+          img_url: "../../static/img/cover.jpeg",
+          likes: 4
         },
         {
+          avatar: "../../static/img/wa.png",
           name: "haha",
-          content: "hey~"
+          content:
+            "嘿哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈~",
+          date: "2019-2-1",
+          // img_url: "../../static/img/cover.jpeg",
+          likes: 0
+        },
+        {
+          avatar: "../../static/img/shi.png",
+          name: "haha",
+          content: "哈！北京，我来了！",
+          date: "2019-1-9",
+          img_url: "../../static/img/beijing.jpeg",
+          likes: 21
         }
       ]
     };
@@ -57,7 +76,7 @@ export default {
   width: 100%;
 }
 .record_content {
-  background-color: #fff;
+  // background-color: #fff;
 }
 .center_bottom {
   // background-color: red;

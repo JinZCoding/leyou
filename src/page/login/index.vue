@@ -43,6 +43,7 @@
 
 <script>
 import { setStore, removeStore } from "../../config/util";
+import { mapGetters, mapActions } from "vuex"; //先要引入
 export default {
   data() {
     return {
@@ -51,17 +52,27 @@ export default {
       showPass: false
     };
   },
-  created(){
+  created() {},
+  computed: {
+    ...mapGetters(["userInfo"])
   },
   methods: {
+    ...mapActions(["setUser"]),
     login() {
       if (this.userId && this.loginPassword) {
-        setStore("isLogin",true)
-        setStore("userid",this.userId)
-        this.$router.push({
-          path: "/index",
-          // query: { userid: this.userId }
-        });
+        setStore("isLogin", true);
+        setStore("userid", this.userId);
+        // console.log("11111", this.userInfo);
+        let info = {
+          isLogin: true,
+          userId: this.userId
+        };
+        this.setUser(info);
+        console.log("22222", this.userInfo);
+        // this.$router.push({
+        //   path: "/index"
+        //   // query: { userid: this.userId }
+        // });
       } else if (this.userId && !this.loginPassword) {
         this.$toast("请输入密码");
       } else {

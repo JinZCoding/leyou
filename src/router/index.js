@@ -11,7 +11,8 @@ const mywritten = r => require.ensure([], () => r(require('../page/profile/child
 
 const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
 const release = r => require.ensure([], () => r(require('../page/release/')), 'release')
-const release1 = r => require.ensure([], () => r(require('../page/release/demo.vue')), 'release1')
+const release1 = r => require.ensure([], () => r(require('../page/release/demo')), 'release1')
+const releaseSuccess = r => require.ensure([], () => r(require('../page/release/children/success')), 'releaseSuccess')
 
 const city = r => require.ensure([], () => r(require('../page/city/')), 'city')
 const note = r => require.ensure([], () => r(require('../page/note/')), 'note')
@@ -77,7 +78,12 @@ export default [{
     {
       path: '/release',
       name: release,
-      component: release
+      component: release,
+      children: [{
+        path: 'success',
+        name: releaseSuccess,
+        component: releaseSuccess
+      }]
     },
     // 发布测试
     {

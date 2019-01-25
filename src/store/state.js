@@ -1,0 +1,4 @@
+const state = {
+  userInfo: {},
+  location: {}
+}

@@ -19,9 +19,10 @@ export default {
 </script>
 <style lang="scss">
 .zxeditor-container .zxeditor-toolbar-wrapper {
+  position: fixed;
   top: 0;
 }
-.zxeditor-content-wrapper {
-  margin-top: 100px;
+.zxeditor-container .zxeditor-content-wrapper{
+  margin-top: 49px;/*no*/
 }
 </style>

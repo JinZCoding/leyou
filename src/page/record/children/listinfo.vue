@@ -1,25 +1,30 @@
 <template>
   <li class="record_li">
     <div class="left_avatar">
-      <img src="../../../assets/img/head_1.jpeg" alt width="50px">
+      <img :src="item.avatar" alt width="50px">
     </div>
     <div class="right_info">
       <span class="name ellipsis">{{name}}</span>
+      <p class="time">{{item.date}}</p>
+    </div>
+    <div class="content_info">
       <p class="content">{{content}}</p>
-      <p class="time">2019-1-1</p>
-      <div class="operation">
-        <div class="extra_opera" v-if="operationShow">
-          <span class="to_like">
-            <i class="iconfont">&#xe8e5;</i>赞
-          </span>
-          <span class="to_comment">
-            <i class="iconfont">&#xe60d;</i>评论
-          </span>
-        </div>
-        <span class="more_opera" @click="">
-          <i class="iconfont">&#xe814;</i>
-        </span>
+      <div class="chart" v-if="imgurl">
+        <img :src="imgurl" width="100%" alt>
       </div>
+    </div>
+    <div class="operation">
+      <span class="to_like" @click="toLike">
+        <i class="iconfont" v-if="!isLike">&#xe874;</i>
+        <i class="iconfont" v-else>&#xe873;</i>
+      </span>
+      <span class="to_comment">
+        <i class="iconfont">&#xe891;</i>
+      </span>
+    </div>
+    <div class="likes" v-if="item.likes">
+      <i class="iconfont">&#xe873;</i>
+      ssss等{{item.likes}}人觉得很赞
     </div>
   </li>
 </template>
@@ -28,19 +33,31 @@ export default {
   name: "RecordItem",
   data() {
     return {
-      operationShow: false
+      isLike: false
     };
   },
-  props: ["name", "content"]
+  props: ["item", "name", "content", "imgurl"],
+  methods: {
+    toLike() {
+      this.isLike = !this.isLike;
+      if (this.isLike) {
+        this.item.likes += 1;
+      } else {
+        this.item.likes -= 1;
+      }
+    }
+  }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../../style/mixin.scss";
 
 .record_li {
   position: relative;
-  margin: 10px 10px;
-  padding: 20px 20px 20px;
+  min-height: 220px;
+  background-color: #fff;
+  margin: 0 0 25px;
+  padding: 20px 30px 20px;
   border-bottom: 1px solid #eee;
   font-size: 28px;
   &:last-child {
@@ -51,7 +68,7 @@ export default {
     position: absolute;
     top: 20px;
     img {
-      border-radius: 10px;
+      border-radius: 50%;
     }
   }
   .right_info {
@@ -63,48 +80,42 @@ export default {
       font-size: 34px;
       font-weight: 700;
     }
-    .content {
-      padding: 10px 0;
-      font-size: 28px;
-    }
     .time {
       padding-top: 20px;
       color: #666;
     }
   }
-}
-.operation {
-  @include fj(flex-end);
-  align-items: center;
-  text-align: center;
-  margin-top: -35px;
-  .extra_opera {
-    display: inline-block;
-    background: rgba(0, 0, 0, 0.8);
-    height: 58px;
-    line-height: 58px;
-    padding: 0 20px;
-    border-radius: 5px;
-    span {
-      color: #fff;
-      font-size: 28px;
+  .content_info {
+    padding: 10px;
+    .content {
+      padding: 10px 0;
+      font-size: 30px;
+      text-align: justify;
     }
-    i {
-      font-size: 32px;
-      color: #fff;
-      padding-right: 12px;
-    }
-    .to_like {
-      padding-right: 20px;
+    .chart {
+      width: 100%;
+      max-height: 300px;
+      overflow: hidden;
     }
   }
-  .more_opera {
-    display: inline-block;
-    @include wh(55px, 38px);
-    line-height: 38px;
-    background: rgba(0, 0, 0, 0.08);
-    margin-left: 40px;
-    border-radius: 5px;
+  .operation {
+    text-align: right;
+    padding: 10px;
+    i {
+      font-size: 38px;
+      color: #000;
+      font-weight: 700;
+      padding-right: 10px;
+    }
+  }
+  .likes {
+    border-top: 1px solid #eee; /*no*/
+    padding: 20px 10px 5px;
+    i {
+      color: #000;
+      padding-right: 6px;
+      font-size: 34px;
+    }
   }
 }
 </style>

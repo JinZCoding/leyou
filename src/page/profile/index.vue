@@ -98,7 +98,9 @@ import { Popup, Dialog } from "vant";
 
 export default {
   data() {
-    return {};
+    return {
+      isLogin: false
+    };
   },
   components: {
     AllHeader,

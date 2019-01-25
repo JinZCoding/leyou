@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="header_center" v-if="coverHeader">
-        <h2 class="ellipsis">文章标题</h2>
+        <h2 class="ellipsis">{{title}}</h2>
       </div>
       <div class="header_right">
         <i class="iconfont">&#xe603;</i>
@@ -74,7 +74,7 @@
       </div>
       <div @click="collect = !collect">
         <i class="iconfont" v-if="collect">&#xe871;</i>
-        <i class="iconfont" v-else>&#xe872;</i>        
+        <i class="iconfont" v-else>&#xe872;</i>
       </div>
       <div @click="thanks = !thanks">
         <i class="iconfont" v-if="thanks">&#xe88b;</i>
@@ -197,7 +197,7 @@ export default {
   .header_center {
     h2 {
       font-size: 34px;
-      max-width: 300px;
+      max-width: 450px;
     }
   }
   .header_right {
@@ -236,6 +236,7 @@ export default {
       padding-bottom: 30px;
       border-bottom: 1px solid #eee;
       .t1 {
+        padding-top: 5px;
         font-size: 40px;
         font-weight: 700;
         -webkit-line-clamp: 2;

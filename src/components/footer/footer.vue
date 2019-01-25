@@ -4,20 +4,38 @@
       <i class="iconfont">&#xe8e3;</i>
       <span>首页</span>
     </router-link>
-    <router-link class="publish" to="/release">
+    <div class="publish" @click="showDialog">
       <i class="iconfont">&#xe62a;</i>
-    </router-link>
+    </div>
     <router-link to="/profile" class="footer_right">
       <i class="iconfont">&#xe8a0;</i>
       <span>我的</span>
     </router-link>
+    <div class="dialog" v-if="dialogShow">
+      <span @click="gotoRelease(1)">攻略</span>
+      <span @click="gotoRelease(2)">游记</span>
+      <span @click="gotoRelease(3)">随记</span>
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: "allFooter",
   data() {
-    return {};
+    return {
+      dialogShow: false
+    };
+  },
+  methods: {
+    showDialog() {
+      this.dialogShow = !this.dialogShow;
+    },
+    gotoRelease(type) {
+      this.$router.push({
+        path: "/release",
+        query: { type: 1 }
+      });
+    }
   }
 };
 </script>
@@ -39,7 +57,7 @@ export default {
     z-index: 1000;
     position: absolute;
     @include center;
-    i{
+    i {
       color: $fc;
       font-size: 78px;
     }
@@ -56,6 +74,15 @@ export default {
     font-size: 42px;
     color: $fc;
   }
+}
+.dialog {
+  position: fixed;
+  bottom: 150px;
+  @include wh(350px, 100px);
+  background-color: red;
+  z-index: 1000;
+  @include fj(space-around);
+  align-items: center;
 }
 </style>
 

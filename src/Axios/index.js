@@ -46,9 +46,9 @@ Axios.interceptors.response.use(response => {
     // console.log(response.data.message)
     Toast(response.data.message);
     vuex.commit('quit')
-    sessionStorage.removeItem('Jurisdiction')
-    sessionStorage.removeItem('menu')
-    sessionStorage.removeItem('DistrictList')
+    // sessionStorage.removeItem('Jurisdiction')
+    // sessionStorage.removeItem('menu')
+    // sessionStorage.removeItem('DistrictList')
     router.replace({ name: 'login' })
   } else {
     // console.log(response.data.message)
