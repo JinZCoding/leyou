@@ -35,7 +35,7 @@
 
 <script>
 import cityList from "./cityList.js";
-import { setStore, getStore } from "../../../config/util";
+import { mapGetters, mapActions } from "vuex"; //先要引入
 
 export default {
   name: "CitySelector",
@@ -66,12 +66,14 @@ export default {
     };
   },
   mounted() {
-    this.currentLocation = JSON.parse(getStore("location")) || {
+    // console.log(this.location);
+    this.currentLocation = this.location || {
       cityName: "北京",
       pinyin: "beijing"
     };
   },
   computed: {
+    ...mapGetters(["location"]),
     // 城市列表
     cityListData() {
       let map = {}; // 处理过后的数据对象
@@ -111,10 +113,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setLocation"]),
     //选择城市 跳转
     chooseCity(city) {
-      // console.log(city);
-      setStore("location", city);
+      this.setLocation(city);
       if (window.location.search) {
         // 如果有backurl,点击后返回backurl页面
         var args = this.getUrl(window.location.href);

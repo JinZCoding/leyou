@@ -1,9 +1,17 @@
 import * as types from './mutation-types'
+import {
+  saveUser,
+  saveLocation,
+  removeUser
+} from '../config/cache'
 
-export const setUser = function ({commit}) {
-  commit(types.SET_USER_INFO)
+export const setUser = function ({commit}, obj) {
+  commit(types.SET_USER_INFO, saveUser(obj))
+}
+export const signOut = function({commit}) {
+  commit(types.REMOVE_USER, removeUser())
 }
 
-export const setLocation = function ({commit}) {
-  commit(types.SET_LOCATION)
+export const setLocation = function ({commit}, obj) {
+  commit(types.SET_LOCATION, saveLocation(obj))
 }

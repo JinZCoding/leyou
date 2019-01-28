@@ -5,14 +5,15 @@
         <h2>发布成功</h2>
       </div>
       <div class="header_right">
-        <a>确定</a>
+        <router-link to="/index">确定</router-link>
       </div>
     </div>
     <div class="success">
       <img src="../../../assets/img/success.jpg" width="100%" alt>
       <span class="tips">文章发布成功！</span>
       <button class="sure">
-        <a href>确定</a>
+        <router-link to="/index">确 定</router-link>
+        <!-- <a href>确定</a> -->
       </button>
     </div>
   </div>

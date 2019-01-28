@@ -60,19 +60,12 @@ export default {
     ...mapActions(["setUser"]),
     login() {
       if (this.userId && this.loginPassword) {
-        setStore("isLogin", true);
-        setStore("userid", this.userId);
-        // console.log("11111", this.userInfo);
         let info = {
           isLogin: true,
           userId: this.userId
         };
         this.setUser(info);
-        console.log("22222", this.userInfo);
-        // this.$router.push({
-        //   path: "/index"
-        //   // query: { userid: this.userId }
-        // });
+        this.$router.go(-1);
       } else if (this.userId && !this.loginPassword) {
         this.$toast("请输入密码");
       } else {

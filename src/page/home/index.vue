@@ -4,7 +4,7 @@
       <router-link to="/city" class="home_left">
         <div>
           <i class="iconfont">&#xe89d;</i>
-          <span class="home_address ellipsis">{{location}}</span>
+          <span class="home_address ellipsis">{{currentLocation}}</span>
         </div>
       </router-link>
       <div class="home_search">
@@ -78,14 +78,14 @@
 import AllFooter from "../../components/footer/footer";
 import GuideList from "./components/guidelist";
 import ScrollTop from "../../components/common/scrolltop";
-import { setStore, removeStore, getStore } from "../../config/util";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { mapGetters, mapActions } from "vuex"; //先要引入
 
 export default {
   data() {
     return {
       isLogin: false,
-      location: "北京",
+      currentLocation: "北京",
       swiperImgList: [
         "./static/img/swiper/s1.png",
         "./static/img/swiper/s2.png",
@@ -115,10 +115,16 @@ export default {
     swiper,
     swiperSlide
   },
+  computed: {
+    ...mapGetters(["userInfo", "location"])
+  },
   mounted() {
-    this.isLogin = getStore("isLogin") || false;
-    if (getStore("location")) {
-      this.location = JSON.parse(getStore("location")).cityName;
+    // console.log("userinfo", this.userInfo);
+    if (this.userInfo) {
+      this.isLogin = this.userInfo.isLogin;
+    }
+    if (this.location) {
+      this.currentLocation = this.location.cityName;
     }
   },
   methods: {

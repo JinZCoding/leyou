@@ -3,19 +3,19 @@
     <!-- <all-header banner="个人中心"></all-header> -->
     <div class="profile_header">
       <span class="pro_tit">个人中心</span>
-      <span class="logout" @click="logout">
+      <span class="logout" @click="logout" v-if="isLogin">
         <i class="iconfont">&#xe673;</i>
       </span>
     </div>
     <div class="profilepage">
       <div class="page_top">
-        <router-link to="/profile/personal" tag="div" class="me">
+        <router-link :to="isLogin?'/profile/personal':'/login'" tag="div" class="me">
           <!-- <div class="me" @click="personalShow=true"> -->
           <div class="pro_left">
             <span class="avatar">
-              <img src="../../assets/img/head_1.jpeg" alt>
+              <img :src="isLogin?img_url:'../static/img/head_4.jpg'" alt>
             </span>
-            <span class="name">阿圣嗷嗷嗷</span>
+            <span class="name">{{isLogin?name:"请先登录账号嗷"}}</span>
           </div>
           <div class="pro_right">
             <!-- <span class="pro_link">个人信息</span> -->
@@ -29,39 +29,27 @@
       <div class="page_bottom">
         <div>
           <div class="one">
-            <router-link
-              :to="{path:'/profile/interest', query: {active:0}}"
-              tag="div"
-              class="likes"
-            >
+            <div @click="gotoInterest(0)" class="likes">
               <span class="icon">
                 <!-- <i class="iconfont">&#xe88b;</i> -->
                 <img src="../../assets/img/xihuan_.png" width="30px" alt>
               </span>
               <span class="font">我的喜欢</span>
-            </router-link>
-            <router-link
-              :to="{path:'/profile/interest', query: {active:1}}"
-              tag="div"
-              class="praises"
-            >
+            </div>
+            <div @click="gotoInterest(1)" class="praises">
               <span class="icon">
                 <!-- <i class="iconfont">&#xe873;</i> -->
                 <img src="../../assets/img/dianzan.png" width="30px" alt>
               </span>
               <span class="font">我的赞</span>
-            </router-link>
-            <router-link
-              :to="{path:'/profile/interest', query: {active:2}}"
-              tag="div"
-              class="favorites"
-            >
+            </div>
+            <div @click="gotoInterest(2)" class="favorites">
               <span class="icon">
                 <!-- <i class="iconfont">&#xe86d;</i> -->
                 <img src="../../assets/img/shoucang_.png" width="30px" alt>
               </span>
               <span class="font">我的收藏</span>
-            </router-link>
+            </div>
           </div>
           <div class="two my_articles">
             <div class="article_tit">
@@ -78,9 +66,9 @@
                 <span>用文字记录旅行的小技巧</span>
               </div>
               <div class="article_class">
-                <router-link :to="{path:'/profile/mywritten', query: {active:0}}" tag="span">游记</router-link>
-                <router-link :to="{path:'/profile/mywritten', query: {active:1}}" tag="span">攻略</router-link>
-                <router-link :to="{path:'/profile/mywritten', query: {active:2}}" tag="span">评价</router-link>
+                <span @click="gotoMywritten(0)">游记</span>
+                <span @click="gotoMywritten(1)">攻略</span>
+                <span @click="gotoMywritten(2)">评价</span>
               </div>
             </div>
           </div>
@@ -95,18 +83,33 @@
 import AllHeader from "../../components/header/header";
 import AllFooter from "../../components/footer/footer";
 import { Popup, Dialog } from "vant";
+import { setStore, removeStore, getStore } from "../../config/util";
+import { mapGetters, mapActions } from "vuex"; //先要引入
 
 export default {
   data() {
     return {
-      isLogin: false
+      isLogin: false,
+      name: "阿圣嗷嗷嗷",
+      img_url: "../static/img/head_3.jpg"
     };
   },
   components: {
     AllHeader,
     AllFooter
   },
+  inject: ["reload"],
+  computed: {
+    ...mapGetters(["userInfo"])
+  },
+  mounted() {
+    // this.isLogin = getStore("isLogin") || false;
+    if (this.userInfo) {
+      this.isLogin = this.userInfo.isLogin;
+    }
+  },
   methods: {
+    ...mapActions(["signOut"]),
     logout() {
       Dialog.confirm({
         title: "退出登录",
@@ -114,11 +117,34 @@ export default {
       })
         .then(() => {
           // on confirm
+          // this.removeStore("isLogin");
+          this.signOut();
           console.log("退出登录");
+          this.reload();
         })
         .catch(() => {
           // on cancel
         });
+    },
+    gotoInterest(type) {
+      if (this.isLogin) {
+        this.$router.push({
+          path: "/profile/interest",
+          query: { active: type }
+        });
+      } else {
+        this.$router.push("/login");
+      }
+    },
+    gotoMywritten(type) {
+      if (this.isLogin) {
+        this.$router.push({
+          path: "/profile/mywritten",
+          query: { active: type }
+        });
+      } else {
+        this.$router.push("/login");
+      }
     }
   }
 };

@@ -82,7 +82,8 @@ export default {
 }
 .article-ul {
   li {
-    padding: 25px 30px;
+    margin: 0 30px;
+    padding: 25px 0;
     border-bottom: 1px solid #eee;
     &:last-child {
       border: none;
@@ -94,7 +95,7 @@ export default {
 }
 .article-items {
   .title {
-    padding: 20px 20px 0 0;
+    padding: 10px 20px 0 0;
     font-size: 36px;
     color: #111;
     line-height: 1.3em;
