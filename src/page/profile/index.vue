@@ -83,7 +83,6 @@
 import AllHeader from "../../components/header/header";
 import AllFooter from "../../components/footer/footer";
 import { Popup, Dialog } from "vant";
-import { setStore, removeStore, getStore } from "../../config/util";
 import { mapGetters, mapActions } from "vuex"; //先要引入
 
 export default {
@@ -103,13 +102,13 @@ export default {
     ...mapGetters(["userInfo"])
   },
   mounted() {
-    // this.isLogin = getStore("isLogin") || false;
     if (this.userInfo) {
       this.isLogin = this.userInfo.isLogin;
     }
   },
   methods: {
     ...mapActions(["signOut"]),
+    // 退出登录
     logout() {
       Dialog.confirm({
         title: "退出登录",
@@ -117,9 +116,8 @@ export default {
       })
         .then(() => {
           // on confirm
-          // this.removeStore("isLogin");
           this.signOut();
-          console.log("退出登录");
+          // console.log("退出登录");
           this.reload();
         })
         .catch(() => {
@@ -192,6 +190,7 @@ export default {
 .page_top {
   .me {
     @include wh(100%, 200px);
+    padding: 0 15px;
     @include fj;
     align-items: center;
     .pro_left {

@@ -2,6 +2,9 @@
   <div class="login-div">
     <div>
       <div class="login_header">
+        <span class="colseLogin" @click="colseLogin">
+          <i class="iconfont">&#xe86e;</i>
+        </span>
         <h2>乐游</h2>
       </div>
       <div class="login_container">
@@ -33,7 +36,6 @@
       <div class="loginButton" @click="login">
         <a>登录</a>
       </div>
-
       <div class="bottom_con">
         <p>&copy; jinzhiyi</p>
       </div>
@@ -42,7 +44,6 @@
 </template>
 
 <script>
-import { setStore, removeStore } from "../../config/util";
 import { mapGetters, mapActions } from "vuex"; //先要引入
 export default {
   data() {
@@ -52,12 +53,16 @@ export default {
       showPass: false
     };
   },
-  created() {},
+  mounted() {
+    // 进入登录页面，默认退出登录，清除session
+    this.signOut();
+  },
   computed: {
     ...mapGetters(["userInfo"])
   },
   methods: {
-    ...mapActions(["setUser"]),
+    ...mapActions(["setUser", "signOut"]),
+    // 登录
     login() {
       if (this.userId && this.loginPassword) {
         let info = {
@@ -71,6 +76,10 @@ export default {
       } else {
         this.$toast("请输入账号");
       }
+    },
+    // 关闭页面
+    colseLogin() {
+      this.$router.go(-1);
     }
   }
 };
@@ -84,6 +93,15 @@ export default {
   // line-height: 240px;
   background: rgba(255, 186, 51, 0.6);
   @include bis("./src/assets/img/login_bk.png");
+  .colseLogin {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    i {
+      font-size: 46px;
+      color: #fff;
+    }
+  }
   h2 {
     font-size: 50px;
     color: #fff;

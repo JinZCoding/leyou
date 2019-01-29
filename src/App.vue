@@ -1,9 +1,8 @@
 <template>
   <div>
-    <router-view/>
+    <router-view v-if="isRouterAlive"></router-view>
   </div>
 </template>
-
 <script>
 export default {
   provide() {

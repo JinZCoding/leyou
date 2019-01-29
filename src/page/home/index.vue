@@ -79,7 +79,7 @@ import AllFooter from "../../components/footer/footer";
 import GuideList from "./components/guidelist";
 import ScrollTop from "../../components/common/scrolltop";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { mapGetters, mapActions } from "vuex"; //先要引入
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {

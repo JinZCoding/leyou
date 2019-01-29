@@ -12,7 +12,7 @@
           <div class="caption">
             <router-link to="/city?backurl=localplay" class="gobaike">
               <i class="iconfont">&#xe758;</i>
-              <h2>{{location.cityName}}</h2>
+              <h2>{{currentLocation.cityName}}</h2>
               <!-- <p>北京，简称“京”，是中华人民共和国的首都、直辖市、国家中心城市、超大城市、国际大都市，全国政治中心、文化中心、国际交往中心、科技创新中心和综合交通枢纽，是中国共产党中央委员会、中华人民共和国中央人民政府、</p> -->
             </router-link>
           </div>
@@ -84,7 +84,7 @@ import AllFooter from "../../components/footer/footer";
 import AllHeader from "../../components/header/header";
 import LocalplayList from "./components/localplaylist";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { setStore, getStore } from "../../config/util";
+import { mapGetters } from "vuex"; //先要引入
 
 export default {
   data() {
@@ -118,16 +118,19 @@ export default {
         slidesPerView: "auto",
         spaceBetween: 30
       },
-      location: ""
+      currentLocation: ""
     };
   },
+  computed: {
+    ...mapGetters(["location"])
+  },
   mounted() {
-    if (getStore("location")) {
-      // console.log(getStore("location"));
-      this.location = JSON.parse(getStore("location"));
+    if (this.location) {
+      this.currentLocation = this.location;
     } else {
-      this.location = { cityName: "北京", pinyin: "beijing" };
+      this.currentLocation = { cityName: "北京", pinyin: "beijing" };
     }
+    // console.log(this.currentLocation);
   },
   components: {
     AllHeader,
