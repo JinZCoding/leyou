@@ -1,5 +1,8 @@
 import App from '../App'
 
+// demo页面
+const demo = r => require.ensure([], () => r(require('../page/login/demo')), 'demo')
+
 const login = r => require.ensure([], () => r(require('../page/login/')), 'login')
 const index = r => require.ensure([], () => r(require('../page/home/')), 'home')
 const profile = r => require.ensure([], () => r(require('../page/profile/')), 'profile')
@@ -11,7 +14,6 @@ const mywritten = r => require.ensure([], () => r(require('../page/profile/child
 
 const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
 const release = r => require.ensure([], () => r(require('../page/release/')), 'release')
-const release1 = r => require.ensure([], () => r(require('../page/release/demo')), 'release1')
 const releaseSuccess = r => require.ensure([], () => r(require('../page/release/children/success')), 'releaseSuccess')
 
 const city = r => require.ensure([], () => r(require('../page/city/')), 'city')
@@ -31,6 +33,11 @@ export default [{
     {
       path: '',
       redirect: '/index',
+    },
+    {
+      path: '/demo',
+      name: demo,
+      component: demo
     },
     // 登录页
     {
@@ -84,12 +91,6 @@ export default [{
         name: releaseSuccess,
         component: releaseSuccess
       }]
-    },
-    // 发布测试
-    {
-      path: '/release1',
-      name: release1,
-      component: release1
     },
     // 选择城市
     {

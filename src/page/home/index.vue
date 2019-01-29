@@ -9,13 +9,19 @@
       </router-link>
       <div class="home_search">
         <span class="search_box">
-          <input type="text" class="search_input" readonly placeholder="搜索目的地/攻略/游记">
+          <input
+            type="text"
+            @click="goSearch"
+            class="search_input"
+            readonly
+            placeholder="搜索目的地/攻略/游记"
+          >
           <i class="iconfont">&#xe870;</i>
         </span>
       </div>
       <div class="home_right">
         <div>
-          <router-link to="/profile" @click="goProfile" v-if="isLogin">
+          <router-link to="/profile" v-if="isLogin">
             <i class="iconfont">&#xe8a0;</i>
           </router-link>
           <router-link to="/login" class="login" v-else>登录</router-link>
@@ -128,8 +134,8 @@ export default {
     }
   },
   methods: {
-    goProfile() {
-      console.log("1111111");
+    goSearch() {
+      this.$router.push("/search");
     }
   }
 };
