@@ -45,6 +45,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"; //先要引入
+import { apiUrl } from "apiUrl/index";
+
 export default {
   data() {
     return {
@@ -58,19 +60,36 @@ export default {
     this.signOut();
   },
   computed: {
-    ...mapGetters(["userInfo"])
+    ...mapGetters(["loginInfo"])
   },
   methods: {
-    ...mapActions(["setUser", "signOut"]),
+    ...mapActions(["setLogin", "signOut"]),
     // 登录
     login() {
       if (this.userId && this.loginPassword) {
-        let info = {
-          isLogin: true,
-          userId: this.userId
-        };
-        this.setUser(info);
-        this.$router.go(-1);
+        this.$post(apiUrl.login, {
+          user_id: this.userId,
+          user_password: this.loginPassword
+        })
+          .then(res => {
+            console.log("res====>", res);
+            if (res.result === 1 && res.code === 200) {
+              let login = {
+                isLogin: true,
+                userid: this.userId
+              };
+              let account = {
+                userid: this.userId,
+                userName: res.data.userName,
+                avatar: res.data.avatar
+              };
+              this.setLogin({ login, account });
+              this.$router.go(-1);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
       } else if (this.userId && !this.loginPassword) {
         this.$toast("请输入密码");
       } else {

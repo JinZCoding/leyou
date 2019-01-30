@@ -13,7 +13,7 @@
           <!-- <div class="me" @click="personalShow=true"> -->
           <div class="pro_left">
             <span class="avatar">
-              <img :src="isLogin?img_url:'../static/img/head_4.jpg'" alt>
+              <img :src="isLogin?avatar:'../static/img/head_4.jpg'" alt>
             </span>
             <span class="name">{{isLogin?name:"请先登录账号嗷"}}</span>
           </div>
@@ -89,8 +89,8 @@ export default {
   data() {
     return {
       isLogin: false,
-      name: "阿圣嗷嗷嗷",
-      img_url: "../static/img/head_3.jpg"
+      name: "",
+      avatar: ""
     };
   },
   components: {
@@ -99,15 +99,20 @@ export default {
   },
   inject: ["reload"],
   computed: {
-    ...mapGetters(["userInfo"])
+    ...mapGetters(["loginInfo", "account"])
   },
   mounted() {
-    if (this.userInfo) {
-      this.isLogin = this.userInfo.isLogin;
-    }
+    this.initData();
   },
   methods: {
     ...mapActions(["signOut"]),
+    initData() {
+      if (this.loginInfo) {
+        this.isLogin = this.loginInfo.isLogin;
+        this.name = this.account.userName;
+        this.avatar = this.account.avatar;
+      }
+    },
     // 退出登录
     logout() {
       Dialog.confirm({

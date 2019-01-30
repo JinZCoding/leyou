@@ -15,14 +15,10 @@ promise.polyfill()
 var domain = document.domain;
 
 const Axios = axios.create({
-  // baseURL: 'https://p2pjr.le.com:8888',
-  // baseURL: 'http://10.75.165.244:8080/',
-  // baseURL: 'https://' + domain + ':8091',
-  // baseURL: '/p2pbg',
-  // baseURL: 'http://' + domain + ':8080',
-  // baseURL: 'http://p2p-test.letvjr.com:8080',
-  // baseURL: "http://10.75.164.45:8080",
-  baseURL:"http://10.75.164.145:8686",
+  // baseURL: 'http://' + domain + ':8686',
+  // baseURL: "http://localhost:8686",
+  // baseURL: "http://10.75.164.145:8686",
+  // baseURL: "http://result.eolinker.com/1jG6qBQ3e65187cd2ccd1c84b8ed4178b1d2cf4d5dd6d72?uri=",
   timeout: 10000,
   responseType: 'json',
   withCredentials: true, //携带cookie
@@ -35,8 +31,7 @@ const Axios = axios.create({
 Axios.interceptors.request.use(config => {
   // config.data = qs.stringify(config.data) //参数格式化
   return config
-}, err => {
-})
+}, err => {})
 //响应拦截
 Axios.interceptors.response.use(response => {
 
@@ -49,7 +44,9 @@ Axios.interceptors.response.use(response => {
     // sessionStorage.removeItem('Jurisdiction')
     // sessionStorage.removeItem('menu')
     // sessionStorage.removeItem('DistrictList')
-    router.replace({ name: 'login' })
+    router.replace({
+      name: 'login'
+    })
   } else {
     // console.log(response.data.message)
     Toast(response.data.message);
@@ -75,12 +72,11 @@ Axios.interceptors.response.use(response => {
 //     }).catch()
 //   })
 // }
-export function post (url, data) {
+export function post(url, data) {
   return new Promise((resolve, reject) => {
-    Axios.post(url, 
-      qs.stringify(data),
-      {
-        headers:{
+    Axios.post(url,
+      qs.stringify(data), {
+        headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(response => {
@@ -103,12 +99,11 @@ export function get(url, data) {
   })
 }
 
-export function postJson (url, data) {
+export function postJson(url, data) {
   return new Promise((resolve, reject) => {
-    Axios.post(url, 
-      data,
-      {
-        headers:{
+    Axios.post(url,
+      data, {
+        headers: {
           'Content-Type': 'application/json;charset=utf-8'
         }
       }).then(response => {

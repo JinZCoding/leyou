@@ -25,7 +25,7 @@
       <div>
         <div class="name infoItem">
           <span>昵&emsp;称：</span>
-          <input type="text" v-model="info.username" placeholder="乐游用户">
+          <input type="text" v-model="info.userName" placeholder="乐游用户">
         </div>
         <div class="sex infoItem">
           <span>性&emsp;别：</span>
@@ -71,7 +71,10 @@
 </template>
 <script>
 import { Actionsheet, Dialog, Popup, DatetimePicker, Toast } from "vant";
+import { mapGetters, mapActions } from "vuex"; //先要引入
+import { apiUrl } from "apiUrl/index";
 import areaList from "./areaList.js";
+
 export default {
   data() {
     return {
@@ -91,32 +94,39 @@ export default {
           name: "保密"
         }
       ],
-      oldinfo: {
-        username: "阿圣啊嗷嗷",
-        sex: "女",
-        avatar: require("../../../assets/img/head_1.jpeg"),
-        birthday: "1990-01-01",
-        address: "北京市 北京市 西城区",
-        autograph: ""
-      },
-      info: {
-        username: "阿圣啊嗷嗷",
-        sex: "女",
-        avatar: require("../../../assets/img/head_1.jpeg"),
-        birthday: "1990-01-01",
-        address: "北京市 北京市 西城区",
-        autograph: ""
-      }
+      oldinfo: {},
+      info: {}
     };
   },
+  computed: {
+    ...mapGetters(["account"])
+  },
   mounted() {
-    // this.initData();
+    this.initData();
   },
   methods: {
     // 初始化信息
     initData() {
-      this.oldinfo = this.info;
+      // this.info = this.account;
       // console.log(this.oldinfo);
+      this.$post(apiUrl.getUserInfo, { userid: this.account.userid }).then(
+        res => {
+          console.log(res);
+          if (res.result === 1 && res.code === 200) {
+            this.info = res.data;
+            this.oldinfo.userid = res.data.userid;
+            this.oldinfo.userName = res.data.userName;
+            this.oldinfo.avatar = res.data.avatar;
+            this.oldinfo.sex = res.data.sex;
+            this.oldinfo.birthday = res.data.birthday;
+            this.oldinfo.address = res.data.address;
+            this.oldinfo.autograph = res.data.autograph;
+            console.log("before======>", this.oldinfo);
+          } else {
+            this.$toast(res.message);
+          }
+        }
+      );
     },
     // 取消确认个人资料
     onClickCancel() {
@@ -139,11 +149,17 @@ export default {
     },
     onClickSave() {
       if (this.havechange) {
-        // this.$toast("保存");
-        this.$router.go(-1);
-        setTimeout(function() {
-          Toast("信息保存成功");
-        }, 1000);
+        this.$post(apiUrl.setUserChange, this.info).then(res => {
+          console.log(res);
+          if (res.result === 1 && res.code === 200) {
+            this.$router.go(-1);
+            setTimeout(function() {
+              Toast("信息保存成功");
+            }, 1000);
+          } else {
+            this.$toast(res.message);
+          }
+        });
       }
     },
     // 取消确认选择地址
@@ -187,15 +203,17 @@ export default {
       this.sexShow = false;
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["account"])
+  },
   watch: {
     // 监控信息变化
     info: {
       handler(val, oldVal) {
         // console.log(val, oldVal);
-        // console.log(this.oldinfo);
+        // console.log("after====>", this.oldinfo);
         if (
-          val.username === this.oldinfo.username &&
+          val.userName === this.oldinfo.userName &&
           val.sex === this.oldinfo.sex &&
           val.avatar === this.oldinfo.avatar &&
           val.birthday === this.oldinfo.birthday &&

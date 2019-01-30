@@ -31,6 +31,7 @@ Vue.prototype.$post = post
 Vue.prototype.$get = get
 Vue.prototype.$postJson = postJson
 
+require('./mock/index')  // mock数据
 
 // 注册自定义toast组件
 import registryToast from './components/common/toast/toast'

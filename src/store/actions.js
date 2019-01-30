@@ -1,17 +1,31 @@
 import * as types from './mutation-types'
 import {
-  saveUser,
-  saveLocation,
-  removeUser
+  saveLogin,
+  saveAccount,
+  removeLogin,
+  removeAccount,
+  saveLocation
 } from '../config/cache'
 
-export const setUser = function ({commit}, obj) {
-  commit(types.SET_USER_INFO, saveUser(obj))
+// 登录
+export const setLogin = function ({
+  commit
+}, obj) {
+  // console.log(obj)
+  commit(types.SET_LOGIN_INFO, saveLogin(obj.login))
+  commit(types.SET_ACCOUNT, saveAccount(obj.account))
 }
-export const signOut = function({commit}) {
-  commit(types.REMOVE_USER, removeUser())
+// 退出登录
+export const signOut = function ({
+  commit
+}) {
+  commit(types.REMOVE_LOGIN, removeLogin())
+  commit(types.REMOVE_ACCOUNT, removeAccount())
 }
 
-export const setLocation = function ({commit}, obj) {
+// 位置信息
+export const setLocation = function ({
+  commit
+}, obj) {
   commit(types.SET_LOCATION, saveLocation(obj))
 }

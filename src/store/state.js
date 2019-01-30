@@ -1,10 +1,12 @@
 import {
-  loadUser,
+  loadLogin,
+  loadAccount,
   loadLocation
 } from '../config/cache'
 
 const state = {
-  userInfo: loadUser(),
+  loginInfo: loadLogin(),
+  account: loadAccount(),
   location: loadLocation()
 }
 

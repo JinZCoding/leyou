@@ -122,12 +122,12 @@ export default {
     swiperSlide
   },
   computed: {
-    ...mapGetters(["userInfo", "location"])
+    ...mapGetters(["loginInfo", "location"])
   },
   mounted() {
-    // console.log("userinfo", this.userInfo);
-    if (this.userInfo) {
-      this.isLogin = this.userInfo.isLogin;
+    // console.log("loginInfo", this.loginInfo);
+    if (this.loginInfo) {
+      this.isLogin = this.loginInfo.isLogin;
     }
     if (this.location) {
       this.currentLocation = this.location.cityName;
