@@ -23,6 +23,14 @@ export const signOut = function ({
   commit(types.REMOVE_ACCOUNT, removeAccount())
 }
 
+// 修改信息
+export const resetAccount = function ({
+  commit
+}, obj) {
+  console.log(obj)
+  commit(types.SET_ACCOUNT, saveAccount(obj))
+}
+
 // 位置信息
 export const setLocation = function ({
   commit

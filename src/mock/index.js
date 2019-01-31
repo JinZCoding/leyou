@@ -15,9 +15,15 @@ Mock.setup({
   timeout: 1000 //设置请求延时时间
 })
 
-console.log("mockData", mockData)
+// console.log("mockData", mockData)
 
-Mock.mock(apiUrl.login, 'post', mockData.loginInfo);
-Mock.mock(apiUrl.getUserInfo, 'post', mockData.userInfo);
-//setUserChange
-Mock.mock(apiUrl.setUserChange, 'post', mockData.saveChange);
+// 登录
+Mock.mock(apiUrl.login, 'post', mockData.login);
+// 用户信息
+Mock.mock(apiUrl.getUserInfo, 'post', mockData.getUserInfo);
+// 修改信息
+Mock.mock(apiUrl.setUserChange, 'post', mockData.setUserChange);
+// 我感兴趣的
+Mock.mock(apiUrl.queryMyInterest, 'post', mockData.queryMyInterest);
+// 我的文章
+Mock.mock(apiUrl.queryMyArticle, 'post', mockData.queryMyArticle);

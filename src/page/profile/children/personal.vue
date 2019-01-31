@@ -18,7 +18,15 @@
         <span class="avatar_img">
           <img :src="info.avatar" alt>
         </span>
-        <span class="replace">修改头像</span>
+        <div class="changeavatar">
+          <span class="replace" @click="uploadHeadImg">修改头像</span>
+          <input
+            type="file"
+            accept="image/jpeg, image/jpg, image/png"
+            @change.stop="handleFile"
+            class="hiddenInput"
+          >
+        </div>
       </div>
     </div>
     <div class="info_table">
@@ -104,7 +112,9 @@ export default {
   mounted() {
     this.initData();
   },
+  inject: ["reload"],
   methods: {
+    ...mapActions(["resetAccount"]),
     // 初始化信息
     initData() {
       // this.info = this.account;
@@ -121,7 +131,7 @@ export default {
             this.oldinfo.birthday = res.data.birthday;
             this.oldinfo.address = res.data.address;
             this.oldinfo.autograph = res.data.autograph;
-            console.log("before======>", this.oldinfo);
+            // console.log("before======>", this.oldinfo);
           } else {
             this.$toast(res.message);
           }
@@ -152,7 +162,20 @@ export default {
         this.$post(apiUrl.setUserChange, this.info).then(res => {
           console.log(res);
           if (res.result === 1 && res.code === 200) {
+            // 若用户名修改了，则要同时修改session和vuex中的数据
+            if (
+              this.info.userName !== this.oldinfo.userName ||
+              this.info.avatar !== this.oldinfo.avatar
+            ) {
+              let obj = {
+                userid: this.account.userid,
+                userName: this.info.userName,
+                avatar: this.info.avatar
+              };
+              this.resetAccount(obj);
+            }
             this.$router.go(-1);
+            this.reload();
             setTimeout(function() {
               Toast("信息保存成功");
             }, 1000);
@@ -201,6 +224,21 @@ export default {
     },
     onCancel() {
       this.sexShow = false;
+    },
+    // 修改头像
+    uploadHeadImg() {
+      this.$el.querySelector(".hiddenInput").click();
+    },
+    handleFile(e) {
+      let $target = e.target || e.srcElement;
+      let file = $target.files[0];
+      var reader = new FileReader();
+      reader.onload = data => {
+        let res = data.target || data.srcElement;
+        this.info.avatar = res.result;
+        this.$store.state.account.avatar = res.result;
+      };
+      reader.readAsDataURL(file);
     }
   },
   computed: {
@@ -210,7 +248,6 @@ export default {
     // 监控信息变化
     info: {
       handler(val, oldVal) {
-        // console.log(val, oldVal);
         // console.log("after====>", this.oldinfo);
         if (
           val.userName === this.oldinfo.userName &&
@@ -278,6 +315,17 @@ export default {
     border-top-right-radius: 50px;
   }
 }
+.changeavatar {
+  position: relative;
+  .hiddenInput {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+  }
+}
 .bg {
   @include wh(100%, 330px);
   @include fj(center);
@@ -296,6 +344,7 @@ export default {
       img {
         border-radius: 50%;
         width: 100%;
+        height: 100%;
       }
     }
     .replace {

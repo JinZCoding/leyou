@@ -42,6 +42,8 @@
 <script>
 import AllHeader from "../../../components/header/header";
 import { Tab, Tabs, List, Cell, CellGroup } from "vant";
+import { apiUrl } from "apiUrl/index";
+
 export default {
   data() {
     return {
@@ -55,7 +57,8 @@ export default {
   created() {
     // console.log(this.$route.query.active);
     this.active = this.$route.query.active;
-    this.title = (this.active===0?"游记":(this.active===1?"攻略":"评价"));
+    this.title =
+      this.active === 0 ? "游记" : this.active === 1 ? "攻略" : "评价";
   },
   mounted() {
     this.initData();
@@ -65,15 +68,31 @@ export default {
   },
   methods: {
     initData() {
-      this.$axios.get("../../static/json/myinterest.json").then(res => {
-        console.log(res.data);
-        this.list = res.data;
-      });
+      this.$post(apiUrl.queryMyArticle, { active: this.active })
+        .then(res => {
+          // console.log(res);
+          if (res.result === 1 && res.code === 200) {
+            if (this.active === 0) {
+              this.list = res.data.travels;
+            } else if (this.active === 1) {
+              this.list = res.data.strategy;
+            } else {
+              this.list = res.data.evaluate;
+            }
+          } else {
+            this.$toast(res.message);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     // 切换标签，显示不同列表
     onTitleClick(index, title) {
+      console.log(title);
       this.title = title;
-      // console.log(index);
+      this.active = index;
+      this.initData();
     },
     onLoad() {
       // 异步更新数据
