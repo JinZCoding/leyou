@@ -79,7 +79,7 @@
 </template>
 <script>
 import { Actionsheet, Dialog, Popup, DatetimePicker, Toast } from "vant";
-import { mapGetters, mapActions } from "vuex"; //先要引入
+import { mapGetters, mapActions } from "vuex";
 import { apiUrl } from "apiUrl/index";
 import areaList from "./areaList.js";
 
