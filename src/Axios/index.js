@@ -4,6 +4,7 @@ import qs from 'qs'
 
 import router from '@/router'
 import vuex from '@/store'
+import * as types from '@/store/mutation-types.js'
 // import
 
 import registryToast from './../components/common/toast/toast'
@@ -30,17 +31,21 @@ const Axios = axios.create({
 //请求拦截
 Axios.interceptors.request.use(config => {
   // config.data = qs.stringify(config.data) //参数格式化
+  vuex.commit(types.SHOW_LOADING);
   return config
-}, err => {})
+}, err => {
+  vuex.commit(types.HIDE_LOADING);
+})
 //响应拦截
 Axios.interceptors.response.use(response => {
+  vuex.commit(types.HIDE_LOADING);
 
   if (response.data.code === 200 || response.data.code === '200') {
     return response.data
   } else if (response.data.code === 401) {
     // console.log(response.data.message)
     Toast(response.data.message);
-    vuex.commit('quit')
+    // vuex.commit('quit')
     // sessionStorage.removeItem('Jurisdiction')
     // sessionStorage.removeItem('menu')
     // sessionStorage.removeItem('DistrictList')
@@ -60,6 +65,7 @@ Axios.interceptors.response.use(response => {
   }
 }, err => {
   // console.log("服务器开小差了，请重试")
+  vuex.commit(types.HIDE_LOADING);
   Toast("服务器开小差了，请重试");
   return Promise.reject(err)
 })

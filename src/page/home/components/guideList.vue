@@ -1,6 +1,7 @@
 <template>
   <div class="guide-list">
     <div>
+      <!-- <loading></loading> -->
       <ul class="article-ul">
         <li v-for="(item,index) in articlelist" :key="index">
           <router-link :to="'/article/'+item.id" class="article-items">
@@ -14,7 +15,7 @@
                 <div class="extra">
                   <span>{{item.views}}浏览</span>
                   <div class="author">
-                    {{item.author}}
+                    {{item.author_name}}
                     <img :src="item.author_img" alt>
                   </div>
                 </div>
@@ -27,49 +28,35 @@
   </div>
 </template>
 <script>
+import { apiUrl } from "apiUrl/index";
+import Loading from "../../../components/common/loading/loading";
+
 export default {
   name: "GuideList",
   data() {
     return {
-      articlelist: [
-        {
-          id: "1",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s6.jpeg",
-          author_img: "./static/img/shi.png"
-        },
-        {
-          id: "2",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s6.jpeg",
-          author_img: "./static/img/shi.png"
-        },
-        {
-          id: "3",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s5.jpeg",
-          author_img: "./static/img/shi.png"
-        },
-        {
-          id: "4",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s1.png",
-          author_img: "./static/img/shi.png"
-        }
-      ]
+      articlelist: []
     };
+  },
+  mounted() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$post(apiUrl.queryIndexList, {})
+        .then(res => {
+          console.log(res);
+          if (res.result === 1 && res.code === 200) {
+            this.articlelist = res.data.list;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+  components: {
+    Loading
   }
 };
 </script>

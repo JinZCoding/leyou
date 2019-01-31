@@ -93,10 +93,10 @@ export default {
       isLogin: false,
       currentLocation: "北京",
       swiperImgList: [
-        "./static/img/swiper/s1.png",
-        "./static/img/swiper/s2.png",
-        "./static/img/swiper/s3.png",
-        "./static/img/swiper/s4.jpeg"
+        "./static/img/swiper/s7.jpeg",
+        "./static/img/swiper/s6.jpeg",
+        "./static/img/swiper/s8.jpeg",
+        "./static/img/swiper/s9.jpeg",
       ],
       swiperOption: {
         loop: true, // 循环模式选项

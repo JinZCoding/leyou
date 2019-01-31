@@ -33,7 +33,7 @@
       <div>
         <div class="name infoItem">
           <span>昵&emsp;称：</span>
-          <input type="text" v-model="info.userName" placeholder="乐游用户">
+          <input type="text" v-model="info.userName" placeholder="乐游用户" maxlength="7">
         </div>
         <div class="sex infoItem">
           <span>性&emsp;别：</span>
@@ -54,7 +54,7 @@
         </div>
         <div class="autograph infoItem">
           <span>签&emsp;名：</span>
-          <input type="text" v-model="info.autograph" placeholder="留下点什么吧~">
+          <input type="text" v-model="info.autograph" placeholder="留下点什么吧~" maxlength="30">
         </div>
         <!-- 性别 -->
         <van-actionsheet
@@ -117,8 +117,6 @@ export default {
     ...mapActions(["resetAccount"]),
     // 初始化信息
     initData() {
-      // this.info = this.account;
-      // console.log(this.oldinfo);
       this.$post(apiUrl.getUserInfo, { userid: this.account.userid }).then(
         res => {
           console.log(res);

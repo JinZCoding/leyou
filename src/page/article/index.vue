@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="header_center" v-if="coverHeader">
-        <h2 class="ellipsis">{{title}}</h2>
+        <h2 class="ellipsis">{{articledetails.title}}</h2>
       </div>
       <div class="header_right">
         <i class="iconfont">&#xe603;</i>
@@ -20,23 +20,23 @@
         </div>
         <div class="article_content">
           <div class="article_title">
-            <h4 class="t1 lineclamp">{{title}}</h4>
+            <h4 class="t1 lineclamp">{{articledetails.title}}</h4>
             <p class="time">
               创建于
-              <strong>{{time}}</strong>
+              <strong>{{articledetails.time}}</strong>
             </p>
             <p class="address">
               <i class="iconfont">&#xe89a;</i>
-              {{address}}
+              {{articledetails.address}}
             </p>
           </div>
           <div class="article_detail">
-            <div v-html="content"></div>
+            <div v-html="articledetails.content"></div>
           </div>
           <div class="copy">
             <p>
               本游记著作权归@
-              <i>{{author}}</i>所有，任何形式转载请联系作者。
+              <i>{{articledetails.author}}</i>所有，任何形式转载请联系作者。
             </p>
             <p>&copy; 2019 leyou</p>
             <span>- THE END -</span>
@@ -88,9 +88,13 @@
   </div>
 </template>
 <script>
+import { apiUrl } from "apiUrl/index";
+
 export default {
   data() {
     return {
+      articledetails: {},
+      article_id: "",
       title: "",
       time: "",
       address: "",
@@ -121,21 +125,20 @@ export default {
   methods: {
     // 初始化页面
     initData() {
-      this.$axios.get("../static/json/article.json").then(res => {
-        // console.log(res.data);
-        this.title = res.data.title;
-        this.time = res.data.time;
-        this.address = res.data.address;
-        this.author = res.data.author;
-        this.content = res.data.content;
-      });
-
-      this.$axios.get("../static/json/replylist.json").then(res => {
-        // console.log(res.data);
-        this.replylen = res.data.length;
-        // 只显示五条评论
-        this.replyList = res.data.slice(0, 5);
-      });
+      this.article_id = this.$route.params.id;
+      // console.log(this.article_id);
+      this.$post(apiUrl.queryArticleDetails, { article_id: this.article_id })
+        .then(res => {
+          // console.log(res);
+          this.articledetails = res.data.articleDetails;
+          this.replyList = res.data.replylist;
+          this.replylen = this.replyList.length;
+          // console.log(this.articledetails);
+          // console.log(this.replyList);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     // header样式
     scrollTop() {
