@@ -96,7 +96,7 @@ export default {
         "./static/img/swiper/s7.jpeg",
         "./static/img/swiper/s6.jpeg",
         "./static/img/swiper/s8.jpeg",
-        "./static/img/swiper/s9.jpeg",
+        "./static/img/swiper/s9.jpeg"
       ],
       swiperOption: {
         loop: true, // 循环模式选项
@@ -132,8 +132,18 @@ export default {
     if (this.location) {
       this.currentLocation = this.location.cityName;
     }
+    this.initSwiper();
   },
   methods: {
+    initSwiper() {
+      this.$post("/api/leyou/index/getSwiperList")
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     goSearch() {
       this.$router.push("/search");
     }

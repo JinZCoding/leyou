@@ -6,7 +6,7 @@ export const mockData = { // 登录
     "message": null,
     "data": {
       userid: "12345",
-      userName: "阿圣嗷嗷嗷吼",
+      username: "阿圣嗷嗷嗷吼",
       avatar: "../../static/img/head_5.jpg"
     }
   },
@@ -17,7 +17,7 @@ export const mockData = { // 登录
     "message": null,
     "data": {
       userid: "12345",
-      userName: "阿圣嗷嗷嗷吼",
+      username: "阿圣嗷嗷嗷吼",
       avatar: "../../static/img/head_5.jpg",
       sex: "女",
       birthday: "1996-06-05",
@@ -32,10 +32,10 @@ export const mockData = { // 登录
     "message": null,
     "data": {
       "list": [{
-          id: "1",
+          article_id: "1",
           title: "初见“黄花风铃木”——新春佛山踏青采花骑游之旅",
           summary: "国际惯例先爆靓照 熬过了寒冷、强风的严冬，终于等到大地回春、万物复苏的日子， 在这温润的凉风和柔和的阳光之下， 冬眠沉寂了几个月的原本运动炽热的心又慢慢苏醒， 那种对运动与旅行的饥渴让我迫不及待地在元宵后的这个周末就踏上了久违的长途骑游之旅。 在长途骑行当中我听到过这样的一句话：被虐是会上瘾的。 自从前年一个月的环 海南 岛骑行之后，这两年时常会回味起自己累得半死半活在赶路得状态，身体的细胞会偶尔挑衅一下自己“什么时候再来一场轰烈的长途”。 所以我也尽量每年都要求自己至少有一次长途骑行的计划， 因为假期的",
-          author_name: "斌子",
+          username: "斌子",
           views: "13701",
           cover_img: "./static/img/list_1.jpeg",
           author_img: "./static/img/shi.png"
@@ -44,7 +44,7 @@ export const mockData = { // 登录
           id: "2",
           title: "糖糖和程程的台湾环岛记（超多Tips,入台前必看）",
           summary: "糖糖，天蝎女，混设计圈的。作为一个有着少女心的老阿姨，从小就有湾湾情节。小学的时候就开始听蔡依林周杰伦SHE，各种 台湾 偶像剧也是贯穿了整个青春期 程程，摩羯男，混艺术圈的。未来画家、博物馆控、手办控、爬宠控、草缸控、极限运动爱好者。他此次 台湾 行的最大愿望就是去 台北 故宫。 台湾 旅游资源还是挺丰富的，人文，自然，美食。去一趟还是非常值得的。 下面先放一些图镇一镇 1.两证一签 台湾 通行证和G签在所在城市的出入境办理，入台证找某宝百程旅行办的，158/人。入台证稍微麻烦一点，所需材料客服都会发给你，建议提前",
-          author_name: "alittle",
+          username: "alittle",
           views: "142901",
           cover_img: "./static/img/list_2.jpeg",
           author_img: "./static/img/shi.png"
@@ -53,7 +53,7 @@ export const mockData = { // 登录
           id: "4",
           title: "愿有人陪你颠沛流离，愿有人陪你看尽苍山洱海——6年之后二刷大理，洱海整治，却更加感受到海边宁静",
           summary: " 这篇游记其实是带家人一起来玩的 但是由于一些因素就不发她们的照片了 先来个自我介绍吧😄 我是辣椒，喜欢玩，喜欢旅行，最理想的职业是旅行体验师，爱拍照，喜欢一切美的事物 💕关于大理 在我第一次12年游 大理 的时候，我觉得很美很舒服，特别适合带家人一起旅游都地方，特别适合放空心情，发呆，感受大自然，和当地文化。 当时是去了 大理 ， 丽江 和 香格里拉 ，相对来说 大理 更让我觉得舒服，那里都茶马古道，鱼鹰表演，海上泛舟，都让我记忆犹新，于是这一次，6年，再次去 大理 ，发现完全是不一样的感觉。很多地方，都快不认识了",
-          author_name: "辣椒",
+          username: "辣椒",
           views: "121087",
           cover_img: "./static/img/list_4.jpeg",
           author_img: "./static/img/shi.png"
@@ -62,7 +62,7 @@ export const mockData = { // 登录
           id: "5",
           title: "老皇城VS新帝都，北京5日经典线路~",
           summary: "经典5日线路，囊括了老北京的市井百态，新北京的时尚潮文化。",
-          author_name: "嗷嗷啊呜",
+          username: "嗷嗷啊呜",
           views: "268617",
           cover_img: "./static/img/list_5.jpeg",
           author_img: "./static/img/shi.png"
@@ -71,7 +71,7 @@ export const mockData = { // 登录
           id: "6",
           title: "K3 | 坐上火车，去一片冰封的海~",
           summary: " 雪国列车 冰上荒原 楔子 从 北京 坐火车到 莫斯科 ，需要六天。整整六天，把身体交付给一个狭小的铁皮箱子，不能洗澡洗头，不能电视电影，更不用说点个外卖改善生活了，想想就有些可怕啊。但是，对于一个不折腾就浑身难受的人来说，这却让人异常向往。知道这趟火车是在大三的时候，在某个我已经不记得的帖子上被 成功 种草，火车出境，穿越大半个西伯利亚，想想就令人向往，遂关注了很多这趟火车的情况。但是，当时在 武汉 读书的我，发现好多东西都需要去 北京 办理，而且 俄罗斯 签 蒙古 签车票什么的一大堆东西，繁琐得让人摸不着头脑",
-          author_name: "咸咸的鱼",
+          username: "咸咸的鱼",
           views: "39014",
           cover_img: "./static/img/list_6.jpeg",
           author_img: "./static/img/shi.png"
@@ -80,7 +80,7 @@ export const mockData = { // 登录
           id: "8",
           title: "广州四日食记，找回味蕾上的小清新^_^~",
           summary: "继2015年夏天的 广州 行之后，在我的内心里，其实已经默默的把 广州 拉入了“黑名单”，人多，到处排队，已经成为我对 广州 的刻板印象。 偶然的机会，再会羊城，没有过多的期待，反而可以真切的感受一个城市的气息。本篇游记将以吃为主线，讲述在这里的三餐与感悟。 长期坐标 重庆 ，习惯了川菜的麻辣与重口，那么就在 广州 找回味蕾上的小清新吧~ 曾经在 深圳 工作两年有余，对于粤菜也并不陌生。虽然当时处于刚刚工作的“节衣缩食”过渡期，基本上很少在外吃吃喝喝，却也吃过一些传统的粤菜，甚至把茶点吃腻了。然而，一直念念不忘的味",
-          author_name: "莫空飞鱼",
+          username: "莫空飞鱼",
           views: "14400",
           cover_img: "./static/img/list_8.jpeg",
           author_img: "./static/img/shi.png"
@@ -101,44 +101,44 @@ export const mockData = { // 登录
         "time": "2018-12-24",
         "address": "俄罗斯",
         "author_id": "0000001",
-        "author_name": "静静不想静静",
+        "username": "静静不想静静",
         "content": "<p>天鹅湖有不同版本的结局，一个结局里，王子和公主双双坠入悬崖，却感动了上天，成功复活，从此解除了魔咒，是所有童话故事都有的幸福结局。</p><p>悲剧版的结局里，王子和公主殉情，天鹅们的魔咒被解除，恶魔也死去。</p><p>还有一个残忍的版本里，恶魔杀死了王子，天鹅依然没有变回公主，并被恶魔带走。</p><p>天鹅湖的故事好多人都知道，《天鹅湖》的旋律好多人都记得，正如我来到俄罗斯之前，只知道柴可夫斯基，还有这个被国人称为“战斗名族”的国家。</p><p>从莫斯科到圣彼得堡的10天，我把它们浓缩在这4分钟的音乐和视频里。音乐的名字就大言不惭的叫做《天鹅湖》吧。这4分钟也许不够精彩，歌也不一定动听，但是我还是想通过这样的方式来表达自己对俄罗斯这个国家的喜爱。</p><p>《天鹅湖》致敬最最伟大的柴可夫斯基。</p><div class='img_cover'><img src='../../static/img/cover.jpeg' alt></div><p>昨晚在机场排队入关的时候跟一个经常来俄罗斯出差的国人聊天，得知俄罗斯最好吃性价比最高的快餐莫过于肯德基。从克里姆林宫出来，一分钟都不想耽误的直奔红场后面的那条街，找到一家肯德基，点了两个套餐</p>"
       },
       replylist: [{
           "reply_id": "00001",
           "author_img": "../static/img/head_1.jpeg",
-          "author_name": "汪",
+          "username": "汪",
           "reply": "我好喜欢po主啊"
         },
         {
           "reply_id": "00002",
           "author_img": "../static/img/head_2.jpeg",
-          "author_name": "喵",
+          "username": "喵",
           "reply": "我好喜欢这个地方啊~~"
         },
         {
           "reply_id": "00003",
           "author_img": "../static/img/head_3.jpeg",
-          "author_name": "呱",
+          "username": "呱",
           "reply": "po主写的太好了吧，爱了爱了"
         },
         {
           "reply_id": "00004",
           "author_img": "../static/img/head_4.jpg",
-          "author_name": "喵",
+          "username": "喵",
           "reply": "哈哈哈哈哈，太可爱了楼主~~"
         },
         {
           "reply_id": "00005",
           "author_img": "../static/img/head_5.jpg",
-          "author_name": "呱",
+          "username": "呱",
           "reply": "哇哇哇！这也太美了！"
         }
       ]
     }
   },
   // 查询评价
-  
+
 
   // 保存修改
   setUserChange: {

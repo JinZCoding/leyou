@@ -4,7 +4,7 @@
       <!-- <loading></loading> -->
       <ul class="article-ul">
         <li v-for="(item,index) in articlelist" :key="index">
-          <router-link :to="'/article/'+item.id" class="article-items">
+          <router-link :to="'/article/'+item.article_id" class="article-items">
             <h3 class="title">{{item.title}}</h3>
             <div class="content clear">
               <dt class="content_cover left">
@@ -15,7 +15,7 @@
                 <div class="extra">
                   <span>{{item.views}}浏览</span>
                   <div class="author">
-                    {{item.author_name}}
+                    {{item.username}}
                     <img :src="item.author_img" alt>
                   </div>
                 </div>

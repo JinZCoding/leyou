@@ -39,7 +39,7 @@ Axios.interceptors.request.use(config => {
 //响应拦截
 Axios.interceptors.response.use(response => {
   vuex.commit(types.HIDE_LOADING);
-
+  // return response.data
   if (response.data.code === 200 || response.data.code === '200') {
     return response.data
   } else if (response.data.code === 401) {

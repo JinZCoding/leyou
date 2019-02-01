@@ -109,7 +109,7 @@ export default {
     initData() {
       if (this.loginInfo) {
         this.isLogin = this.loginInfo.isLogin;
-        this.name = this.account.userName;
+        this.name = this.account.username;
         this.avatar = this.account.avatar;
       }
     },

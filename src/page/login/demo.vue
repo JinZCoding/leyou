@@ -1,39 +1,49 @@
 <template>
   <div>
     <ul>
-      <li v-for="(item,index) in datalist" :key="index">
-        <h1>
-          {{item.personName}}:
-          <span>{{item.viewName}}</span>
-        </h1>
-      </li>
+      <van-cell-group>
+        <van-field v-model="id" placeholder="请输入用户名"/>
+      </van-cell-group>
+      <van-button type="default" @click="getData">默认按钮</van-button>
+      <span>{{data}}</span>
     </ul>
   </div>
 </template>
 <script>
+import { Button, Field } from "vant";
+
 export default {
   name: "demo",
   data() {
     return {
-      datalist: []
+      data: "",
+      id: ""
     };
   },
   mounted() {
-    this.showdata();
+    // this.showdata();
   },
   methods: {
-    showdata() {
-      //		import axios from 'axios'
-      //    Vue.prototype.$http = axios  在main.js中把axios添加到vue原型中，则可在每个组件中调用
-      this.$get("/user") //全局引入使用vue原型中的方法this.$http,已经把axios添加到原型中
+    getData() {
+      this.$get("/api/login", { id: this.id })
         .then(res => {
-          console.log(res);
-          this.datalist = res.data;
+          console.log("res=====>", res);
+          this.data = res;
         })
         .catch(err => {
-          console.log("调用失败", err);
+          console.log(err);
         });
     }
+    // showdata() {
+    //   this.$get("/api/login")
+    //     .then(res => {
+    //       console.log(res);
+    //       this.data = res.data;
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }
   }
 };
 </script>

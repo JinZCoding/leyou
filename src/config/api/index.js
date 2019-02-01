@@ -10,4 +10,6 @@ export const apiUrl = {
 
   queryArticleDetails: '/leyou/article/queryArticleDetails', //查询文章详情
   // 查询评价
+  // login: '/api/leyou/user/login', //登录
+
 }
