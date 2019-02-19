@@ -1,3 +1,5 @@
+// index.js 后端入口文件，启动后端服务
+
 const routerApi = require('./router');
 const bodyParser = require('body-parser'); // post 数据是需要
 const express = require('express');
@@ -16,4 +18,3 @@ console.log('success listen at port:3030......');
 // api.js 连接数据库，各种方法实现
 // sqlMap.js sql语句
 // router.js 后端 express 路由配置
-// index.js 后端入口文件，启动后端服务
