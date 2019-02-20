@@ -13,11 +13,6 @@ const pool = mysql.createPool({
   multipleStatements: true // 多语句查询
 });
 
-// 返回统一格式
-var responseData;
-
-
-
 module.exports = {
   // 获取首页swiperlist
   getSwiperList(req, res, next) {
@@ -151,6 +146,142 @@ module.exports = {
             "data": null
           }
           return res.json(result);
+        }
+      })
+    })
+  },
+  // 查看文章内容
+  queryArticleDetails(req, res, next) {
+    // console.log(req)
+    let id = req.body.article_id
+    pool.getConnection((err, connection) => {
+      let sql = sqlMap.queryArticleDetails;
+      let sql2 = sqlMap.queryArticleReplyList;
+      // let sql3 = sqlMap.queryArticleDetails;
+      connection.query(sql, id, (err, data) => {
+        if (err) {
+          console.log(err)
+          var result = {
+            "code": 500,
+            "result": 0,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          // console.log("data", data)
+          connection.query(sql2, id, (err, data1) => {
+            if (err) {
+              console.log(err)
+              var result = {
+                "code": 500,
+                "result": 0,
+                "message": "服务器错误",
+                "data": null
+              }
+              return res.json(result);
+            } else {
+              var result = {
+                "code": 200,
+                "result": 1,
+                "message": null,
+                "data": {
+                  articleDetails: data[0],
+                  replylist: data1
+                }
+              }
+              // console.log(result)
+              return res.json(result);
+            }
+            // connection.release();
+          })
+        }
+      })
+    })
+  },
+  // 查询回复列表
+  queryAllReplyList(req, res, next) {
+    let id = req.body.article_id
+    pool.getConnection((err, connection) => {
+      var sql = sqlMap.queryAllReplyList;
+      connection.query(sql, id, (err, data) => {
+        if (err) {
+          console.log(err)
+          var result = {
+            "result": 0,
+            "code": 500,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          console.log(data)
+          var result = {
+            "result": 1,
+            "code": 200,
+            "message": null,
+            "data": data
+          }
+          return res.json(result);
+        }
+      })
+    })
+  },
+
+  // 查询各模块列表信息
+  queryNavigationInfoList(req, res, next) {
+    // console.log(req.body)
+    let type = req.body.type
+    pool.getConnection((err, connection) => {
+      var sql = [sqlMap.queryBanner, sqlMap.queryHotArticleList, sqlMap.queryNewArticleList];
+      connection.query(sql[0], type, (err, data) => {
+        if (err) {
+          console.log(err)
+          var result = {
+            "result": 0,
+            "code": 500,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          connection.query(sql[1], type, (err, data1) => {
+            if (err) {
+              console.log(err)
+              var result = {
+                "result": 0,
+                "code": 500,
+                "message": "服务器错误",
+                "data": null
+              }
+              return res.json(result);
+            } else {
+              connection.query(sql[2], type, (err, data2) => {
+                if (err) {
+                  console.log(err)
+                  var result = {
+                    "result": 0,
+                    "code": 500,
+                    "message": "服务器错误",
+                    "data": null
+                  }
+                  return res.json(result);
+                } else {
+                  var result = {
+                    "result": 1,
+                    "code": 200,
+                    "message": null,
+                    "data": {
+                      banner: data[0],
+                      hotList: data1,
+                      newList: data2
+                    }
+                  }
+                  return res.json(result);
+                }
+              })
+            }
+          })
         }
       })
     })

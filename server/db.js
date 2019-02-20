@@ -5,6 +5,7 @@ module.exports = {
     user: 'root',
     password: 'jinzhiyi', // root 密码
     database: 'leyou', // 数据库名
-    port: '3306'
+    port: '3306',
+    multipleStatements: true // 查询多个sql语句
   }
 }

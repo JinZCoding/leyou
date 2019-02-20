@@ -23,7 +23,7 @@
             <h4 class="t1 lineclamp">{{articledetails.title}}</h4>
             <p class="time">
               创建于
-              <strong>{{articledetails.time}}</strong>
+              <strong>{{articledetails.updatetime}}</strong>
             </p>
             <p class="address">
               <i class="iconfont">&#xe89a;</i>
@@ -53,7 +53,7 @@
                   </div>
                   <div class="reply_desc">
                     <span class="author">{{item.author}}</span>
-                    <p class="replyone">{{item.reply}}</p>
+                    <p class="replyone">{{item.reply_content}}</p>
                   </div>
                 </li>
               </div>
@@ -94,12 +94,6 @@ export default {
   data() {
     return {
       articledetails: {},
-      article_id: "",
-      title: "",
-      time: "",
-      address: "",
-      author: "",
-      content: "",
       coverHeader: false,
       replylen: 0,
       replyList: [],
@@ -127,7 +121,9 @@ export default {
     initData() {
       this.article_id = this.$route.params.id;
       // console.log(this.article_id);
-      this.$post(apiUrl.queryArticleDetails, { article_id: this.article_id })
+      this.$post("/api/leyou/article/queryArticleDetails", {
+        article_id: this.article_id
+      })
         .then(res => {
           // console.log(res);
           this.articledetails = res.data.articleDetails;

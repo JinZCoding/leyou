@@ -1,63 +1,43 @@
 <template>
-  <div class="guide-list">
-    <div>
-      <!-- <loading></loading> -->
-      <ul class="article-ul">
-        <li v-for="(item,index) in articlelist" :key="index">
-          <router-link :to="'/article/'+item.article_id" class="article-items">
-            <h3 class="title">{{item.title}}</h3>
-            <div class="content clear">
-              <dt class="content_cover left">
-                <img :src="item.cover_img" alt>
-              </dt>
-              <dd class="content_right">
-                <div class="summary">{{item.summary}}</div>
-                <div class="extra">
-                  <span>{{item.views}}浏览</span>
-                  <div class="author">
-                    {{item.username}}
-                    <img :src="item.author_img" alt>
-                  </div>
-                </div>
-              </dd>
+  <li>
+    <router-link :to="'/article/'+article_id" class="article-items">
+      <h3 class="title">{{title}}</h3>
+      <div class="content clear">
+        <dt class="content_cover left">
+          <img :src="cover_img" alt>
+        </dt>
+        <dd class="content_right">
+          <div class="summary">{{summary}}</div>
+          <div class="extra">
+            <span>{{views}}浏览</span>
+            <div class="author">
+              {{author}}
+              <img :src="author_img" alt>
             </div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </div>
+          </div>
+        </dd>
+      </div>
+    </router-link>
+  </li>
 </template>
 <script>
-import { apiUrl } from "apiUrl/index";
-import Loading from "../../../components/common/loading/loading";
-
 export default {
   name: "GuideList",
   data() {
-    return {
-      articlelist: []
-    };
+    return {};
   },
-  mounted() {
-    this.initData();
-  },
-  methods: {
-    initData() {
-      this.$post(apiUrl.queryIndexList, {})
-        .then(res => {
-          console.log(res);
-          if (res.result === 1 && res.code === 200) {
-            this.articlelist = res.data.list;
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  },
-  components: {
-    Loading
-  }
+  mounted() {},
+  props: [
+    "article_id",
+    "title",
+    "cover_img",
+    "summary",
+    "views",
+    "author",
+    "author_img"
+  ],
+  methods: {},
+  components: {}
 };
 </script>
 <style lang="scss">

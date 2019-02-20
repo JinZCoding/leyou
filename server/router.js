@@ -29,6 +29,17 @@ router.post(apiUrl.updateUserInfo, (req, res, next) => {
   api.updateUserInfo(req, res, next);
 })
 
+router.post(apiUrl.queryArticleDetails, (req, res, next) => {
+  api.queryArticleDetails(req, res, next);
+})
+
+router.post(apiUrl.queryAllReplyList, (req, res, next) => {
+  api.queryAllReplyList(req, res, next);
+})
+
+router.post(apiUrl.queryNavigationInfoList, (req, res, next) => {
+  api.queryNavigationInfoList(req, res, next)
+})
 // router.post('/setValue', (req, res, next) => {
 //   api.setValue(req, res, next);
 // });
