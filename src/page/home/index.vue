@@ -165,11 +165,11 @@ export default {
         .catch(() => {});
     },
     initData() {
-      this.$post(apiUrl.queryIndexList)
+      this.$post("/api/leyou/index/getIndexArticleList")
         .then(res => {
           console.log(res);
           this.loadingShow = false;
-          this.articlelist = res.data.list;
+          this.articlelist = res.data;
         })
         .catch(() => {});
     },

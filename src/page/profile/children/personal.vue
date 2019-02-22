@@ -33,7 +33,7 @@
       <div>
         <div class="name infoItem">
           <span>昵&emsp;称：</span>
-          <input type="text" v-model="info.username" placeholder="乐游用户" maxlength="7">
+          <input type="text" v-model="info.username" placeholder="乐游用户" maxlength="10">
         </div>
         <div class="sex infoItem">
           <span>性&emsp;别：</span>

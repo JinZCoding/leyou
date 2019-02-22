@@ -4,12 +4,12 @@
       <h3 class="title">{{title}}</h3>
       <div class="content clear">
         <dt class="content_cover left">
-          <img :src="cover_img" alt>
+          <img :src="cover_img?cover_img:'/static/img/list_5.jpeg'" alt>
         </dt>
         <dd class="content_right">
           <div class="summary">{{summary}}</div>
           <div class="extra">
-            <span>{{views}}浏览</span>
+            <!-- <span>{{views}}浏览</span> -->
             <div class="author">
               {{author}}
               <img :src="author_img" alt>

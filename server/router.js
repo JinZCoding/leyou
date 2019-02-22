@@ -17,6 +17,10 @@ router.post(apiUrl.getSwiperList, (req, res, next) => {
   api.getSwiperList(req, res, next);
 })
 
+router.post(apiUrl.getIndexArticleList, (req, res, next) => {
+  api.getIndexArticleList(req, res, next);
+})
+
 router.post(apiUrl.login, (req, res, next) => {
   api.login(req, res, next);
 })

@@ -138,7 +138,6 @@ export default {
           this.bannerInfo = res.data.banner;
           this.newList = res.data.newList;
           this.hotList = res.data.hotList;
-          // console.log("swiperlist========>", this.swiperImgList);
         })
         .catch(() => {});
     }

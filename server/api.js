@@ -29,14 +29,43 @@ module.exports = {
           }
           return res.json(result);
         } else {
-          console.log("data", data)
+          // console.log("data", data)
           var result = {
             "code": 200,
             "result": 1,
             "message": null,
             "data": data
           }
-          console.log(result)
+          // console.log(result)
+          return res.json(result);
+        }
+        // connection.release();
+      })
+    })
+  },
+  // 获取首页swiperlist
+  getIndexArticleList(req, res, next) {
+    pool.getConnection((err, connection) => {
+      var sql = sqlMap.getIndexArticleList;
+      connection.query(sql, [], (err, data) => {
+        if (err) {
+          console.log(err)
+          var result = {
+            "code": 500,
+            "result": 0,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          // console.log("data", data)
+          var result = {
+            "code": 200,
+            "result": 1,
+            "message": null,
+            "data": data
+          }
+          // console.log(result)
           return res.json(result);
         }
         // connection.release();
@@ -46,7 +75,7 @@ module.exports = {
   // 登录
   login(req, res, next) {
     // console.log(req)
-    console.log(req.body)
+    // console.log(req.body)
     var userid = req.body.userid;
     var password = req.body.password
     // console.log(userid, password)
@@ -108,7 +137,7 @@ module.exports = {
           }
           return res.json(result);
         } else {
-          console.log(data)
+          // console.log(data)
           var result = {
             "result": 1,
             "code": 200,
@@ -122,7 +151,7 @@ module.exports = {
   },
   // 修改用户信息
   updateUserInfo(req, res, next) {
-    console.log("bodyyyyyyyyyyyy", req.body)
+    // console.log("bodyyyyyyyyyyyy", req.body)
     let updateUser_Params = [req.body.username, req.body.avatar, req.body.sex, req.body.birthday, req.body.address, req.body.autograph, req.body.userid]
     // var userid = req.body.userid;
     pool.getConnection((err, connection) => {
@@ -138,7 +167,7 @@ module.exports = {
           }
           return res.json(result);
         } else {
-          console.log(data)
+          // console.log(data)
           var result = {
             "result": 1,
             "code": 200,
@@ -215,7 +244,7 @@ module.exports = {
           }
           return res.json(result);
         } else {
-          console.log(data)
+          // console.log(data)
           var result = {
             "result": 1,
             "code": 200,
