@@ -7,21 +7,18 @@
           <img src="../../assets/img/glbg.png" width="100%" alt>
           <!-- <i class="iconfont">&#xe758;</i> -->
           <div class="pic">
-            <img src="../../assets/img/beijing.jpeg" width="100%" alt>
+            <img :src="cityInfo.city_img" width="100%" alt>
           </div>
           <div class="caption">
             <router-link to="/city?backurl=localplay" class="gobaike">
               <i class="iconfont">&#xe758;</i>
               <h2>{{currentLocation.cityName}}</h2>
-              <!-- <p>北京，简称“京”，是中华人民共和国的首都、直辖市、国家中心城市、超大城市、国际大都市，全国政治中心、文化中心、国际交往中心、科技创新中心和综合交通枢纽，是中国共产党中央委员会、中华人民共和国中央人民政府、</p> -->
             </router-link>
           </div>
         </div>
         <div class="cityItem city_desc">
           <h3>旅游攻略</h3>
-          <div
-            class="desc lineclamp"
-          >北京，位于华北平原，有着三千余年的建城史和八百五十余年的建都史。北京是中华人民共和国首都、中央直辖市、中国国家中心城市，也是中国政治、文化、教育和国际交流中心。是一座传统与现代交融的城市。这里既有古典风韵，又具时尚气息。</div>
+          <div class="desc lineclamp">{{cityInfo.city_info}}</div>
           <router-link to="/" tag="div" class="moreinfo">
             <span>阅读更多</span>
           </router-link>
@@ -29,17 +26,16 @@
         <div class="cityItem play">
           <h3>看什么</h3>
           <swiper :options="swiperOption">
-            <swiper-slide v-for="(item, index) in img" :key="index">
-              <img src="../../assets/img/swiper/s4.jpeg" width="100%" alt class="photo">
+            <swiper-slide v-for="(item, index) in playList" :key="index">
+              <img :src="item.playImg" width="100%" alt class="photo">
               <div class="name">
-                <span class="t1 lineclamp" style="-webkit-line-clamp: 2;">天安门广场天安门广场天安门广场</span>
-                <!-- <span class="t2">100298评价</span> -->
+                <span class="t1 lineclamp" style="-webkit-line-clamp: 2;">{{item.playName}}</span>
               </div>
             </swiper-slide>
             <swiper-slide>
-              <router-link to="/" tag="div" class="moreinfo">
+              <div class="moreinfo">
                 <span>更多好看</span>
-              </router-link>
+              </div>
             </swiper-slide>
           </swiper>
         </div>
@@ -50,10 +46,10 @@
               <li v-for="(item, index) in foodList" :key="index">
                 <router-link to="/">
                   <div class="food_img">
-                    <img :src="item.img_name" width="100%" alt>
+                    <img :src="item.foodImg" width="100%" alt>
                   </div>
                   <div class="food_name">
-                    <p class="t1">{{item.name}}</p>
+                    <p class="t1">{{item.foodName}}</p>
                     <p class="t2">
                       <strong>{{item.views}}</strong>人提起过
                     </p>
@@ -61,9 +57,9 @@
                 </router-link>
               </li>
             </ul>
-            <router-link tag="div" to="/" class="moreinfo">
+            <div class="moreinfo">
               <span>更多美味</span>
-            </router-link>
+            </div>
           </div>
         </div>
         <div class="cityItem live">
@@ -89,40 +85,37 @@ import { mapGetters } from "vuex"; //先要引入
 export default {
   data() {
     return {
+      cityInfo: {},
       img: [1, 2, 1, 2, 1, 2, 1, 2],
-      foodList: [
-        {
-          name: "瓷瓶儿老酸奶",
-          img_name: require("@/assets/img/food_1.jpeg"),
-          views: "2080"
-        },
-        {
-          name: "炒肝",
-          img_name: require("@/assets/img/food_2.jpeg"),
-          views: "2010"
-        },
-        {
-          name: "北京烤鸭",
-          img_name: require("@/assets/img/food_3.jpeg"),
-          views: "23322"
-        },
-        {
-          name: "炸酱面",
-          img_name: require("@/assets/img/food_4.jpeg"),
-          views: "20801"
-        }
-      ],
+      playList: [],
+      foodList: [],
       swiperOption: {
         // loop: true, // 循环模式选项
         // width: 120,
         slidesPerView: "auto",
         spaceBetween: 30
       },
-      currentLocation: ""
+      currentLocation: {}
     };
   },
   computed: {
     ...mapGetters(["location"])
+  },
+  methods: {
+    initData() {
+      this.$post("/api/leyou/local/queryLocalInfo", {
+        city: this.currentLocation.pinyin
+      })
+        .then(res => {
+          console.log("res====>", res);
+          this.cityInfo = res.data.cityInfo;
+          this.playList = res.data.cityPlay;
+          this.foodList = res.data.cityFood;
+        })
+        .catch(err => {
+          // console.log(err);
+        });
+    }
   },
   mounted() {
     if (this.location) {
@@ -130,7 +123,8 @@ export default {
     } else {
       this.currentLocation = { cityName: "北京", pinyin: "beijing" };
     }
-    // console.log(this.currentLocation);
+    this.initData();
+    console.log(this.currentLocation);
   },
   components: {
     AllHeader,
@@ -186,12 +180,17 @@ export default {
 }
 .current_city {
   position: relative;
+  height: 6.1rem;
   padding: 0;
   .pic {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   .caption {
     position: absolute;

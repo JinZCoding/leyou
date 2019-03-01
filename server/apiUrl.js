@@ -8,7 +8,8 @@ var apiUrl = {
   updateUserInfo: '/leyou/user/updateUserInfo', // 修改用户信息
   queryArticleDetails: '/leyou/article/queryArticleDetails', // 查看文章queryAllReplyList
   queryAllReplyList: '/leyou/article/queryAllReplyList', // 查看回复
-  queryNavigationInfoList: '/leyou/index/queryNavigationInfoList' // 查询各模块列表信息
+  queryNavigationInfoList: '/leyou/index/queryNavigationInfoList', // 查询各模块列表信息
+  queryLocalInfo:'/leyou/local/queryLocalInfo' //查询当地游玩页面内容
 }
 
 module.exports = apiUrl;

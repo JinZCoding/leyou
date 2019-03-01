@@ -314,5 +314,65 @@ module.exports = {
         }
       })
     })
+  },
+
+  // 查询各模块列表信息
+  queryLocalInfo(req, res, next) {
+    // console.log(req.body)
+    let city = req.body.city
+    pool.getConnection((err, connection) => {
+      var sql = [sqlMap.queryLocalInfo, sqlMap.queryLocalFood, sqlMap.queryLocalPlay];
+      connection.query(sql[0], city, (err, data) => {
+        if (err) {
+          console.log(err)
+          var result = {
+            "result": 0,
+            "code": 500,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          connection.query(sql[1], city, (err, data1) => {
+            if (err) {
+              console.log(err)
+              var result = {
+                "result": 0,
+                "code": 500,
+                "message": "服务器错误",
+                "data": null
+              }
+              return res.json(result);
+            } else {
+              connection.query(sql[2], city, (err, data2) => {
+                if (err) {
+                  console.log(err)
+                  var result = {
+                    "result": 0,
+                    "code": 500,
+                    "message": "服务器错误",
+                    "data": null
+                  }
+                  return res.json(result);
+                } else {
+                  var result = {
+                    "result": 1,
+                    "code": 200,
+                    "message": null,
+                    "data": {
+                      cityInfo: data[0],
+                      cityFood: data1,
+                      cityPlay: data2
+                    }
+                  }
+                  return res.json(result);
+                }
+              })
+            }
+          })
+        }
+      })
+    })
   }
+
 }
