@@ -1,76 +1,43 @@
 <template>
-  <div class="guide-list">
-    <div>
-      <ul class="article-ul">
-        <li v-for="(item,index) in articlelist" :key="index">
-          <router-link :to="'/article/'+item.id" class="article-items">
-            <h3 class="title">{{item.title}}</h3>
-            <div class="content clear">
-              <dt class="content_cover left">
-                <img :src="item.cover_img" alt>
-              </dt>
-              <dd class="content_right">
-                <div class="summary">{{item.summary}}</div>
-                <div class="extra">
-                  <span>{{item.views}}浏览</span>
-                  <div class="author">
-                    {{item.author}}
-                    <img :src="item.author_img" alt>
-                  </div>
-                </div>
-              </dd>
+  <li>
+    <router-link :to="'/article/'+article_id" class="article-items">
+      <h3 class="title">{{title}}</h3>
+      <div class="content clear">
+        <dt class="content_cover left">
+          <img :src="cover_img?cover_img:'/static/img/list_5.jpeg'" alt>
+        </dt>
+        <dd class="content_right">
+          <div class="summary">{{summary}}</div>
+          <div class="extra">
+            <!-- <span>{{views}}浏览</span> -->
+            <div class="author">
+              {{author}}
+              <img :src="author_img" alt>
             </div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </div>
+          </div>
+        </dd>
+      </div>
+    </router-link>
+  </li>
 </template>
 <script>
 export default {
   name: "GuideList",
   data() {
-    return {
-      articlelist: [
-        {
-          id: "1",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s6.jpeg",
-          author_img: "./static/img/shi.png"
-        },
-        {
-          id: "2",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s6.jpeg",
-          author_img: "./static/img/shi.png"
-        },
-        {
-          id: "3",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s5.jpeg",
-          author_img: "./static/img/shi.png"
-        },
-        {
-          id: "4",
-          title: "你猜是什么~",
-          summary: "你猜我猜不猜",
-          author: "嗷嗷啊呜",
-          views: "2091",
-          cover_img: "./static/img/swiper/s1.png",
-          author_img: "./static/img/shi.png"
-        }
-      ]
-    };
-  }
+    return {};
+  },
+  mounted() {},
+  props: [
+    "article_id",
+    "title",
+    "cover_img",
+    "summary",
+    "views",
+    "author",
+    "author_img"
+  ],
+  methods: {},
+  components: {}
 };
 </script>
 <style lang="scss">

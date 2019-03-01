@@ -4,13 +4,13 @@
     <div class="reply-div">
       <div>
         <div class="reply_ul">
-          <li class="replyItem" v-for="(item, index) in replylist" :key="index">
+          <li class="replyItem" v-for="(item, index) in replyList" :key="index">
             <div class="readers left">
               <img :src="item.author_img" alt>
             </div>
             <div class="reply_desc">
               <span class="author">{{item.author}}</span>
-              <p class="replyone">{{item.reply}}</p>
+              <p class="replyone">{{item.reply_content}}</p>
             </div>
           </li>
         </div>
@@ -28,7 +28,7 @@
       <div class="send_reply">
         <span class="send">发送</span>
       </div>
-    </div> -->
+    </div>-->
   </div>
 </template>
 <script>
@@ -37,11 +37,12 @@ import AllHeader from "../../../components/header/header";
 export default {
   data() {
     return {
-      replylist: [],
+      replyList: [],
       showReply: false
     };
   },
   mounted() {
+    // console.log(this.$route.query.id);
     this.initReply();
   },
   components: {
@@ -49,11 +50,16 @@ export default {
   },
   methods: {
     initReply() {
-      this.$axios.get("../../static/json/replylist.json").then(res => {
-        console.log(res.data);
-        // 只显示五条评论
-        this.replylist = res.data;
-      });
+      this.$post("/api/leyou/article/queryAllReplyList", {
+        article_id: this.$route.query.id
+      })
+        .then(res => {
+          // console.log(res.data);
+          this.replyList = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
@@ -144,10 +150,10 @@ export default {
       padding: 15px 20px;
     }
   }
-  .send_reply{
+  .send_reply {
     @include fj(flex-end);
     margin: 5px 35px 10px 0;
-    span{
+    span {
       font-size: 28px;
       color: $fc;
     }

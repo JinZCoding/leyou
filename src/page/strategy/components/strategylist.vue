@@ -1,51 +1,27 @@
 <template>
-  <div class="list">
-    <ul>
-      <li v-for="(item, index) in list" :key="index" class="note-li">
-        <router-link :to="'/article/'+item.id">
-          <span class="left sort">
-            <i class="num">{{index+1}}</i>
-          </span>
-          <div class="note_title">
-            <h3>{{item.title}}</h3>
-            <i class="iconfont in">&#xe88e;</i>
-          </div>
-          <div class="bottom_info">
-            <span class="author">{{item.author}}</span>
-            <span class="address">{{item.address}}</span>
-          </div>
-        </router-link>
-      </li>
-    </ul>
-  </div>
+  <li class="note-li">
+    <router-link :to="'/article/'+article_id">
+      <span class="left sort">
+        <i class="num">{{index+1}}</i>
+      </span>
+      <div class="note_title">
+        <h3>{{title}}</h3>
+        <i class="iconfont in">&#xe88e;</i>
+      </div>
+      <div class="bottom_info">
+        <span class="author">{{author}}</span>
+        <span class="address">{{address}}</span>
+      </div>
+    </router-link>
+  </li>
 </template>
 <script>
 export default {
   name: "StrategyList",
   data() {
-    return {
-      list: [
-        {
-          id:"1",
-          title: "标题踢踢踢踢踢踢踢ITITITii",
-          author: "mokio",
-          address: "日本"
-        },
-        {
-          id:"2",
-          title: "哎哟哟哟哟哟哟哟我滴小心脏",
-          author: "william",
-          address: "香港"
-        },
-        {
-          id:"3",
-          title: "妈咪妈咪哄",
-          author: "asha",
-          address: "重庆"
-        }
-      ]
-    };
-  }
+    return {};
+  },
+  props: ["index", "article_id", "title", "author", "address"]
 };
 </script>
 <style lang="scss">

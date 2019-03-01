@@ -5,6 +5,8 @@ import {
 } from '../config/cache'
 
 const state = {
+  LOADING: false,
+
   loginInfo: loadLogin(),
   account: loadAccount(),
   location: loadLocation()

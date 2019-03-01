@@ -1,23 +1,19 @@
 <template>
-  <div class="list">
-    <ul>
-      <li v-for="(item, index) in list" :key="index" class="note-li">
-        <router-link :to="'/article/'+item.id">
-          <span class="left sort">
-            <i class="num">{{index+1}}</i>
-          </span>
-          <div class="note_title">
-            <h3>{{item.title}}</h3>
-            <i class="iconfont in">&#xe88e;</i>
-          </div>
-          <div class="bottom_info">
-            <span class="author">{{item.author}}</span>
-            <span class="address">{{item.address}}</span>
-          </div>
-        </router-link>
-      </li>
-    </ul>
-  </div>
+  <li class="note-li">
+    <router-link :to="'/article/'+id">
+      <span class="left sort">
+        <i class="num">{{index+1}}</i>
+      </span>
+      <div class="note_title">
+        <h3>{{title}}</h3>
+        <i class="iconfont in">&#xe88e;</i>
+      </div>
+      <div class="bottom_info">
+        <span class="author">{{author}}</span>
+        <span class="address">{{address}}</span>
+      </div>
+    </router-link>
+  </li>
 </template>
 <script>
 export default {
@@ -44,44 +40,45 @@ export default {
           address: "重庆"
         },
         {
-          id:"4",
+          id: "4",
           title: "标题踢踢踢踢踢踢踢ITITITii",
           author: "mokio",
           address: "日本"
         },
         {
-          id:"5",
+          id: "5",
           title: "哎哟哟哟哟哟哟哟我滴小心脏",
           author: "william",
           address: "香港"
         },
         {
-          id:"6",
+          id: "6",
           title: "妈咪妈咪哄",
           author: "asha",
           address: "重庆"
         },
         {
-          id:"7",
+          id: "7",
           title: "标题踢踢踢踢踢踢踢ITITITii",
           author: "mokio",
           address: "日本"
         },
         {
-          id:"8",
+          id: "8",
           title: "哎哟哟哟哟哟哟哟我滴小心脏",
           author: "william",
           address: "香港"
         },
         {
-          id:"9",
+          id: "9",
           title: "妈咪妈咪哄",
           author: "asha",
           address: "重庆"
         }
       ]
     };
-  }
+  },
+  props: ["id", "index", "title", "author", "address"]
 };
 </script>
 <style lang="scss">

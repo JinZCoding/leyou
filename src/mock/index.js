@@ -21,6 +21,15 @@ Mock.setup({
 Mock.mock(apiUrl.login, 'post', mockData.login);
 // 用户信息
 Mock.mock(apiUrl.getUserInfo, 'post', mockData.getUserInfo);
+// 首页文章列表
+Mock.mock(apiUrl.queryIndexList, 'post', mockData.queryIndexList);
+
+
+// 查询文章详情queryArticleDetails
+Mock.mock(apiUrl.queryArticleDetails, 'post', mockData.queryArticleDetails);
+// 查询评价
+
+
 // 修改信息
 Mock.mock(apiUrl.setUserChange, 'post', mockData.setUserChange);
 // 我感兴趣的

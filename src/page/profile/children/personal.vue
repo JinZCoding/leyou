@@ -33,7 +33,7 @@
       <div>
         <div class="name infoItem">
           <span>昵&emsp;称：</span>
-          <input type="text" v-model="info.userName" placeholder="乐游用户">
+          <input type="text" v-model="info.username" placeholder="乐游用户" maxlength="10">
         </div>
         <div class="sex infoItem">
           <span>性&emsp;别：</span>
@@ -54,7 +54,7 @@
         </div>
         <div class="autograph infoItem">
           <span>签&emsp;名：</span>
-          <input type="text" v-model="info.autograph" placeholder="留下点什么吧~">
+          <input type="text" v-model="info.autograph" placeholder="留下点什么吧~" maxlength="30">
         </div>
         <!-- 性别 -->
         <van-actionsheet
@@ -117,15 +117,15 @@ export default {
     ...mapActions(["resetAccount"]),
     // 初始化信息
     initData() {
-      // this.info = this.account;
-      // console.log(this.oldinfo);
-      this.$post(apiUrl.getUserInfo, { userid: this.account.userid }).then(
-        res => {
+      this.$post("/api/leyou/user/getUserInfo", {
+        userid: this.account.userid
+      })
+        .then(res => {
           console.log(res);
           if (res.result === 1 && res.code === 200) {
             this.info = res.data;
             this.oldinfo.userid = res.data.userid;
-            this.oldinfo.userName = res.data.userName;
+            this.oldinfo.username = res.data.username;
             this.oldinfo.avatar = res.data.avatar;
             this.oldinfo.sex = res.data.sex;
             this.oldinfo.birthday = res.data.birthday;
@@ -135,8 +135,10 @@ export default {
           } else {
             this.$toast(res.message);
           }
-        }
-      );
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     // 取消确认个人资料
     onClickCancel() {
@@ -157,32 +159,37 @@ export default {
         this.$router.go(-1);
       }
     },
+    // 确认修改
     onClickSave() {
       if (this.havechange) {
-        this.$post(apiUrl.setUserChange, this.info).then(res => {
-          console.log(res);
-          if (res.result === 1 && res.code === 200) {
-            // 若用户名修改了，则要同时修改session和vuex中的数据
-            if (
-              this.info.userName !== this.oldinfo.userName ||
-              this.info.avatar !== this.oldinfo.avatar
-            ) {
-              let obj = {
-                userid: this.account.userid,
-                userName: this.info.userName,
-                avatar: this.info.avatar
-              };
-              this.resetAccount(obj);
+        this.$post("/api/leyou/user/updateUserInfo", this.info)
+          .then(res => {
+            console.log(res);
+            if (res.result === 1 && res.code === 200) {
+              // 若用户名修改了，则要同时修改session和vuex中的数据
+              if (
+                this.info.username !== this.oldinfo.username ||
+                this.info.avatar !== this.oldinfo.avatar
+              ) {
+                let obj = {
+                  userid: this.account.userid,
+                  username: this.info.username,
+                  avatar: this.info.avatar
+                };
+                this.resetAccount(obj);
+              }
+              this.$router.go(-1);
+              this.reload();
+              setTimeout(function() {
+                Toast("信息保存成功");
+              }, 1000);
+            } else {
+              this.$toast(res.message);
             }
-            this.$router.go(-1);
-            this.reload();
-            setTimeout(function() {
-              Toast("信息保存成功");
-            }, 1000);
-          } else {
-            this.$toast(res.message);
-          }
-        });
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     },
     // 取消确认选择地址
@@ -250,7 +257,7 @@ export default {
       handler(val, oldVal) {
         // console.log("after====>", this.oldinfo);
         if (
-          val.userName === this.oldinfo.userName &&
+          val.username === this.oldinfo.username &&
           val.sex === this.oldinfo.sex &&
           val.avatar === this.oldinfo.avatar &&
           val.birthday === this.oldinfo.birthday &&

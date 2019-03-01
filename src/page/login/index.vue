@@ -67,28 +67,28 @@ export default {
     // 登录
     login() {
       if (this.userId && this.loginPassword) {
-        this.$post(apiUrl.login, {
-          user_id: this.userId,
-          user_password: this.loginPassword
+        console.log(this.userId, this.loginPassword);
+        // this.$post(apiUrl.login, {
+        this.$post("/api/leyou/user/login", {
+          userid: this.userId,
+          password: this.loginPassword
         })
           .then(res => {
             console.log("res====>", res);
-            if (res.result === 1 && res.code === 200) {
-              let login = {
-                isLogin: true,
-                userid: this.userId
-              };
-              let account = {
-                userid: this.userId,
-                userName: res.data.userName,
-                avatar: res.data.avatar
-              };
-              this.setLogin({ login, account });
-              this.$router.go(-1);
-            }
+            let login = {
+              isLogin: true,
+              userid: res.data.userid
+            };
+            let account = {
+              userid: this.userId,
+              username: res.data.username,
+              avatar: res.data.avatar
+            };
+            this.setLogin({ login, account });
+            this.$router.go(-1);
           })
           .catch(err => {
-            console.log(err);
+            // console.log(err);
           });
       } else if (this.userId && !this.loginPassword) {
         this.$toast("请输入密码");

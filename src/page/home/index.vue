@@ -33,7 +33,7 @@
         <!-- 导航轮播 -->
         <swiper :options="swiperOption">
           <swiper-slide v-for="(item, index) in swiperImgList" :key="index">
-            <img :src="item" alt>
+            <img :src="item.swiper_img" alt>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -70,7 +70,24 @@
             <div class="list_header">
               <span>推荐攻略</span>
             </div>
-            <guide-list></guide-list>
+            <div class="guide-list">
+              <div>
+                <van-loading size="50px" v-show="loadingShow" class="list_loading"/>
+                <ul class="article-ul">
+                  <guide-list
+                    v-for="(item,index) in articlelist"
+                    :key="index"
+                    :article_id="item.article_id"
+                    :title="item.title"
+                    :cover_img="item.cover_img"
+                    :summary="item.summary"
+                    :views="item.views"
+                    :author="item.author"
+                    :author_img="item.author_img"
+                  ></guide-list>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -86,18 +103,16 @@ import GuideList from "./components/guidelist";
 import ScrollTop from "../../components/common/scrolltop";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { mapGetters, mapActions } from "vuex";
+import { apiUrl } from "apiUrl/index";
+import { Loading } from "vant";
 
 export default {
   data() {
     return {
       isLogin: false,
       currentLocation: "北京",
-      swiperImgList: [
-        "./static/img/swiper/s1.png",
-        "./static/img/swiper/s2.png",
-        "./static/img/swiper/s3.png",
-        "./static/img/swiper/s4.jpeg"
-      ],
+      articlelist: [],
+      swiperImgList: [],
       swiperOption: {
         loop: true, // 循环模式选项
         // 如果需要分页器
@@ -111,7 +126,8 @@ export default {
           el: ".swiper-pagination",
           clickable: true
         }
-      }
+      },
+      loadingShow: false
     };
   },
   components: {
@@ -124,7 +140,12 @@ export default {
   computed: {
     ...mapGetters(["loginInfo", "location"])
   },
+  created() {
+    this.loadingShow = true;
+  },
   mounted() {
+    this.initSwiper();
+    this.initData();
     // console.log("loginInfo", this.loginInfo);
     if (this.loginInfo) {
       this.isLogin = this.loginInfo.isLogin;
@@ -134,6 +155,24 @@ export default {
     }
   },
   methods: {
+    initSwiper() {
+      this.$post("/api/leyou/index/getSwiperList")
+        .then(res => {
+          console.log(res);
+          this.swiperImgList = res.data;
+          // console.log("swiperlist========>", this.swiperImgList);
+        })
+        .catch(() => {});
+    },
+    initData() {
+      this.$post("/api/leyou/index/getIndexArticleList")
+        .then(res => {
+          console.log(res);
+          this.loadingShow = false;
+          this.articlelist = res.data;
+        })
+        .catch(() => {});
+    },
     goSearch() {
       this.$router.push("/search");
     }
@@ -269,5 +308,26 @@ export default {
       color: #999;
     }
   }
+}
+.guide-list {
+  background-color: #fff;
+  width: 100%;
+}
+.article-ul {
+  li {
+    margin: 0 30px;
+    padding: 25px 0;
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border: none;
+    }
+    a {
+      display: block;
+    }
+  }
+}
+.list_loading {
+  margin: 0 auto;
+  padding: 10px;
 }
 </style>
