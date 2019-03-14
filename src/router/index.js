@@ -14,7 +14,7 @@ const mywritten = r => require.ensure([], () => r(require('../page/profile/child
 
 const search = r => require.ensure([], () => r(require('../page/search/')), 'search')
 const release = r => require.ensure([], () => r(require('../page/release/')), 'release')
-const releaseSuccess = r => require.ensure([], () => r(require('../page/release/children/success')), 'releaseSuccess')
+const releaseSuccess = r => require.ensure([], () => r(require('../page/release/success')), 'releaseSuccess')
 
 const city = r => require.ensure([], () => r(require('../page/city/')), 'city')
 const note = r => require.ensure([], () => r(require('../page/note/')), 'note')
@@ -85,12 +85,13 @@ export default [{
     {
       path: '/release',
       name: release,
-      component: release,
-      children: [{
-        path: 'success',
-        name: releaseSuccess,
-        component: releaseSuccess
-      }]
+      component: release
+    },
+    // 发布成功
+    {
+      path: 'success',
+      name: releaseSuccess,
+      component: releaseSuccess
     },
     // 选择城市
     {

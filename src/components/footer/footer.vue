@@ -12,9 +12,9 @@
       <span>我的</span>
     </router-link>
     <div class="dialog" v-if="dialogShow">
-      <span @click="gotoRelease(1)">攻略</span>
-      <span @click="gotoRelease(2)">游记</span>
-      <span @click="gotoRelease(3)">随记</span>
+      <span class="dialog_span" @click="gotoRelease(1)">攻略</span>
+      <span class="dialog_span" @click="gotoRelease(2)">游记</span>
+      <span class="dialog_span" @click="gotoRelease(3)">随记</span>
     </div>
   </div>
 </template>
@@ -78,11 +78,21 @@ export default {
 .dialog {
   position: fixed;
   bottom: 150px;
-  @include wh(350px, 100px);
-  background-color: red;
+  @include wh(360px, 100px);
   z-index: 1000;
   @include fj(space-around);
   align-items: center;
+  .dialog_span{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background-color: $fc;
+    border-radius: 50%;
+    border: 1px solid $fc;
+    color: #fff;
+  }
 }
 </style>
 

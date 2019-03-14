@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="success">
-      <img src="../../../assets/img/success.jpg" width="100%" alt>
+      <img src="../../assets/img/success.jpg" width="100%" alt>
       <span class="tips">文章发布成功！</span>
       <button class="sure">
         <router-link to="/index">确 定</router-link>
@@ -25,7 +25,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../style/mixin.scss";
+@import "../../style/mixin.scss";
 .header {
   background: #fff;
   position: fixed;

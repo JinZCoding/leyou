@@ -48,8 +48,8 @@ router.post(apiUrl.queryNavigationInfoList, (req, res, next) => {
 router.post(apiUrl.queryLocalInfo, (req, res, next) => {
   api.queryLocalInfo(req, res, next)
 })
-// router.post('/setValue', (req, res, next) => {
-//   api.setValue(req, res, next);
-// });
+router.post(apiUrl.queryRecordInfo , (req, res, next) => {
+  api.queryRecordInfo(req, res, next);
+});
 
 module.exports = router;

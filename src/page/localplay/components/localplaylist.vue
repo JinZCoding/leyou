@@ -1,71 +1,39 @@
 <template>
-  <div class="localplay-list">
-    <div>
-      <ul class="localplay-ul">
-        <li v-for="(item,index) in articlelist" :key="index">
-          <router-link :to="'/article/'+item.id"  class="localplay-items">
-            <!-- <h4 class="title">{{title}}</h4> -->
-            <div class="content clear">
-              <div class="content_cover">
-                <img src="../../../assets/img/swiper/s2.png" alt>
-              </div>
-              <div class="content_left">
-                <div class="title">{{item.title}}</div>
-                <div class="extra">
-                  <!-- <span>{{views}}浏览</span> -->
-                  <div class="author">
-                    <img src="../../../assets/img/wa.png" alt>
-                    {{item.author}}
-                  </div>
-                </div>
-              </div>
-              <div class="content_bottom">
-                <span>
-                  <strong>{{item.views}}</strong>浏览
-                </span>
-                <i class="iconfont" v-if="!item.like" @click="likes(index)">&#xe872;</i>
-                <i class="iconfont" v-else>&#xe871;</i>
-              </div>
+  <li>
+    <router-link :to="'/article/'+id" class="localplay-items">
+      <!-- <h4 class="title">{{title}}</h4> -->
+      <div class="content clear">
+        <div class="content_cover">
+          <img src="../../../assets/img/swiper/s2.png" alt>
+        </div>
+        <div class="content_left">
+          <div class="title">{{title}}</div>
+          <div class="extra">
+            <div class="author">
+              <img src="../../../assets/img/wa.png" alt>
+              {{author}}
             </div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </div>
+          </div>
+        </div>
+        <div class="content_bottom">
+          <span>
+            <strong>{{views}}</strong>浏览
+          </span>
+        </div>
+      </div>
+    </router-link>
+  </li>
 </template>
 <script>
 export default {
   name: "LocalplayList",
   data() {
-    return {
-      articlelist: [
-        {
-          id: "1",
-          title: "全网最全的北京攻略呱！",
-          author: "呱",
-          views: "22.1万",
-          like: false
-        },
-        {
-          id:"2",
-          title: "全网最全的北京攻略呱啊！",
-          author: "呱啊",
-          views: "22.2万",
-          like: false
-        },
-        {
-          id:"3",
-          title: "全网最全的北京攻略呱啊",
-          author: "呱啊w",
-          views: "22.2万",
-          like: false
-        }
-      ],
-    };
+    return {};
   },
+  props: ["id", "title", "author", "views", "like"],
   methods: {
-    likes(index) {
-      this.articlelist[index].like = true;
+    likes() {
+      this.like = true;
     }
   }
 };

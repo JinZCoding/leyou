@@ -64,7 +64,21 @@
         </div>
         <div class="cityItem live">
           <h3>当地攻略</h3>
-          <localplay-list></localplay-list>
+          <div class="localplay-list">
+            <div>
+              <ul class="localplay-ul">
+                <localplay-list
+                  v-for="(item,index) in articleList"
+                  :key="index"
+                  :id="item.article_id"
+                  :title="item.title"
+                  :author="item.author"
+                  :views="item.views"
+                  :like="item.likes"
+                ></localplay-list>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -89,6 +103,7 @@ export default {
       img: [1, 2, 1, 2, 1, 2, 1, 2],
       playList: [],
       foodList: [],
+      articleList: [],
       swiperOption: {
         // loop: true, // 循环模式选项
         // width: 120,
@@ -111,6 +126,7 @@ export default {
           this.cityInfo = res.data.cityInfo;
           this.playList = res.data.cityPlay;
           this.foodList = res.data.cityFood;
+          this.articleList = res.data.articleList;
         })
         .catch(err => {
           // console.log(err);
@@ -307,6 +323,23 @@ export default {
   i {
     color: #aaa;
     font-size: 45px;
+  }
+}
+.localplay-list {
+  background-color: #fff;
+  width: 100%;
+}
+.localplay-ul {
+  li {
+    position: relative;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border: none;
+    }
+    a {
+      display: block;
+    }
   }
 }
 </style>

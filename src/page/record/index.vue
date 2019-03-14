@@ -9,9 +9,9 @@
             v-for="(item, index) in list"
             :key="index"
             :item="item"
-            :name="item.name"
-            :content="item.content"
-            :imgurl="item.img_url"
+            :name="item.author"
+            :content="item.record_content"
+            :imgurl="item.record_img"
           ></li>
         </ul>
       </div>
@@ -32,34 +32,46 @@ export default {
     return {
       list: [
         {
-          avatar: "../../static/img/head_1.jpeg",
-          name: "aha",
-          content: "你好啊哈哈哈哈哈哈哈哈哈~",
-          date: "2019-1-1",
-          img_url: "../../static/img/cover.jpeg",
+          author_img: "../../static/img/head_1.jpeg",
+          author: "aha",
+          record_content: "你好啊哈哈哈哈哈哈哈哈哈~",
+          updatetime: "2019-1-1",
+          record_img: "../../static/img/cover.jpeg",
           likes: 4
         },
         {
-          avatar: "../../static/img/wa.png",
-          name: "haha",
-          content:
+          author_img: "../../static/img/wa.png",
+          author: "haha",
+          record_content:
             "嘿哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈~",
-          date: "2019-2-1",
-          // img_url: "../../static/img/cover.jpeg",
+          updatetime: "2019-2-1",
+          // record_img: "../../static/img/cover.jpeg",
           likes: 0
         },
         {
-          avatar: "../../static/img/shi.png",
-          name: "haha",
-          content: "哈！北京，我来了！",
-          date: "2019-1-9",
-          img_url: "../../static/img/beijing.jpeg",
+          author_img: "../../static/img/shi.png",
+          author: "haha",
+          record_content: "哈！北京，我来了！",
+          updatetime: "2019-1-9",
+          record_img: "../../static/img/beijing.jpeg",
           likes: 21
         }
       ]
     };
   },
-  mounted() {},
+  mounted() {
+    this.initData();
+  },
+  methods: {
+    initData() {
+      this.$post("/api/leyou/record/queryRecordInfo", {})
+        .then(res => {
+          console.log(res);
+          this.list = res.data;
+        })
+        .catch(() => {});
+    }
+  },
   components: {
     AllHeader,
     AllFooter,

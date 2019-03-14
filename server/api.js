@@ -72,6 +72,8 @@ module.exports = {
       })
     })
   },
+
+  // 登录、个人信息模块
   // 登录
   login(req, res, next) {
     // console.log(req)
@@ -179,6 +181,8 @@ module.exports = {
       })
     })
   },
+
+  // 文章详情页面相关（回复
   // 查看文章内容
   queryArticleDetails(req, res, next) {
     // console.log(req)
@@ -257,6 +261,7 @@ module.exports = {
     })
   },
 
+  // 各模块信息列表（ 攻略、游记可用 start
   // 查询各模块列表信息
   queryNavigationInfoList(req, res, next) {
     // console.log(req.body)
@@ -316,12 +321,12 @@ module.exports = {
     })
   },
 
-  // 查询各模块列表信息
+  // local模块
   queryLocalInfo(req, res, next) {
     // console.log(req.body)
     let city = req.body.city
     pool.getConnection((err, connection) => {
-      var sql = [sqlMap.queryLocalInfo, sqlMap.queryLocalFood, sqlMap.queryLocalPlay];
+      var sql = [sqlMap.queryLocalInfo, sqlMap.queryLocalFood, sqlMap.queryLocalPlay, sqlMap.queryLocalArticleList];
       connection.query(sql[0], city, (err, data) => {
         if (err) {
           console.log(err)
@@ -355,22 +360,65 @@ module.exports = {
                   }
                   return res.json(result);
                 } else {
-                  var result = {
-                    "result": 1,
-                    "code": 200,
-                    "message": null,
-                    "data": {
-                      cityInfo: data[0],
-                      cityFood: data1,
-                      cityPlay: data2
+                  connection.query(sql[3], city, (err, data3) => {
+                    if (err) {
+                      console.log(err)
+                      var result = {
+                        "result": 0,
+                        "code": 500,
+                        "message": "服务器错误",
+                        "data": null
+                      }
+                      return res.json(result);
+                    } else {
+                      var result = {
+                        "result": 1,
+                        "code": 200,
+                        "message": null,
+                        "data": {
+                          cityInfo: data[0],
+                          cityFood: data1,
+                          cityPlay: data2,
+                          articleList: data3
+                        }
+                      }
+                      return res.json(result);
                     }
-                  }
-                  return res.json(result);
+                  })
                 }
               })
             }
           })
         }
+      })
+    })
+  },
+
+  queryRecordInfo(req, res, next){
+    pool.getConnection((err, connection) => {
+      var sql = sqlMap.queryRecordInfo;
+      connection.query(sql, [], (err, data) => {
+        if (err) {
+          console.log(err)
+          var result = {
+            "code": 500,
+            "result": 0,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          // console.log("data", data)
+          var result = {
+            "code": 200,
+            "result": 1,
+            "message": null,
+            "data": data
+          }
+          // console.log(result)
+          return res.json(result);
+        }
+        // connection.release();
       })
     })
   }

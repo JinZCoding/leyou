@@ -1,11 +1,11 @@
 <template>
   <li class="record_li">
     <div class="left_avatar">
-      <img :src="item.avatar" alt width="50px">
+      <img :src="item.author_img" alt width="50px">
     </div>
     <div class="right_info">
       <span class="name ellipsis">{{name}}</span>
-      <p class="time">{{item.date}}</p>
+      <p class="time">{{item.updatetime}}</p>
     </div>
     <div class="content_info">
       <p class="content">{{content}}</p>
