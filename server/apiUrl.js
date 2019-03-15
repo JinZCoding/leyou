@@ -12,6 +12,7 @@ var apiUrl = {
   queryLocalInfo: '/leyou/local/queryLocalInfo', //查询当地游玩页面内容
   queryRecordInfo: '/leyou/record/queryRecordInfo', // 查询随记内容 
   releaseArticle: '/leyou/release/releaseArticle', //发布新文章
+  // 获取作者信息
 }
 
 module.exports = apiUrl;

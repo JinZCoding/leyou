@@ -56,6 +56,7 @@
 <script>
 import { ZxEditor } from "zx-editor";
 import areaList from "./areaList.js";
+import { mapGetters } from "vuex"; //先要引入
 export default {
   name: "release",
   data() {
@@ -68,6 +69,9 @@ export default {
       pinyin: "", // 地点拼音
       addressShow: false
     };
+  },
+  computed: {
+    ...mapGetters(["loginInfo"])
   },
   methods: {
     // 返回
@@ -87,6 +91,7 @@ export default {
         // console.log(this.content);
         // 调用接口 保存文章
         let objParams = {
+          userid: this.loginInfo.userid,
           title: this.title,
           content: this.content,
           article_type: this.article_type,
@@ -98,6 +103,9 @@ export default {
         this.$post("/api/leyou/release/releaseArticle", objParams)
         .then(res => {
           console.log(res);
+          if(res.code == 200 && res.result == 1){
+            this.$router.replace({ path: "/success" });
+          }
           // this.swiperImgList = res.data;
           // console.log("swiperlist========>", this.swiperImgList);
         })
@@ -129,7 +137,7 @@ export default {
   },
   created() {
     this.article_type = this.$route.query.type;
-    // console.log(this.article_type);
+    // console.log(this.loginInfo.userid);
   }
 };
 </script>

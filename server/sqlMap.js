@@ -35,7 +35,8 @@ var sqlMap = {
   // 随记模块  end
 
   // 发布文章
-  releaseArticle:"INSERT INTO article_list ( article_type, title, content, address, address_pinyin   ) VALUES ( ?,?,?,?,? );"
+  releaseArticle:"INSERT INTO article_list ( article_id, article_type, title, content, address, address_pinyin, updatetime ) VALUES ( ?,?,?,?,?,?,? );"
+  
 
 }
 
