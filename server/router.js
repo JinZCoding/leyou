@@ -52,4 +52,8 @@ router.post(apiUrl.queryRecordInfo , (req, res, next) => {
   api.queryRecordInfo(req, res, next);
 });
 
+router.post(apiUrl.releaseArticle , (req, res, next) => {
+  api.releaseArticle(req, res, next);
+});
+
 module.exports = router;

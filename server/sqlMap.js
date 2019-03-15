@@ -34,6 +34,8 @@ var sqlMap = {
   queryRecordInfo: "SELECT * FROM record_list",
   // 随记模块  end
 
+  // 发布文章
+  releaseArticle:"INSERT INTO article_list ( article_type, title, content, address, address_pinyin   ) VALUES ( ?,?,?,?,? );"
 
 }
 

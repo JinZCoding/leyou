@@ -394,7 +394,8 @@ module.exports = {
     })
   },
 
-  queryRecordInfo(req, res, next){
+  // 随记模块
+  queryRecordInfo(req, res, next) {
     pool.getConnection((err, connection) => {
       var sql = sqlMap.queryRecordInfo;
       connection.query(sql, [], (err, data) => {
@@ -421,6 +422,59 @@ module.exports = {
         // connection.release();
       })
     })
+  },
+
+  // 发布新文章releaseArticle
+  releaseArticle(req, res, next) {
+    let title = req.body.title;
+    let content = req.body.content;
+    let article_type = req.body.article_type;
+    let address = req.body.address;
+    let address_pinyin = req.body.pinyin
+    console.log(req.body)
+    let updatetime = new Date();
+    console.log(updatetime)
+    var outTradeNo = ""; //订单号
+    // for (var i = 0; i < 6; i++) //6位随机数，用以加在时间戳后面。
+    // {
+    //   outTradeNo += Math.floor(Math.random() * 10);
+    // }
+    // outTradeNo = new Date().getTime() + outTradeNo; //时间戳，用来生成订单号。
+    const now = new Date()
+    let month = now.getMonth() + 1
+    let day = now.getDate()
+    let hour = now.getHours()
+    let minutes = now.getMinutes()
+    let seconds = now.getSeconds()
+    month = this.setTimeDateFmt(month)
+    hour = this.setTimeDateFmt(hour)
+    minutes = this.setTimeDateFmt(minutes)
+    seconds = this.setTimeDateFmt(seconds)
+    outTradeNo = now.getFullYear().toString() + month.toString() + day + hour + minutes + seconds + (Math.round(Math.random() * 89 + 100)).toString()
+    console.log(outTradeNo)
+    /*pool.getConnection((err, connection) => {
+      var sql = sqlMap.releaseArticle;
+      connection.query(sql, [article_type, title, content, address, address_pinyin], (err, data) => {
+        if (err) {
+          console.log(err)
+          var result = {
+            "code": 500,
+            "result": 0,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          var result = {
+            "code": 200,
+            "result": 1,
+            "message": null,
+            "data": data
+          }
+          return res.json(result);
+        }
+      })
+    })*/
   }
 
 }

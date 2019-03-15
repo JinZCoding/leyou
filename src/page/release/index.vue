@@ -35,14 +35,20 @@
             @cancel="onAddressCancel"
             @confirm="onAddressConfirm"
             @change="onAddressChange"
-          /> -->
+          />-->
+          <van-picker
+            show-toolbar
+            title="请选择地点"
+            :columns="areaList.list"
+            @cancel="onCancel"
+            @confirm="onAddressConfirm"
+          />
         </van-popup>
       </div>
       <div id="editorContainer">
         <!-- 编辑器容器 -->
       </div>
     </div>
-
   </div>
 </template>
 
@@ -55,10 +61,11 @@ export default {
   data() {
     return {
       areaList,
-      title: "",
-      content: "",
-      article_type: null,
-      address: "",
+      title: "", // 题目
+      content: "", // 内容
+      article_type: null, // 文章类型
+      address: "", // 地点
+      pinyin: "", // 地点拼音
       addressShow: false
     };
   },
@@ -77,34 +84,37 @@ export default {
       } else if (!this.content) {
         this.$toast("请输入正文");
       } else {
-        console.log(this.content);
+        // console.log(this.content);
         // 调用接口 保存文章
         let objParams = {
-          article_type: this.type,
-          title: this.title
-          // updatetime: ""
-        };
-
+          title: this.title,
+          content: this.content,
+          article_type: this.article_type,
+          address: this.address,
+          address_pinyin: this.pinyin
+        }; 
+        console.log(objParams);
+        // /leyou/release/releaseArticle
+        this.$post("/api/leyou/release/releaseArticle", objParams)
+        .then(res => {
+          console.log(res);
+          // this.swiperImgList = res.data;
+          // console.log("swiperlist========>", this.swiperImgList);
+        })
+        .catch(() => {});
         // this.$router.push({ path: "/success" });
       }
     },
-    onChange(picker, value, index) {
-      Toast(`当前值：${value}, 当前索引：${index}`);
-    },
-    // 取消确认选择地址
-    onAddressCancel() {
+    //
+    onAddressConfirm(value, index) {
+      // this.$toast(`当前值：${value}, 当前索引：${index}`);
       this.addressShow = false;
+      console.log(value, this.areaList.pinyin[index]);
+      this.address = value;
+      this.pinyin = this.areaList.pinyin[index];
     },
-    // 选择地址
-    onAddressConfirm(val) {
-      // console.log(val);
-      this.address = val[0].name + " " + val[1].name + " " + val[2].name;
-      console.log(this.address);
+    onCancel() {
       this.addressShow = false;
-    },
-    onAddressChange(picker) {
-      let val = picker.getValues();
-      // console.log(val);
     }
   },
   mounted() {
@@ -119,7 +129,7 @@ export default {
   },
   created() {
     this.article_type = this.$route.query.type;
-    console.log(this.article_type);
+    // console.log(this.article_type);
   }
 };
 </script>
