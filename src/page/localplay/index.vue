@@ -72,7 +72,9 @@
                   :key="index"
                   :id="item.article_id"
                   :title="item.title"
+                  :cover_img="item.cover_img"
                   :author="item.author"
+                  :author_img="item.author_img"
                   :views="item.views"
                   :like="item.likes"
                 ></localplay-list>

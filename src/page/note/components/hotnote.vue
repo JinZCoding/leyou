@@ -1,6 +1,6 @@
 <template>
   <router-link tag="li" class="hot-li-items" :to="'/article/'+id">
-    <img :src="cover_img" alt>
+    <img :src="cover_img?cover_img:'/static/img/list_5.jpeg'" alt>
     <div class="layout">
       <div class="one">
         <span class="travels_time">{{updatetime}}</span>

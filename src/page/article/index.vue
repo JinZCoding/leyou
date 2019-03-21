@@ -16,7 +16,7 @@
     <div class="articlePage">
       <div>
         <div class="article_cover">
-          <img src="../../assets/img/cover.jpeg" alt>
+          <img :src="articledetails.cover_img?articledetails.cover_img:'/static/img/cover.jpeg'" alt>
         </div>
         <div class="article_content">
           <div class="article_title">
@@ -222,6 +222,7 @@ export default {
     width: 100%;
     img {
       width: 100%;
+      max-height: 6rem;
     }
   }
   .article_content {

@@ -43,7 +43,7 @@ module.exports = {
       })
     })
   },
-  // 获取首页swiperlist
+  // 获取首页list
   getIndexArticleList(req, res, next) {
     pool.getConnection((err, connection) => {
       var sql = sqlMap.getIndexArticleList;
@@ -442,7 +442,7 @@ module.exports = {
     // console.log(article_id, updatetime)
     pool.getConnection((err, connection) => {
       var sql = sqlMap.releaseArticle;
-      connection.query(sql, [article_id, art.article_type, art.title, art.content, art.address, art.address_pinyin, updatetime], (err, data) => {
+      connection.query(sql, [article_id, art.userid, art.article_type, art.title, art.content, art.summary, art.address, art.address_pinyin, updatetime], (err, data) => {
         if (err) {
           console.log(err)
           var result = {

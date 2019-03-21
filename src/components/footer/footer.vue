@@ -12,30 +12,50 @@
       <span>我的</span>
     </router-link>
     <div class="dialog" v-if="dialogShow">
-      <span class="dialog_span" @click="gotoRelease(1)">攻略</span>
-      <span class="dialog_span" @click="gotoRelease(2)">游记</span>
-      <span class="dialog_span" @click="gotoRelease(3)">随记</span>
+      <span class="dialog_span" @click="gotoRelease(0)">攻略</span>
+      <span class="dialog_span" @click="gotoRelease(1)">游记</span>
+      <span class="dialog_span" @click="gotoRelease(2)">随记</span>
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex"; //先要引入
+
 export default {
   name: "allFooter",
   data() {
     return {
-      dialogShow: false
+      dialogShow: false,
+      isLogin: false
     };
   },
+  computed: {
+    ...mapGetters(["loginInfo"])
+  },
   methods: {
+    // 判斷是否登錄
+    initLogin() {
+      if (this.loginInfo) {
+        this.isLogin = this.loginInfo.isLogin;
+      }
+    },
     showDialog() {
       this.dialogShow = !this.dialogShow;
     },
     gotoRelease(type) {
-      this.$router.push({
-        path: "/release",
-        query: { type: 1 }
-      });
+      // 未登录跳转登录，登录跳转发布文章页
+      if (this.isLogin) {
+        this.$router.push({
+          path: "/release",
+          query: { type: type }
+        });
+      } else {
+        this.$router.push("/login");
+      }
     }
+  },
+  created() {
+    this.initLogin();
   }
 };
 </script>
@@ -82,7 +102,7 @@ export default {
   z-index: 1000;
   @include fj(space-around);
   align-items: center;
-  .dialog_span{
+  .dialog_span {
     display: inline-block;
     width: 100px;
     height: 100px;

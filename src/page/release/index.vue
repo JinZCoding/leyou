@@ -15,10 +15,9 @@
         </div>
       </div>
     </div>
-    <div class="article_info">
+    <div class="article_info" v-if="article_type!==2 && article_type!=='2'">
       <div class="heading">
         <input type="text" class="article_heading" v-model="title" placeholder="标题">
-        <!-- <input type="text" class="address" v-model="address" placeholder="请选择地点"> -->
       </div>
       <div class="address">
         <input
@@ -30,12 +29,6 @@
           placeholder="请选择地点"
         >
         <van-popup v-model="addressShow" position="bottom">
-          <!-- <van-area
-            :area-list="areaList"
-            @cancel="onAddressCancel"
-            @confirm="onAddressConfirm"
-            @change="onAddressChange"
-          />-->
           <van-picker
             show-toolbar
             title="请选择地点"
@@ -49,11 +42,24 @@
         <!-- 编辑器容器 -->
       </div>
     </div>
+    <div class="article_record" v-else>
+      <!-- <span>3</span> -->
+      <div>
+        <textarea class="record_content" placeholder="请输入内容" cols="46" rows="6"></textarea>
+        <div class="upload_img">
+          <!-- <span>123</span> -->
+          <van-uploader :after-read="onRead" accept="image/gif, image/jpeg">
+            <van-icon name="photograph"/>
+          </van-uploader>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script src="./dist/js/zx-editor.min.js"></script>
 <script>
+import { Uploader } from "vant";
 import { ZxEditor } from "zx-editor";
 import areaList from "./areaList.js";
 import { mapGetters } from "vuex"; //先要引入
@@ -64,6 +70,7 @@ export default {
       areaList,
       title: "", // 题目
       content: "", // 内容
+      summary: "", //摘要
       article_type: null, // 文章类型
       address: "", // 地点
       pinyin: "", // 地点拼音
@@ -82,35 +89,37 @@ export default {
     // 发布
     saveClick() {
       // console.log(this.content);
-      this.getCont();
-      if (!this.title) {
-        this.$toast("请输入标题");
-      } else if (!this.content) {
-        this.$toast("请输入正文");
+      if (this.article_type !== 2 && this.article_type !== "2") {
+        this.getCont();
+        if (!this.title) {
+          this.$toast("请输入标题");
+        } else if (!this.content) {
+          this.$toast("请输入正文");
+        } else {
+          // console.log(this.content);
+          // this.summary = this.content.innerText;
+          // 调用接口 保存文章
+          let objParams = {
+            userid: this.loginInfo.userid,
+            title: this.title,
+            content: this.content,
+            summary: this.title, //暫時將title作為摘要保存
+            article_type: this.article_type,
+            address: this.address,
+            address_pinyin: this.pinyin
+          };
+          console.log(objParams);
+          this.$post("/api/leyou/release/releaseArticle", objParams)
+            .then(res => {
+              console.log(res);
+              if (res.code == 200 && res.result == 1) {
+                this.$router.replace({ path: "/success" });
+              }
+            })
+            .catch(() => {});
+        }
       } else {
-        // console.log(this.content);
-        // 调用接口 保存文章
-        let objParams = {
-          userid: this.loginInfo.userid,
-          title: this.title,
-          content: this.content,
-          article_type: this.article_type,
-          address: this.address,
-          address_pinyin: this.pinyin
-        }; 
-        console.log(objParams);
-        // /leyou/release/releaseArticle
-        this.$post("/api/leyou/release/releaseArticle", objParams)
-        .then(res => {
-          console.log(res);
-          if(res.code == 200 && res.result == 1){
-            this.$router.replace({ path: "/success" });
-          }
-          // this.swiperImgList = res.data;
-          // console.log("swiperlist========>", this.swiperImgList);
-        })
-        .catch(() => {});
-        // this.$router.push({ path: "/success" });
+        console.log(123);
       }
     },
     //
@@ -123,17 +132,24 @@ export default {
     },
     onCancel() {
       this.addressShow = false;
+    },
+    // 上传图片
+    onRead(file) {
+      console.log(file);
     }
   },
   mounted() {
-    var zxEditor = new ZxEditor("#editorContainer", {
-      //   fixed: true
-      showToolbar: ["emoji", "pic"]
-    });
-    let that = this;
-    that.getCont = is => {
-      this.content = zxEditor.getContent(is);
-    };
+    console.log(this.article_type);
+    if (this.article_type !== 2 && this.article_type !== "2") {
+      var zxEditor = new ZxEditor("#editorContainer", {
+        //   fixed: true
+        showToolbar: ["emoji", "pic"]
+      });
+      let that = this;
+      that.getCont = is => {
+        this.content = zxEditor.getContent(is);
+      };
+    }
   },
   created() {
     this.article_type = this.$route.query.type;
@@ -176,6 +192,7 @@ export default {
     right: 30px;
   }
 }
+// 攻略、游记
 .article_info {
   padding-top: 90px;
   background-color: #fff;
@@ -215,6 +232,23 @@ export default {
         font-size: 38px;
       }
     }
+  }
+}
+// 随记
+.article_record {
+  padding-top: 90px;
+  background-color: #fff;
+  height: 100%;
+  .record_content {
+    font-size: 30px;
+    margin: 10px 38px;
+  }
+  .upload_img {
+    border-top: 1px solid #eee;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 30px;
+    font-size: 35px;
   }
 }
 .zxeditor-container .zxeditor-content-wrapper {

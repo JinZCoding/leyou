@@ -4,13 +4,13 @@
       <!-- <h4 class="title">{{title}}</h4> -->
       <div class="content clear">
         <div class="content_cover">
-          <img src="../../../assets/img/swiper/s2.png" alt>
+          <img :src="cover_img?cover_img:'/static/img/swiper/s2.png'" alt>
         </div>
         <div class="content_left">
           <div class="title">{{title}}</div>
           <div class="extra">
             <div class="author">
-              <img src="../../../assets/img/wa.png" alt>
+              <img :src="author_img" alt>
               {{author}}
             </div>
           </div>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {};
   },
-  props: ["id", "title", "author", "views", "like"],
+  props: ["id", "title", "cover_img", "author", "author_img", "views", "like"],
   methods: {
     likes() {
       this.like = true;
