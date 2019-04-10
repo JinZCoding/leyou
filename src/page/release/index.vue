@@ -93,11 +93,13 @@ export default {
         this.getCont();
         if (!this.title) {
           this.$toast("请输入标题");
-        } else if (!this.content) {
+        }else if (!this.address) {
+          this.$toast("请选择地点");
+        } else if (this.content === "<p><br></p>") {
           this.$toast("请输入正文");
         } else {
-          // console.log(this.content);
-          // this.summary = this.content.innerText;
+          // console.log("fffffffffb")
+          // console.log(this.content)
           // 调用接口 保存文章
           let objParams = {
             userid: this.loginInfo.userid,

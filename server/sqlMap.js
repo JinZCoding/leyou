@@ -47,7 +47,9 @@ var sqlMap = {
   // local模块 end
 
   // 随记模块  start
-  queryRecordInfo: "SELECT * FROM record_list",
+  queryRecordInfo: `SELECT record_list.record_id, record_list.record_content, record_list.author_id,  record_list.updatetime, record_list.record_img, record_list.likes, user_info.username author, user_info.avatar author_img
+  FROM record_list,user_info
+  WHERE record_list.author_id = user_info.userid`,
   // 随记模块  end
 
   // 发布文章

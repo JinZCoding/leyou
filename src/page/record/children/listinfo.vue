@@ -36,7 +36,7 @@ export default {
       isLike: false
     };
   },
-  props: ["item", "name", "content", "imgurl"],
+  props: ["item", "name", "content", "imgurl","authorimg"],
   methods: {
     toLike() {
       this.isLike = !this.isLike;

@@ -30,33 +30,7 @@ import RecordItem from "./children/listinfo";
 export default {
   data() {
     return {
-      list: [
-        {
-          author_img: "../../static/img/head_1.jpeg",
-          author: "aha",
-          record_content: "你好啊哈哈哈哈哈哈哈哈哈~",
-          updatetime: "2019-1-1",
-          record_img: "../../static/img/cover.jpeg",
-          likes: 4
-        },
-        {
-          author_img: "../../static/img/wa.png",
-          author: "haha",
-          record_content:
-            "嘿哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈~",
-          updatetime: "2019-2-1",
-          // record_img: "../../static/img/cover.jpeg",
-          likes: 0
-        },
-        {
-          author_img: "../../static/img/shi.png",
-          author: "haha",
-          record_content: "哈！北京，我来了！",
-          updatetime: "2019-1-9",
-          record_img: "../../static/img/beijing.jpeg",
-          likes: 21
-        }
-      ]
+      list: []
     };
   },
   mounted() {
