@@ -4,6 +4,10 @@ import App from '../App'
 const demo = r => require.ensure([], () => r(require('../page/login/demo')), 'demo')
 
 const login = r => require.ensure([], () => r(require('../page/login/')), 'login')
+
+const register = r => require.ensure([], () => r(require('../page/login/register')), 'register')
+
+
 const index = r => require.ensure([], () => r(require('../page/home/')), 'home')
 const profile = r => require.ensure([], () => r(require('../page/profile/')), 'profile')
 
@@ -38,6 +42,12 @@ export default [{
       path: '/demo',
       name: demo,
       component: demo
+    },
+    // 注册页
+    {
+      path: '/register',
+      name: register,
+      component: register
     },
     // 登录页
     {

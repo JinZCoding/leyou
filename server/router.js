@@ -25,6 +25,10 @@ router.post(apiUrl.login, (req, res, next) => {
   api.login(req, res, next);
 })
 
+router.post(apiUrl.register, (req, res, next) => {
+  api.register(req, res, next);
+})
+
 router.post(apiUrl.getUserInfo, (req, res, next) => {
   api.getUserInfo(req, res, next);
 })

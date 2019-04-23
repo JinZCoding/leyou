@@ -4,6 +4,7 @@ var apiUrl = {
   getSwiperList: '/leyou/index/getSwiperList', // 获取首页swiperlist
   getIndexArticleList: '/leyou/index/getIndexArticleList', // 首页文章列表
   login: '/leyou/user/login', // 登录
+  register: '/leyou/user/register', // 注册
   getUserInfo: '/leyou/user/getUserInfo', // 获取用户信息
   updateUserInfo: '/leyou/user/updateUserInfo', // 修改用户信息
   queryArticleDetails: '/leyou/article/queryArticleDetails', // 查看文章queryAllReplyList

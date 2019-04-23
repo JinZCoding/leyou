@@ -9,6 +9,8 @@ var sqlMap = {
 
   // 登录、个人信息模块   start
   login: 'SELECT userid,username,avatar FROM user_info WHERE userid = (SELECT userid FROM users WHERE userid = ? and password = ?);',
+  register: 'INSERT INTO users ( userid, password) VALUES (?,?);',
+  registerInfo: `INSERT INTO user_info ( userid, username, avatar ) VALUES (?,"乐游用户","/static/img/head.jpg");`,
   getUserInfo: 'SELECT userid,username,avatar,sex,birthday,address,autograph FROM user_info WHERE userid = ?;',
   updateUserInfo: "UPDATE user_info SET username = ?, avatar= ?, sex = ?, birthday = ?, address = ?, autograph = ? WHERE userid = ?;",
   // 登录、个人信息模块   end

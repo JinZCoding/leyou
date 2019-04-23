@@ -5,7 +5,7 @@
         <span class="colseLogin" @click="colseLogin">
           <i class="iconfont">&#xe86e;</i>
         </span>
-        <h2>登录</h2>
+        <h2>注册</h2>
       </div>
       <div class="login_container">
         <div class="userId">
@@ -32,14 +32,26 @@
             <img v-else src="../../assets/img/open@3x.png" alt>
           </span>
         </div>
-        <!-- <span class="go_register">没有账号，点击<router-link to="/register">注册</router-link></span> -->
-        <span class="go_register">
-          没有账号，点击
-          <a @click="goRegister">注册</a>
+        <div class="loginPassword2">
+          <label for>
+            <span>
+              <img src="../../assets/img/pass.png" alt>
+            </span>
+          </label>
+          <input type="password" v-model="loginPassword2" placeholder="确认密码" v-if="!showPass2">
+          <input type="text" v-model="loginPassword2" placeholder="确认密码" v-else>
+          <span class="show_pass" @click="showPass2=!showPass2">
+            <img v-if="!showPass2" src="../../assets/img/close@3x.png" alt>
+            <img v-else src="../../assets/img/open@3x.png" alt>
+          </span>
+        </div>
+        <span class="go_login">
+          已有账号，点击
+          <a @click="goLogin">登录</a>
         </span>
       </div>
-      <div class="loginButton" @click="login">
-        <a>登录</a>
+      <div class="loginButton" @click="register">
+        <a>注册</a>
       </div>
       <div class="bottom_con">
         <p>&copy; jinzhiyi</p>
@@ -57,53 +69,42 @@ export default {
     return {
       userId: "",
       loginPassword: "",
-      showPass: false
+      loginPassword2: "",
+      showPass: false,
+      showPass2: false
     };
   },
-  mounted() {
-    // 进入登录页面，默认退出登录，清除session
-    this.signOut();
-  },
-  computed: {
-    ...mapGetters(["loginInfo"])
-  },
+  mounted() {},
+  computed: {},
   methods: {
-    ...mapActions(["setLogin", "signOut"]),
-    goRegister() {
-      this.$router.replace({ path: "/register" });
-      // this.$router.go(-1);
-    },
-    // 登录
-    login() {
-      if (this.userId && this.loginPassword) {
-        console.log(this.userId, this.loginPassword);
-        // this.$post(apiUrl.login, {
-        this.$post("/api/leyou/user/login", {
-          userid: this.userId,
-          password: this.loginPassword
-        })
-          .then(res => {
-            console.log("res====>", res);
-            let login = {
-              isLogin: true,
-              userid: res.data.userid
-            };
-            let account = {
-              userid: this.userId,
-              username: res.data.username,
-              avatar: res.data.avatar
-            };
-            this.setLogin({ login, account });
-            this.$router.go(-1);
+    // 注册
+    register() {
+      console.log("zhuce");
+      if (this.userId && this.loginPassword && this.loginPassword) {
+        console.log(this.userId, this.loginPassword, this.loginPassword);
+        if (this.loginPassword !== this.loginPassword2) {
+          this.$toast("确认密码失败，请重新输入");
+        } else {
+          console.log("...");
+          this.$post("/api/leyou/user/register", {
+            userid: this.userId,
+            password: this.loginPassword
           })
-          .catch(err => {
-            // console.log(err);
-          });
+            .then(res => {
+              console.log("res====>", res);
+              this.$router.replace({ path: "/login" });
+            })
+            .catch(err => {});
+        }
       } else if (this.userId && !this.loginPassword) {
         this.$toast("请输入密码");
       } else {
         this.$toast("请输入账号");
       }
+    },
+    goLogin() {
+      this.$router.replace({ path: "/login" });
+      // this.$router.go(-1);
     },
     // 关闭页面
     colseLogin() {
@@ -172,7 +173,7 @@ input {
     padding: 0 5px;
     background: none;
   }
-  .go_register {
+  .go_login {
     display: flex;
     justify-content: flex-end;
     font-size: 20px;

@@ -123,6 +123,59 @@ module.exports = {
       })
     })
   },
+  // 注册
+  register(req, res, next) {
+    // console.log(req)
+    // console.log(req.body)
+    var userid = req.body.userid;
+    var password = req.body.password
+    // console.log(userid, password)
+    pool.getConnection((err, connection) => {
+      var sql = sqlMap.register;
+      var sql2 = sqlMap.registerInfo;
+      connection.query(sql, [
+        userid,
+        password
+      ], (err, data) => {
+        // console.log(err, data)
+        if (err) {
+          console.log(err)
+          var result = {
+            "code": 500,
+            "result": 0,
+            "message": "服务器错误",
+            "data": null
+          }
+          return res.json(result);
+        } else {
+          connection.query(sql2, [
+            userid
+          ], (err, data) => {
+            // console.log(err, data)
+            if (err) {
+              console.log(err)
+              var result = {
+                "code": 500,
+                "result": 0,
+                "message": "服务器错误",
+                "data": null
+              }
+              return res.json(result);
+            } else {
+                var result = {
+                  "code": 200,
+                  "result": 1,
+                  "message": null,
+                  "data": null
+                }
+                return res.json(result);
+            // connection.release();
+              }
+          })
+        }
+      })
+    })
+  },
   // 获取用户信息
   getUserInfo(req, res, next) {
     var userid = req.body.userid;

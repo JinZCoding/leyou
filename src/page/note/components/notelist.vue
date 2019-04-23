@@ -19,64 +19,7 @@
 export default {
   name: "NoteList",
   data() {
-    return {
-      list: [
-        {
-          id: "1",
-          title: "标题踢踢踢踢踢踢踢ITITITii",
-          author: "mokio",
-          address: "日本"
-        },
-        {
-          id: "2",
-          title: "哎哟哟哟哟哟哟哟我滴小心脏",
-          author: "william",
-          address: "香港"
-        },
-        {
-          id: "3",
-          title: "妈咪妈咪哄",
-          author: "asha",
-          address: "重庆"
-        },
-        {
-          id: "4",
-          title: "标题踢踢踢踢踢踢踢ITITITii",
-          author: "mokio",
-          address: "日本"
-        },
-        {
-          id: "5",
-          title: "哎哟哟哟哟哟哟哟我滴小心脏",
-          author: "william",
-          address: "香港"
-        },
-        {
-          id: "6",
-          title: "妈咪妈咪哄",
-          author: "asha",
-          address: "重庆"
-        },
-        {
-          id: "7",
-          title: "标题踢踢踢踢踢踢踢ITITITii",
-          author: "mokio",
-          address: "日本"
-        },
-        {
-          id: "8",
-          title: "哎哟哟哟哟哟哟哟我滴小心脏",
-          author: "william",
-          address: "香港"
-        },
-        {
-          id: "9",
-          title: "妈咪妈咪哄",
-          author: "asha",
-          address: "重庆"
-        }
-      ]
-    };
+    return {};
   },
   props: ["id", "index", "title", "author", "address"]
 };

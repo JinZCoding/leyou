@@ -37,7 +37,7 @@
         </div>
         <div class="sex infoItem">
           <span>性&emsp;别：</span>
-          <input type="text" v-model="info.sex" readonly @click="sexShow=true">
+          <input type="text" v-model="info.sex" placeholder="请选择性别哦" readonly @click="sexShow=true">
         </div>
         <div class="birthday infoItem">
           <span>生&emsp;日：</span>
@@ -50,7 +50,7 @@
         </div>
         <div class="address infoItem">
           <span>常住地：</span>
-          <input type="text" v-model="info.address" readonly @click="addressShow=true">
+          <input type="text" v-model="info.address" placeholder="请选择您的地址哦" readonly @click="addressShow=true">
         </div>
         <div class="autograph infoItem">
           <span>签&emsp;名：</span>
